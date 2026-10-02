@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Intake · Refero · Velora research</title><style>
+:root{--bg:#f6f3ec;--card:#fffdf8;--ink:#1d2722;--mute:#5f6d65;--line:#e4ded2;--accent:#2f5d4a;--soft:#e5ede7;--new:#b4532a;--newsoft:#f6e6dc}
+@media (prefers-color-scheme:dark){:root{--bg:#131916;--card:#1b231f;--ink:#e9ede9;--mute:#9ba9a1;--line:#2d3732;--accent:#8fc7a9;--soft:#22302a;--new:#f0a37c;--newsoft:#3a2a21}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;padding:10px 16px}
+nav a{display:inline-block;margin-right:4px;padding:6px 12px;border-radius:999px;color:var(--mute);text-decoration:none;font-size:14px}
+nav a.on{background:var(--accent);color:var(--bg)}
+main{max-width:1180px;margin:0 auto;padding:28px 16px 80px}
+main.narrow{max-width:760px}
+h1,h2,h3{font-family:Georgia,"Iowan Old Style",serif;font-weight:600;line-height:1.2;margin:0}
+h1{font-size:clamp(30px,5vw,44px);margin:8px 0 10px}
+.lead{font-size:18px;color:var(--mute);max-width:62ch;margin:0 0 8px}
+section{margin-top:56px}
+.sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sh h2{font-size:28px}
+.sub{color:var(--mute);margin:0 0 20px}
+.tag{display:inline-block;font:600 11px/1 -apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:var(--newsoft);color:var(--new)}
+.tag.yours{background:var(--soft);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.shot{background:var(--soft);height:340px;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;cursor:zoom-in}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.body h3{font-size:18px}
+.app{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.body p{margin:0;font-size:14.5px;color:var(--mute)}
+.body a.more{margin-top:auto;padding-top:6px;font-size:13px;color:var(--accent)}
+.textgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.tcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--new);border-radius:12px;padding:14px 16px}
+.tcard h3{font-size:17px;margin-bottom:4px}
+.tcard p{margin:0;font-size:14.5px;color:var(--mute)}
+.yours .tcard{border-left-color:var(--accent)}
+.row{display:flex;gap:12px;align-items:flex-start}
+.row img{width:72px;height:110px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);cursor:zoom-in;flex:none}
+@media (max-width:560px){.grid{grid-template-columns:1fr 1fr;gap:10px}.shot{height:240px}.body{padding:10px 10px 12px}.body h3{font-size:15px}.body p{font-size:13px}}
+a{color:var(--accent);overflow-wrap:anywhere}
+#lb{position:fixed;inset:0;background:rgba(10,14,12,.86);display:none;align-items:center;justify-content:center;z-index:20;padding:16px;cursor:zoom-out}
+#lb img{max-width:100%;max-height:100%;border-radius:12px}
+#lb.on{display:flex}
+/* detail pages */
+.md h1{font-size:32px}.md h2{font-size:23px;margin:44px 0 10px;padding-top:22px;border-top:1px solid var(--line)}.md h3{font-size:19px;margin:26px 0 8px}
+.md p,.md li{max-width:68ch}.md hr{display:none}
+.md code{background:var(--soft);padding:1px 6px;border-radius:4px;font-size:.9em}
+.md img{display:block;max-width:min(100%,320px);margin:14px 0;border-radius:14px;border:1px solid var(--line);cursor:zoom-in}
+.md table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px;display:block;overflow-x:auto}
+.md th,.md td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}.md th{background:var(--soft)}
+</style></head>
+<body><nav><a href="index.html">Visual report</a><a href="summary.html">Summary (text)</a><a href="web-cro-evidence.html">Conversion evidence</a><a href="web-competitors.html">Competitors</a><a href="web-trust-tone.html">Trust &amp; tone</a><a href="web-booking.html">Booking (web)</a><a href="mobbin-intake.html">Intake · Mobbin</a><a href="refero-intake.html" class=on>Intake · Refero</a><a href="mobbin-results.html">Results · Mobbin</a><a href="refero-results.html">Results · Refero</a><a href="mobbin-booking.html">Booking · Mobbin</a><a href="refero-booking.html">Booking · Refero</a></nav><main class="narrow md"><h1>Refero research: health intake quiz question screens</h1>
+<p>Source: Refero MCP only (screens, flows, styles). ~11 calls, page 1. Thumbnails in <code>img/refero-intake/</code>, all viewed before judging.
+Closest competitor match in Refero: <strong>Hers</strong> weight-management intake (US GLP-1 telehealth). Ada (symptom checker) is the best reference for medical tone.</p>
+<h2>Patterns</h2>
+<h3>1. Height and weight on one calm screen (Hers)</h3>
+<ul>
+<li><strong>What:</strong> One screen with two stacked questions: &quot;What is your height?&quot; (feet + inches side by side) and &quot;What is your weight?&quot; (one field). Thin segmented progress bar on top, lots of white space, unit shown as the placeholder.</li>
+<li><strong>Why it works:</strong> BMI needs both numbers, so asking them together reads as one fact about you, not two interrogations. Cuts one step from the riskiest part of the funnel.</li>
+<li><strong>Velora:</strong> Put height (cm) and weight (kg) on one screen with <code>inputmode=&quot;numeric&quot;</code> and the unit inside the field. This conflicts with notes.md (&quot;weight on its own screen&quot;). One way to settle it: keep them together but put the reassurance line right under the weight field. Pick one and record why.
+<img src="img/refero-intake/hers-height-weight-one-screen.jpg" alt=""></li>
+<li><a href="https://refero.design/pages/432451eb-9642-46c4-9f4b-6375b6c02b22">https://refero.design/pages/432451eb-9642-46c4-9f4b-6375b6c02b22</a></li>
+</ul>
+<h3>2. A &quot;why we ask&quot; line under the question (Hers)</h3>
+<ul>
+<li><strong>What:</strong> Dark modal quiz, &quot;04 / 07&quot; counter plus a bar. The question &quot;Do either of your parents have a history of excess weight or obesity?&quot; has a one-line sub-copy that explains it: &quot;Genetic factors can increase your likelihood…&quot;. It also offers <strong>&quot;Prefer not to answer.&quot;</strong></li>
+<li><strong>Why it works:</strong> Sensitive questions feel clinical and fair when the reason sits right under them. An opt-out answer stops people quitting on one uncomfortable question.</li>
+<li><strong>Velora:</strong> Every sensitive question (weight, conditions, medication, pregnancy) gets a muted 1-line &quot;why&quot; under the title, for example &quot;Vikt och längd ger ditt BMI, som avgör om behandling kan vara aktuell.&quot; Add &quot;Vill inte svara&quot; only where the clinic can still screen without the answer, never on BMI inputs.
+<img src="img/refero-intake/hers-step-counter-dark-modal.jpg" alt=""></li>
+<li><a href="https://refero.design/pages/11fc1d71-63dd-4ea2-a397-0ce98bbd9287">https://refero.design/pages/11fc1d71-63dd-4ea2-a397-0ce98bbd9287</a></li>
+</ul>
+<h3>3. Safety disclaimer up front, then a warm &quot;I&#39;ll ask a few questions&quot; (Ada)</h3>
+<ul>
+<li><strong>What:</strong> Before question 1 there is a soft-blue dismissible note: &quot;If you&#39;re experiencing serious symptoms, do not use Ada. Instead, contact emergency services.&quot; Below it, in a large serif: &quot;I get smarter the more you tell me, so I&#39;m going to ask a few questions that will help me help you.&quot; Then an &quot;Okay&quot; pill.</li>
+<li><strong>Why it works:</strong> It covers screening and liability in one quiet box, not a wall of legal text. The serif voice sets the expectation (a few questions, and why) in a human tone.</li>
+<li><strong>Velora:</strong> Use an intro screen or top card with one honest line on what the quiz does (&quot;2 minuter · ingen kostnad · svaren läses av legitimerad vårdpersonal&quot;) and a soft note for exclusions (pregnant, under 18) instead of a hard-stop wall.
+<img src="img/refero-intake/ada-intro-safety-note.jpg" alt=""></li>
+<li><a href="https://refero.design/flows/4095">https://refero.design/flows/4095</a> (step 2)</li>
+</ul>
+<h3>4. Inline &quot;What does this mean?&quot; link plus &quot;I&#39;d rather not say&quot; (Ada)</h3>
+<ul>
+<li><strong>What:</strong> One question per screen in a large serif (&quot;Are you a current smoker or have you been a smoker in the past?&quot;). A small blue &quot;What does this mean?&quot; link opens an explainer sheet. Answers are right-aligned pills (Yes / No / I&#39;d rather not say), so it feels like a chat reply.</li>
+<li><strong>Why it works:</strong> Help is there for anyone who wants it, without cluttering the screen. The chat-style rhythm feels like talking to someone, not filling in a form, which is the brief&#39;s &quot;understood rather than interrogated&quot;.</li>
+<li><strong>Velora:</strong> For medical terms (&quot;typ 2-diabetes&quot;, &quot;sömnapné&quot;, &quot;GLP-1&quot;), add a &quot;Vad betyder det?&quot; link that opens a bottom sheet with 2-3 plain-Swedish sentences. Big serif question, large tap-target answers.
+<img src="img/refero-intake/ada-smoking-question.jpg" alt=""></li>
+<li><a href="https://refero.design/flows/4095">https://refero.design/flows/4095</a> (step 8)</li>
+</ul>
+<h3>5. Honest explainer for a limiting question (Ada &quot;Why only these two?&quot;)</h3>
+<ul>
+<li><strong>What:</strong> The sex-at-birth question links to a sheet: &quot;Of course there are more gender identities than just male and female… Entering your sex at birth will enable your assessment to continue.&quot;</li>
+<li><strong>Why it works:</strong> It respects the person while still getting the medical input it needs. It answers the objection before it becomes a reason to drop off.</li>
+<li><strong>Velora:</strong> Use the same pattern for &quot;Biologiskt kön&quot; (needed for dosing and pregnancy screening) and for &quot;why do you need my personnummer/phone&quot; at the booking step.
+<img src="img/refero-intake/ada-why-only-two-modal.jpg" alt=""></li>
+<li><a href="https://refero.design/flows/4095">https://refero.design/flows/4095</a> (step 6)</li>
+</ul>
+<h3>6. Empathetic feedback interstitial mid-quiz (Seed)</h3>
+<ul>
+<li><strong>What:</strong> After a symptom answer, a full-bleed blurred warm photo with &quot;That&#39;s great news.&quot; plus 2 lines of education and a &quot;Let&#39;s keep going&quot; CTA. The step counter &quot;2 / 11&quot; stays visible.</li>
+<li><strong>Why it works:</strong> It breaks the run of questions, rewards the user, and shows the answers are being used. That reduces &quot;interrogation&quot; fatigue around the midpoint.</li>
+<li><strong>Velora:</strong> Add one interstitial after the BMI screen (&quot;Tack. Utifrån dina svar kan medicinsk viktminskning vara ett alternativ — några frågor till om din hälsa.&quot;) using a real clinician photo. Use at most 1-2, or it becomes padding.
+<img src="img/refero-intake/seed-feedback-interstitial.jpg" alt=""></li>
+<li><a href="https://refero.design/flows/12731">https://refero.design/flows/12731</a> (step 7)</li>
+</ul>
+<h3>7. Multi-select pills with &quot;Select all that apply&quot; (Seed)</h3>
+<ul>
+<li><strong>What:</strong> &quot;What matters most to you right now?&quot;, sub-copy &quot;We&#39;ll find products that are the best fit. Select all that apply.&quot;, outlined pill chips, and a muted Continue button until something is chosen. Thin progress line with &quot;1 / 11&quot; in the corner.</li>
+<li><strong>Why it works:</strong> The instruction removes doubt about single or multi choice. Pills keep a long list scannable.</li>
+<li><strong>Velora:</strong> Use this for weight-related conditions (blodtryck, diabetes, sömnapné, PCOS…). Use checkbox rows rather than pills for medical items, with an explicit <strong>&quot;Inget av detta&quot;</strong> option that clears the others. That keeps screening clean.
+<img src="img/refero-intake/seed-health-priorities.jpg" alt=""></li>
+<li><a href="https://refero.design/flows/12731">https://refero.design/flows/12731</a> (step 2)</li>
+</ul>
+<h3>8. Oversized numeric value for body inputs (Dropset)</h3>
+<ul>
+<li><strong>What:</strong> &quot;What&#39;s your current weight?&quot; with a huge 80pt+ wheel value &quot;162 .6&quot;, the unit label above it, and a thin progress bar.</li>
+<li><strong>Why it works:</strong> The number is the hero and is easy to adjust with a thumb. It feels like a device, not a form.</li>
+<li><strong>Velora:</strong> Keep the Hers-style text input (faster for exact kg). Borrow the large tabular-figure display for the typed value and a live BMI readout under it. Skip wheel pickers, which are slow for 2-3 digit values.
+<img src="img/refero-intake/dropset-weight-picker.jpg" alt=""></li>
+<li><a href="https://refero.design/screens/9f4cf4c5-9bb6-4c72-8775-c9cd774ae361">https://refero.design/screens/9f4cf4c5-9bb6-4c72-8775-c9cd774ae361</a></li>
+</ul>
+<p>Also seen (not saved): Prose puts a &quot;WHY WE ASK:&quot; panel on its age question, plus an age disclaimer (&quot;not intended for individuals under 18&quot;). Same idea as pattern 2, but as a heavier overlay: <a href="https://refero.design/flows/6315">https://refero.design/flows/6315</a></p>
+<h2>Visual style candidates (refero_search_styles)</h2>
+<ol>
+<li><strong>Ease Health</strong> (<code>style-ease-health.jpg</code>): large serif headlines, deep forest-green primary, sage and pale blue-grey tinted panels on cream, 14px radius, tinted fills instead of shadows. Reads &quot;calm, clinically precise&quot;. Best fit for Velora: medical credibility without looking cold.
+<a href="https://refero.design/styles/954854b3-3477-4f6a-891e-302c15987973">https://refero.design/styles/954854b3-3477-4f6a-891e-302c15987973</a></li>
+<li><strong>Oura</strong> (<code>style-oura.jpg</code>): linen and sand neutrals, graphite text, large sans plus an italic serif accent (&quot;Made for you.&quot;), dark pill buttons, soft tonal cards. Most premium and personal. Use its warmth for result and confirmation screens.
+<a href="https://refero.design/styles/8f1f0540-574f-435f-86a6-aba9a4a1bca0">https://refero.design/styles/8f1f0540-574f-435f-86a6-aba9a4a1bca0</a>
+Runner-up: Seed&#39;s quiz palette (#FBFBF4 ivory, #243A1B forest, #D1D3C9 lines) is a ready-made calm-health quiz palette.</li>
+</ol>
+<p>Suggested combination: Ease structure and colour (cream bg, forest primary, sage tints) with Oura&#39;s serif-italic accent for the one emotional word per screen.</p>
+<h2>Top 3 takeaways</h2>
+<ol>
+<li><strong>Explain every sensitive question in one line, right under it.</strong> Hers, Ada and Prose all do this. It is the cheapest trust lever, and the right place for &quot;only your clinician sees this&quot;.</li>
+<li><strong>Respect plus escape hatches convert.</strong> &quot;Prefer not to answer&quot;, &quot;What does this mean?&quot; and an honest &quot;why only two?&quot; keep people moving. Only allow them where screening doesn&#39;t need the answer.</li>
+<li><strong>Calm premium = serif question + lots of air + thin progress bar + one muted CTA.</strong> Every strong reference uses one question (or one tight group, like height + weight) per screen, a thin bar or &quot;n / N&quot;, and big tap targets. Add one empathetic interstitial at the midpoint, not more.</li>
+</ol>
+
+</main>
+<div id="lb"><img alt=""></div><script>const lb=document.getElementById('lb'),li=lb.querySelector('img');
+document.querySelectorAll('.shot img,.row img,.md img').forEach(i=>i.parentElement.onclick=i.onclick=ev=>{ev.stopPropagation();li.src=i.src;lb.classList.add('on')});
+lb.onclick=()=>lb.classList.remove('on');document.onkeydown=k=>k.key==='Escape'&&lb.classList.remove('on')</script></body></html>

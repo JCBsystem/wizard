@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Intake · Mobbin · Velora research</title><style>
+:root{--bg:#f6f3ec;--card:#fffdf8;--ink:#1d2722;--mute:#5f6d65;--line:#e4ded2;--accent:#2f5d4a;--soft:#e5ede7;--new:#b4532a;--newsoft:#f6e6dc}
+@media (prefers-color-scheme:dark){:root{--bg:#131916;--card:#1b231f;--ink:#e9ede9;--mute:#9ba9a1;--line:#2d3732;--accent:#8fc7a9;--soft:#22302a;--new:#f0a37c;--newsoft:#3a2a21}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;padding:10px 16px}
+nav a{display:inline-block;margin-right:4px;padding:6px 12px;border-radius:999px;color:var(--mute);text-decoration:none;font-size:14px}
+nav a.on{background:var(--accent);color:var(--bg)}
+main{max-width:1180px;margin:0 auto;padding:28px 16px 80px}
+main.narrow{max-width:760px}
+h1,h2,h3{font-family:Georgia,"Iowan Old Style",serif;font-weight:600;line-height:1.2;margin:0}
+h1{font-size:clamp(30px,5vw,44px);margin:8px 0 10px}
+.lead{font-size:18px;color:var(--mute);max-width:62ch;margin:0 0 8px}
+section{margin-top:56px}
+.sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sh h2{font-size:28px}
+.sub{color:var(--mute);margin:0 0 20px}
+.tag{display:inline-block;font:600 11px/1 -apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:var(--newsoft);color:var(--new)}
+.tag.yours{background:var(--soft);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.shot{background:var(--soft);height:340px;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;cursor:zoom-in}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.body h3{font-size:18px}
+.app{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.body p{margin:0;font-size:14.5px;color:var(--mute)}
+.body a.more{margin-top:auto;padding-top:6px;font-size:13px;color:var(--accent)}
+.textgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.tcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--new);border-radius:12px;padding:14px 16px}
+.tcard h3{font-size:17px;margin-bottom:4px}
+.tcard p{margin:0;font-size:14.5px;color:var(--mute)}
+.yours .tcard{border-left-color:var(--accent)}
+.row{display:flex;gap:12px;align-items:flex-start}
+.row img{width:72px;height:110px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);cursor:zoom-in;flex:none}
+@media (max-width:560px){.grid{grid-template-columns:1fr 1fr;gap:10px}.shot{height:240px}.body{padding:10px 10px 12px}.body h3{font-size:15px}.body p{font-size:13px}}
+a{color:var(--accent);overflow-wrap:anywhere}
+#lb{position:fixed;inset:0;background:rgba(10,14,12,.86);display:none;align-items:center;justify-content:center;z-index:20;padding:16px;cursor:zoom-out}
+#lb img{max-width:100%;max-height:100%;border-radius:12px}
+#lb.on{display:flex}
+/* detail pages */
+.md h1{font-size:32px}.md h2{font-size:23px;margin:44px 0 10px;padding-top:22px;border-top:1px solid var(--line)}.md h3{font-size:19px;margin:26px 0 8px}
+.md p,.md li{max-width:68ch}.md hr{display:none}
+.md code{background:var(--soft);padding:1px 6px;border-radius:4px;font-size:.9em}
+.md img{display:block;max-width:min(100%,320px);margin:14px 0;border-radius:14px;border:1px solid var(--line);cursor:zoom-in}
+.md table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px;display:block;overflow-x:auto}
+.md th,.md td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}.md th{background:var(--soft)}
+</style></head>
+<body><nav><a href="index.html">Visual report</a><a href="summary.html">Summary (text)</a><a href="web-cro-evidence.html">Conversion evidence</a><a href="web-competitors.html">Competitors</a><a href="web-trust-tone.html">Trust &amp; tone</a><a href="web-booking.html">Booking (web)</a><a href="mobbin-intake.html" class=on>Intake · Mobbin</a><a href="refero-intake.html">Intake · Refero</a><a href="mobbin-results.html">Results · Mobbin</a><a href="refero-results.html">Results · Refero</a><a href="mobbin-booking.html">Booking · Mobbin</a><a href="refero-booking.html">Booking · Refero</a></nav><main class="narrow md"><h1>Mobbin: health intake &amp; weight-loss quiz question screens</h1>
+<p>Source: Mobbin MCP only (ios + web), 8 searches. Apps reviewed: Ro, Hers/Hims, Noom, Oura, Yazio, Cal AI, WHOOP, Clue, Stardust, Liven, Zocdoc.
+Each pattern below is based on what the screenshot shows, not the metadata alone. Images are in <code>img/mobbin-intake/</code>.</p>
+<hr>
+<h2>1. Height and weight on one screen, framed as a &quot;starting point&quot; (Ro)</h2>
+<p><img src="img/mobbin-intake/ro-height-weight-one-screen.jpg" alt="Ro height + weight"></p>
+<ul>
+<li><strong>What:</strong> One screen with the heading &quot;We&#39;ve got you! What&#39;s your starting point?&quot; It has three numeric fields: height (two fields, ft + in) and current weight. A thin progress bar sits at the top. There is no help text and no illustration.</li>
+<li><strong>Why it works:</strong> The two BMI inputs belong together, so asking for them on one screen saves a step. Calling it a &quot;starting point&quot; makes weight sound like the start of a journey rather than a judgement. The warm &quot;We&#39;ve got you!&quot; opener takes the edge off a sensitive question.</li>
+<li><strong>Velora:</strong> Put height and weight on one screen as <code>cm</code> + <code>kg</code> numeric inputs (<code>inputmode=&quot;numeric&quot;</code>). Add sex and age only if they fit without scrolling. Use a heading like &quot;Var börjar du?&quot; (&quot;Where are you starting from?&quot;). Keep the reassurance line from notes.md (&quot;Only your clinician sees this&quot;) under the weight field.</li>
+<li><a href="https://mobbin.com/flows/c40ee07f-972a-43b2-83b4-666d7f6df86e">https://mobbin.com/flows/c40ee07f-972a-43b2-83b4-666d7f6df86e</a> (screen 5 of 20)</li>
+</ul>
+<h2>2. &quot;It&#39;s okay to guess&quot; microcopy on weight (Yazio)</h2>
+<p><img src="img/mobbin-intake/yazio-weight-okay-to-guess.jpg" alt="Yazio weight"></p>
+<ul>
+<li><strong>What:</strong> &quot;What&#39;s your current weight?&quot; with the subline &quot;It&#39;s okay to guess. You can always adjust your starting weight later.&quot; The large number is centred, with a kg/lb chip toggle and the numeric keypad already open.</li>
+<li><strong>Why it works:</strong> It removes the pressure of being exact, and the fear of stepping on a scale before answering, which is a real drop-off point. The keypad opening automatically saves a tap.</li>
+<li><strong>Velora:</strong> Use this exact sentiment: &quot;En uppskattning räcker, vi går igenom det tillsammans på mötet.&quot; (&quot;An estimate is fine, we&#39;ll go through it together at the meeting.&quot;) Medically, a rough figure is fine for pre-screening because the clinician confirms it at the meeting. Autofocus the field. Use kg only (Sweden), with no unit toggle.</li>
+<li><a href="https://mobbin.com/screens/2b2b032e-f176-4680-972d-3de0c98154df">https://mobbin.com/screens/2b2b032e-f176-4680-972d-3de0c98154df</a></li>
+<li>Related: Me+ uses a ruler picker with &quot;Your personal information won&#39;t be collected or shared&quot; (<a href="https://mobbin.com/screens/186618f9-d714-42b0-baf1-01cfcfd932a7">https://mobbin.com/screens/186618f9-d714-42b0-baf1-01cfcfd932a7</a>). WHOOP and Cal AI use paired height/weight wheel pickers (<a href="https://mobbin.com/screens/cbf00a91-d454-4224-b596-dc06d0134741">https://mobbin.com/screens/cbf00a91-d454-4224-b596-dc06d0134741</a>). Wheel pickers are slower for large values, so a typed input is better for weights over 100 kg.</li>
+</ul>
+<h2>3. &quot;Why we ask&quot; link that opens a bottom sheet (Oura)</h2>
+<p><img src="img/mobbin-intake/oura-why-we-ask-sheet.jpg" alt="Oura why we ask"></p>
+<ul>
+<li><strong>What:</strong> A small <code>(i) Why we ask</code> chip sits under the question. Tapping it opens a bottom sheet with two short sections: &quot;Why we ask&quot; and &quot;What if I prefer not to say&quot;, then a &quot;Done&quot; button.</li>
+<li><strong>Why it works:</strong> The explanation is there on demand without cluttering the screen. The &quot;What if I prefer not to say&quot; section is unusually honest, which builds trust. A bottom sheet keeps the user in place, so they don&#39;t lose their spot in the flow.</li>
+<li><strong>Velora:</strong> This is the help-button pattern from notes.md. Add a &quot;Varför frågar vi?&quot; (&quot;Why do we ask?&quot;) chip on the weight, conditions and medication screens. The sheet copy should cover (a) what the clinician uses the answer for, e.g. &quot;GLP-1 is prescribed based on BMI and health&quot;, (b) who sees it, and (c) what happens if they&#39;re unsure. Store the copy in the question JSON config as a <code>help</code> field.</li>
+<li><a href="https://mobbin.com/screens/96fb49c7-fef9-4f2c-a527-0d9a8ab0b9ae">https://mobbin.com/screens/96fb49c7-fef9-4f2c-a527-0d9a8ab0b9ae</a></li>
+</ul>
+<h2>4. Conditions list with a &quot;why it matters&quot; subline and a safe exit option (Hers)</h2>
+<p><img src="img/mobbin-intake/hers-conditions-why-it-matters.jpg" alt="Hers conditions"></p>
+<ul>
+<li><strong>What:</strong> &quot;Do you have any of the following medical conditions?&quot; with the subline &quot;Underlying medical conditions can impact your metabolism, hormones, energy level, appetite regulation…&quot;. It&#39;s marked &quot;Select all that apply&quot; and shows 4 options plus <strong>&quot;None of these or prefer not to answer&quot;</strong> as the last option. A &quot;05 / 07&quot; counter and a bar sit at the top, with Back and Next side by side.</li>
+<li><strong>Why it works:</strong> The subline frames conditions as <em>reasons weight is hard</em>, not as faults, which takes away blame. Merging &quot;none&quot; and &quot;prefer not to answer&quot; into one option means no one is forced to disclose. With 7 steps in total, the length feels manageable.</li>
+<li><strong>Velora:</strong> Use a blame-free subline such as &quot;Vissa tillstånd gör det svårare att gå ner i vikt, och påverkar vilken behandling som passar.&quot; (&quot;Some conditions make it harder to lose weight, and affect which treatment fits.&quot;) Make &quot;Inget av dessa&quot; (&quot;None of these&quot;) the exclusive last option, so it unchecks the others. For screening, keep the GLP-1 contraindications (e.g. MTC/MEN2 history, pregnancy, pancreatitis) as a <strong>separate</strong> screen so the answers can be checked properly. Don&#39;t offer &quot;prefer not to answer&quot; on that screen.</li>
+<li><a href="https://mobbin.com/screens/0d206b69-8de0-4293-8b2e-0b539e80c652">https://mobbin.com/screens/0d206b69-8de0-4293-8b2e-0b539e80c652</a> (flow: <a href="https://mobbin.com/flows/24b53bf7-435f-46df-b5fb-aebad6dd4482">https://mobbin.com/flows/24b53bf7-435f-46df-b5fb-aebad6dd4482</a>)</li>
+</ul>
+<h2>5. Clinical multi-select in plain language with explanations in brackets (Ro, Noom)</h2>
+<ul>
+<li><strong>What:</strong> Ro asks one long, precise question: &quot;Do you currently have, or have you ever been diagnosed with, any of the following heart or heart-related conditions?&quot; It&#39;s marked &quot;Select all that apply&quot; and terms are explained in brackets, e.g. &quot;Tachycardia (episodes of rapid heart rate)&quot;. The Next button stays disabled until the user picks something. Noom uses a lighter version with checkbox cards and an explicit &quot;None&quot; option.</li>
+<li><strong>Why it works:</strong> Defining terms in brackets prevents mistakes, which means more accurate screening and fewer bad matches at the meeting. Grouping conditions by body system keeps each list short.</li>
+<li><strong>Velora:</strong> Write every condition in plain Swedish with the Latin term in brackets (&quot;Högt blodtryck (hypertoni)&quot;). Group them so no list goes past about 6 items. If a list has to be longer, use a search field, as Perplexity does (<a href="https://mobbin.com/screens/1f5291a1-e18f-47b8-98a4-d324125ff310">https://mobbin.com/screens/1f5291a1-e18f-47b8-98a4-d324125ff310</a>).</li>
+<li>Ro: <a href="https://mobbin.com/flows/c40ee07f-972a-43b2-83b4-666d7f6df86e">https://mobbin.com/flows/c40ee07f-972a-43b2-83b4-666d7f6df86e</a> · Noom: <a href="https://mobbin.com/flows/e507f2f3-674c-4170-8726-ffa156477c14">https://mobbin.com/flows/e507f2f3-674c-4170-8726-ffa156477c14</a></li>
+</ul>
+<h2>6. Empathetic inline feedback after a sensitive answer (Liven, Noom)</h2>
+<ul>
+<li><strong>What:</strong> In Liven, after the user picks &quot;Almost always&quot; for &quot;It&#39;s difficult for me to express emotions&quot;, a yellow card expands under the answer: &quot;You&#39;re not alone. Many people…&quot;. Noom adds full-screen breaks with social proof (&quot;You&#39;re in trusted hands… helped 3,627,436 people&quot;) and educational charts (the yo-yo dieting curve).</li>
+<li><strong>Why it works:</strong> The user feels understood rather than interrogated, which is the brief&#39;s own wording. Short positive moments between questions break up the monotony that drives abandonment.</li>
+<li><strong>Velora:</strong> Show a short inline reply (one line, no full-screen break) after 2–3 key answers. One example, after &quot;Tried before without lasting results&quot;: &quot;Det är vanligt, och inte ett misslyckande. Kroppen försvarar sin vikt.&quot; (&quot;That&#39;s common, and it isn&#39;t a failure. The body defends its weight.&quot;) Allow at most <strong>one</strong> break screen, around the middle of the quiz, with a verifiable figure about Velora patients. Noom has several of these screens, which is too many for a 12-step flow.</li>
+<li>Liven: <a href="https://mobbin.com/flows/5695ec7e-a531-4d04-8381-746e3591db36">https://mobbin.com/flows/5695ec7e-a531-4d04-8381-746e3591db36</a> · Noom: <a href="https://mobbin.com/flows/7154e10b-ba9f-48a2-b2a4-19e7b438978e">https://mobbin.com/flows/7154e10b-ba9f-48a2-b2a4-19e7b438978e</a></li>
+</ul>
+<h2>7. Result screen that plays the user&#39;s answers back to them (Hers)</h2>
+<p><img src="img/mobbin-intake/hers-mirror-back-summary-result.jpg" alt="Hers summary"></p>
+<ul>
+<li><strong>What:</strong> &quot;You are a [30]-year-old assigned [female] living in [California]. Your family doesn&#39;t have a history of obesity and you have [0] medical conditions…&quot; Each answer is highlighted inline. Below it is a score card with a &quot;How is my score calculated?&quot; link, the primary CTA &quot;Start a consultation&quot; and a secondary &quot;Learn more&quot;. A disclaimer sits at the bottom.</li>
+<li><strong>Why it works:</strong> Seeing their own answers shows the person they were listened to and makes the result feel personal and earned. The visible &quot;how calculated&quot; link builds trust, especially in a medical setting.</li>
+<li><strong>Velora:</strong> Open the result screen with one sentence that plays the answers back, e.g. &quot;Utifrån ditt BMI på 32 och att du har provat flera gånger tidigare…&quot; (&quot;Based on your BMI of 32, and that you&#39;ve tried several times before…&quot;), followed by &quot;medicinsk viktnedgång kan passa dig&quot; (&quot;medical weight loss may suit you&quot;). Then the &quot;Boka kostnadsfritt möte&quot; (&quot;Book a free meeting&quot;) CTA. Make each highlighted answer tappable to edit it, which also helps screening accuracy.</li>
+<li><a href="https://mobbin.com/flows/24b53bf7-435f-46df-b5fb-aebad6dd4482">https://mobbin.com/flows/24b53bf7-435f-46df-b5fb-aebad6dd4482</a> (last screen)</li>
+</ul>
+<h2>8. A &quot;You&#39;ve qualified&quot; badge plus a single &quot;What&#39;s next&quot; step (Ro)</h2>
+<p><img src="img/mobbin-intake/ro-qualified-whats-next.jpg" alt="Ro qualified"></p>
+<ul>
+<li><strong>What:</strong> The badge reads &quot;You&#39;ve qualified&quot;, followed by an outcome pill (&quot;Lose 37 lbs in a year&quot;, with a footnote to its source). A &quot;What&#39;s next?&quot; card explains: &quot;A Ro-affiliated provider will review your health information to make sure GLP-1s are right for you.&quot; There is one primary button, &quot;Continue&quot;.</li>
+<li><strong>Why it works:</strong> It celebrates the result while being honest that a clinician makes the final decision, which keeps it medically correct. There is only one thing to do next.</li>
+<li><strong>Velora:</strong> Use the badge wording &quot;Du kan passa för behandling&quot; (&quot;You may be suitable for treatment&quot;). Avoid &quot;qualified&quot; before a clinician has reviewed the case. Add one &quot;Nästa steg&quot; (&quot;Next step&quot;) card: &quot;Ett kostnadsfritt videomöte, 15 min, med legitimerad vårdpersonal&quot; (&quot;A free 15-min video meeting with licensed clinical staff&quot;). Only show an outcome claim if it has a footnote to its source.</li>
+<li><a href="https://mobbin.com/flows/c40ee07f-972a-43b2-83b4-666d7f6df86e">https://mobbin.com/flows/c40ee07f-972a-43b2-83b4-666d7f6df86e</a> (screen 20 of 20)</li>
+</ul>
+<hr>
+<h3>Progress indicators seen</h3>
+<ul>
+<li>Ro uses a thin, unlabeled bar, which is honest and calm. Hers web shows &quot;05 / 07&quot; plus a bar, which works because the total is small. Noom uses a segmented bar per section, labelled e.g. &quot;DEMOGRAPHIC PROFILE&quot; and &quot;BEHAVIORAL PROFILE QUIZ (2/10)&quot;.</li>
+<li>This supports notes.md: when the total is around 12, use a bar without a count. If counting at all, count <em>sections</em> (&quot;Om dig · Hälsa · Mål&quot;, i.e. &quot;About you · Health · Goals&quot;) rather than questions.</li>
+</ul>
+<h3>Consent and privacy framing</h3>
+<ul>
+<li>Hers puts a privacy acknowledgement on the intro screen (&quot;Responses prior to account creation will not be used as part of your medical assessment&quot;). WHOOP puts consent to health-data processing above Next. Stardust puts &quot;Your data is private&quot; under the heading of its conditions question.</li>
+<li>For Velora (GDPR, health data = special category): add one line of consent on the first health-data screen, not a wall of legal text at the start.</li>
+</ul>
+<h2>Top 3 takeaways</h2>
+<ol>
+<li><strong>Explain every sensitive question with one blame-free line, plus an optional &quot;Varför frågar vi?&quot; bottom sheet</strong> (Hers, Oura). This builds trust without adding steps. Add it as a <code>help</code> field in the question JSON.</li>
+<li><strong>Merge inputs that belong together and lower the effort of answering.</strong> Put height and weight on one screen (Ro), say &quot;an estimate is fine&quot; (Yazio), use &quot;None of these&quot; as an exclusive option, and open the numeric keypad automatically. This is the cheapest way to cut steps from 26 to about 12.</li>
+<li><strong>Play the answers back on the result screen and be honest about who decides</strong> (Hers, Ro). Show a personalised summary sentence, say &quot;may suit you&quot; with clinical review, then a single CTA to the free meeting. Both conversion and correct screening depend on this moment.</li>
+</ol>
+
+</main>
+<div id="lb"><img alt=""></div><script>const lb=document.getElementById('lb'),li=lb.querySelector('img');
+document.querySelectorAll('.shot img,.row img,.md img').forEach(i=>i.parentElement.onclick=i.onclick=ev=>{ev.stopPropagation();li.src=i.src;lb.classList.add('on')});
+lb.onclick=()=>lb.classList.remove('on');document.onkeydown=k=>k.key==='Escape'&&lb.classList.remove('on')</script></body></html>

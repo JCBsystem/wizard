@@ -1,0 +1,130 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Booking (web) · Velora research</title><style>
+:root{--bg:#f6f3ec;--card:#fffdf8;--ink:#1d2722;--mute:#5f6d65;--line:#e4ded2;--accent:#2f5d4a;--soft:#e5ede7;--new:#b4532a;--newsoft:#f6e6dc}
+@media (prefers-color-scheme:dark){:root{--bg:#131916;--card:#1b231f;--ink:#e9ede9;--mute:#9ba9a1;--line:#2d3732;--accent:#8fc7a9;--soft:#22302a;--new:#f0a37c;--newsoft:#3a2a21}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;padding:10px 16px}
+nav a{display:inline-block;margin-right:4px;padding:6px 12px;border-radius:999px;color:var(--mute);text-decoration:none;font-size:14px}
+nav a.on{background:var(--accent);color:var(--bg)}
+main{max-width:1180px;margin:0 auto;padding:28px 16px 80px}
+main.narrow{max-width:760px}
+h1,h2,h3{font-family:Georgia,"Iowan Old Style",serif;font-weight:600;line-height:1.2;margin:0}
+h1{font-size:clamp(30px,5vw,44px);margin:8px 0 10px}
+.lead{font-size:18px;color:var(--mute);max-width:62ch;margin:0 0 8px}
+section{margin-top:56px}
+.sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sh h2{font-size:28px}
+.sub{color:var(--mute);margin:0 0 20px}
+.tag{display:inline-block;font:600 11px/1 -apple-system,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:var(--newsoft);color:var(--new)}
+.tag.yours{background:var(--soft);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.shot{background:var(--soft);height:340px;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;cursor:zoom-in}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.body h3{font-size:18px}
+.app{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.body p{margin:0;font-size:14.5px;color:var(--mute)}
+.body a.more{margin-top:auto;padding-top:6px;font-size:13px;color:var(--accent)}
+.textgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.tcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--new);border-radius:12px;padding:14px 16px}
+.tcard h3{font-size:17px;margin-bottom:4px}
+.tcard p{margin:0;font-size:14.5px;color:var(--mute)}
+.yours .tcard{border-left-color:var(--accent)}
+.row{display:flex;gap:12px;align-items:flex-start}
+.row img{width:72px;height:110px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);cursor:zoom-in;flex:none}
+@media (max-width:560px){.grid{grid-template-columns:1fr 1fr;gap:10px}.shot{height:240px}.body{padding:10px 10px 12px}.body h3{font-size:15px}.body p{font-size:13px}}
+a{color:var(--accent);overflow-wrap:anywhere}
+#lb{position:fixed;inset:0;background:rgba(10,14,12,.86);display:none;align-items:center;justify-content:center;z-index:20;padding:16px;cursor:zoom-out}
+#lb img{max-width:100%;max-height:100%;border-radius:12px}
+#lb.on{display:flex}
+/* detail pages */
+.md h1{font-size:32px}.md h2{font-size:23px;margin:44px 0 10px;padding-top:22px;border-top:1px solid var(--line)}.md h3{font-size:19px;margin:26px 0 8px}
+.md p,.md li{max-width:68ch}.md hr{display:none}
+.md code{background:var(--soft);padding:1px 6px;border-radius:4px;font-size:.9em}
+.md img{display:block;max-width:min(100%,320px);margin:14px 0;border-radius:14px;border:1px solid var(--line);cursor:zoom-in}
+.md table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px;display:block;overflow-x:auto}
+.md th,.md td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}.md th{background:var(--soft)}
+</style></head>
+<body><nav><a href="index.html">Visual report</a><a href="summary.html">Summary (text)</a><a href="web-cro-evidence.html">Conversion evidence</a><a href="web-competitors.html">Competitors</a><a href="web-trust-tone.html">Trust &amp; tone</a><a href="web-booking.html" class=on>Booking (web)</a><a href="mobbin-intake.html">Intake · Mobbin</a><a href="refero-intake.html">Intake · Refero</a><a href="mobbin-results.html">Results · Mobbin</a><a href="refero-results.html">Results · Refero</a><a href="mobbin-booking.html">Booking · Mobbin</a><a href="refero-booking.html">Booking · Refero</a></nav><main class="narrow md"><h1>Booking &amp; lead-capture step: evidence and spec</h1>
+<p>Scope: result → book free online meeting → confirmation (mobile, Sweden, GLP-1).
+Pages marked (opened) were fetched and read. Pages marked (search snippet) could not be opened (paywall/captcha), so treat those numbers as weaker.</p>
+<h2>Findings</h2>
+<ol>
+<li><p><strong>Gating the result behind contact details costs a lot of people.</strong> ConvertFlow sees <strong>30–50% of quiz finishers drop</strong> when email is required before results. Putting it after the result gets fewer emails but more conversions. This is vendor data from e-commerce, not peer-reviewed.
+Source (opened): <a href="https://www.convertflow.com/blog/how-to-fix-ecommerce-quiz-funnel-drop-off-in-2026">https://www.convertflow.com/blog/how-to-fix-ecommerce-quiz-funnel-drop-off-in-2026</a>
+<strong>Velora:</strong> show the result (&quot;may suit you&quot;) <strong>ungated</strong>. Ask for contact details only as part of booking, where they are clearly needed (&quot;so the nurse can call you&quot;). The result itself is what earns the details.</p>
+</li>
+<li><p><strong>Field count matters more than step count.</strong> Baymard: the average checkout has <strong>11.3 fields</strong> but <strong>8 is enough</strong>, and 17% abandon over complexity. With split first/last name fields, <strong>42% type their full name into &quot;First name&quot;</strong>; a single &quot;Full name&quot; field causes 4% hesitation. Baymard also says to delay account creation to the confirmation page.
+Source (opened): <a href="https://baymard.com/blog/checkout-flow-average-form-fields">https://baymard.com/blog/checkout-flow-average-form-fields</a>
+<strong>Velora:</strong> booking form = <strong>3 fields</strong> (full name, mobile, email). No account and no password. Defer anything else (address, personnummer) until after the meeting.</p>
+</li>
+<li><p><strong>A short booking horizon lowers no-shows.</strong> In 1.26M appointments, no-shows were <strong>4.3% at 0–15 days lead time vs 7.7% at &gt;60 days</strong>. &quot;Appointment confirmed = yes&quot; was among the top 3 predictors of attendance (Marshfield, PMC). A study of new patients reports <strong>30% no-show for new vs 21% for follow-up patients</strong>, and <strong>23% (&lt;30 d) vs 47% (≥30 d)</strong> (Health Care Manager 2017, search snippet).
+Source (opened): <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10503036/">https://pmc.ncbi.nlm.nih.gov/articles/PMC10503036/</a> · (search snippet) <a href="https://journals.lww.com/healthcaremanagerjournal/abstract/2017/01000/lead_time_to_appointment_and_no_show_rates_for_new.2.aspx">https://journals.lww.com/healthcaremanagerjournal/abstract/2017/01000/lead_time_to_appointment_and_no_show_rates_for_new.2.aspx</a>
+<strong>Velora:</strong> offer only the <strong>next 3–5 days</strong>, default to the soonest day, and lead with &quot;Next available: today 16:30&quot;. Velora&#39;s leads are new patients, the high-risk group.</p>
+</li>
+<li><p><strong>Reminders work, and several beat one.</strong> A meta-analysis of 21 studies found no-shows of <strong>15% with digital notifications vs 21% without (RR 0.75)</strong>. <strong>Multiple notifications raised attendance by 25% vs 6% for a single one.</strong>
+Source (opened): <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5093388/">https://pmc.ncbi.nlm.nih.gov/articles/PMC5093388/</a>
+<strong>Velora:</strong> send SMS + email right away, an SMS 24 h before, and one 1–2 h before with the join link. The confirmation page says this explicitly (&quot;We&#39;ll text you a reminder&quot;).</p>
+</li>
+<li><p><strong>The same pattern holds for meetings booked online.</strong> Calendly users report an <strong>average 28% drop in no-shows</strong> with automated reminders (88% saw a decrease). Calendly&#39;s advice: 2–3-day windows for inbound leads, reminders at 24 h and 4 h, and an agenda sent ahead. Vendor survey.
+Source (opened): <a href="https://calendly.com/blog/reduce-no-show-rates-sales">https://calendly.com/blog/reduce-no-show-rates-sales</a>
+<strong>Velora:</strong> put a 3-bullet &quot;what we&#39;ll talk about&quot; agenda on the confirmation page and in the email.</p>
+</li>
+<li><p><strong>Limit the slot choices.</strong> Decision time grows with the number of options (Hick&#39;s law). Booking guidance says to show a few slots and let people expand for more. This is a principle, not a measured study for booking.
+Source (opened via search): <a href="https://thedecisionlab.com/reference-guide/design/hicks-law">https://thedecisionlab.com/reference-guide/design/hicks-law</a>
+<strong>Velora:</strong> a horizontal row of day chips (5 days), then <strong>4–6 slots per day</strong> grouped Morning/Afternoon/Evening, plus &quot;Show more times&quot;. Scarcity must be <strong>true</strong>: show &quot;2 times left today&quot; only when it really is so. Fake urgency hurts trust in a health context.</p>
+</li>
+<li><p><strong>BankID is universal in Sweden, but it&#39;s a heavy step.</strong> <strong>95% of Swedes use mobile BankID</strong> (99% aged 18–64, 84% aged 65+, 74% aged 76+). Freja is at 4%. Kry, Doktor.se, 1177 and Yazen all use BankID to log in to their <strong>clinics</strong>. IMY: authentication strength should match how sensitive the data is.
+Sources (opened): <a href="https://svenskarnaochinternet.se/rapporter/svenskarna-och-internet-2025/anvandning-av-internet-och-e-tjanster/">https://svenskarnaochinternet.se/rapporter/svenskarna-och-internet-2025/anvandning-av-internet-och-e-tjanster/</a> · <a href="https://www.imy.se/verksamhet/dataskydd/det-har-galler-enligt-gdpr/informationssakerhet/autentisering/">https://www.imy.se/verksamhet/dataskydd/det-har-galler-enligt-gdpr/informationssakerhet/autentisering/</a> · (search) <a href="https://clinic.yazen.com/login/bankid">https://clinic.yazen.com/login/bankid</a>
+<strong>Velora:</strong> <strong>don&#39;t require BankID to book a free intro meeting.</strong> The meeting is not a record-reading e-service. Requiring BankID adds an app switch and makes the step feel like a commitment. Use it <strong>later</strong> (the clinic and prescription step needs a verified identity and personnummer). On the confirmation page, say &quot;Before treatment you&#39;ll verify with BankID&quot;. This is an assumption about Velora&#39;s legal setup; confirm with the team.</p>
+</li>
+<li><p><strong>The confirmation page&#39;s job is reassurance.</strong> NN/g: confirmation steps calm anxiety and build trust. Show exactly what was booked, and let people create an account after the main task, not during it.
+Sources (opened): <a href="https://www.nngroup.com/articles/after-the-buy-button-in-e-commerce/">https://www.nngroup.com/articles/after-the-buy-button-in-e-commerce/</a> · Baymard (above) on delaying account creation
+<strong>Velora:</strong> the confirmation shows the exact date, time, length, format and who calls. It has <strong>Add to calendar</strong> (.ics / Google), <strong>Change time</strong>, a 3-step &quot;what happens next&quot;, and &quot;how to prepare&quot; (nothing needed, ~20 min, somewhere private).</p>
+</li>
+</ol>
+<h2>Recommended booking-step spec (mocked prototype)</h2>
+<p><strong>Screen A: Result (ungated)</strong></p>
+<ul>
+<li>Heading: &quot;Medicinsk viktminskning kan passa dig&quot; plus 1–2 personalised lines drawn from their answers.</li>
+<li>Primary CTA: &quot;Boka ett kostnadsfritt samtal&quot;. Below it: &quot;15–20 min · Online · Ingen kostnad, inget åtagande&quot;.</li>
+<li>Show &quot;Nästa lediga tid: idag 16:30&quot; directly on the result screen. That cuts out one decision.</li>
+</ul>
+<p><strong>Screen B: Pick a time</strong></p>
+<ul>
+<li>Day chips for the next 5 days (Today, Tomorrow, Fri 4 Oct…). Today, or the first day with slots, is preselected.</li>
+<li>4–6 slot buttons (min 44px tall), grouped by time of day, plus &quot;Visa fler tider&quot;.</li>
+<li>Header: &quot;Samtal med legitimerad sjuksköterska&quot; with a small avatar or team photo. Time zone is implicit (Swedish time).</li>
+<li>Honest scarcity only (&quot;2 tider kvar idag&quot; when true). No countdown timers.</li>
+<li>Sticky CTA: &quot;Fortsätt med tis 3 okt 16:30&quot;.</li>
+</ul>
+<p><strong>Screen C: Your details (3 fields)</strong></p>
+<ul>
+<li>Order: Mobilnummer (type=tel, +46 prefilled, autocomplete=tel) → Namn (single field, autocomplete=name) → E-post (type=email, autocomplete=email).</li>
+<li>Helper copy: &quot;Vi ringer/skickar länken hit. Vi delar aldrig dina uppgifter.&quot;</li>
+<li>Consent: one line linking to the privacy policy, plus an unchecked opt-in for marketing (GDPR). Health answers are covered by the privacy note.</li>
+<li>Summary chip at the top: &quot;tis 3 okt · 16:30 · Ändra&quot;.</li>
+<li>CTA: &quot;Boka samtalet&quot;. No BankID, no password, no personnummer.</li>
+</ul>
+<p><strong>Screen D: Confirmation</strong></p>
+<ul>
+<li>Check-mark animation, then: &quot;Du är bokad, Anna.&quot; Below: &quot;tis 3 okt kl 16:30 · 20 min · Videosamtal&quot;.</li>
+<li>Buttons: &quot;Lägg till i kalender&quot; (primary secondary-style) and &quot;Ändra tid&quot;.</li>
+<li>What happens next: 1) Bekräftelse på SMS + e-post nu → 2) Påminnelse dagen innan och 1 h före med länk → 3) Samtalet: vi går igenom din hälsa, dina mål och om behandling passar. Du bestämmer sedan.</li>
+<li>How to prepare: &quot;Inget att förbereda. Ha gärna din vikt och eventuella mediciner i huvudet.&quot;</li>
+<li>Trust: who they will meet (licensed nurse/doctor), &quot;Kostnadsfritt, inget åtagande&quot;, and how to get help or a contact.</li>
+<li>Later step: &quot;Om du går vidare verifierar du dig med BankID&quot;.</li>
+</ul>
+<h2>Top 3 takeaways</h2>
+<ol>
+<li><strong>Show the result ungated. Ask for contact details only at booking: 3 fields, no BankID or account.</strong> Gating loses about 30–50% of finishers (vendor data), and every extra field costs completions (Baymard).</li>
+<li><strong>Short horizon, fewer slots, soonest first.</strong> No-shows rise with lead time (4.3% → 7.7%; new patients far worse). Offer the next 3–5 days and preselect &quot;next available&quot;.</li>
+<li><strong>The confirmation page plus reminders is the no-show fix.</strong> Reminders give RR 0.75, and multiple reminders beat one (25% vs 6%). Add to calendar, an agenda/what to expect, and an easy reschedule.</li>
+</ol>
+
+</main>
+<div id="lb"><img alt=""></div><script>const lb=document.getElementById('lb'),li=lb.querySelector('img');
+document.querySelectorAll('.shot img,.row img,.md img').forEach(i=>i.parentElement.onclick=i.onclick=ev=>{ev.stopPropagation();li.src=i.src;lb.classList.add('on')});
+lb.onclick=()=>lb.classList.remove('on');document.onkeydown=k=>k.key==='Escape'&&lb.classList.remove('on')</script></body></html>

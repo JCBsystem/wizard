@@ -1,0 +1,740 @@
+{
+  "ui": {
+    "next": "Nästa",
+    "back": "Tillbaka",
+    "almostDone": "Nästan klart",
+    "restart": "Börja om"
+  },
+  "steps": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "Ta reda på om medicinsk viktnedgång kan passa dig",
+      "helpText": "Dina svar är hälsouppgifter. Bara vårdpersonal i din vård ser dem.",
+      "cta": "Kom igång",
+      "kicker": "2 minuter · Kostnadsfritt",
+      "bullets": [
+        "Svara på några frågor",
+        "Se ditt resultat direkt",
+        "Boka ett kostnadsfritt videosamtal"
+      ],
+      "notes": [
+        {
+          "title": "5 000+ har startat där du är nu",
+          "more": [
+            "Du är precis där du ska vara. Vi hjälper tusentals varje vecka att nå sina mål – med behandlingar, coachning och verktyg som funkar på riktigt.",
+            "★★★★★",
+            "Jag är så tacksam!",
+            "Jag har haft problem med övervikt i väldigt många år och har testat allt för att gå ner i vikt. Velora är dom första som har tagit mig på allvar och hjälpt mig när träning och diet inte räcker hela vägen. Jag är så tacksam för detta! För första gången på väldigt många år har jag faktiskt börjat gå ner i vikt sakta men säkert. :)",
+            "– Nathalie"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mal",
+      "fields": [
+        {
+          "id": "goal",
+          "type": "single",
+          "label": "Vad är ditt viktminskningsmål?",
+          "description": "Svara på dessa frågor för att vi ska kunna ge dig en personlig behandling.",
+          "options": [
+            {
+              "value": "1-10",
+              "label": "Förlora 1-10kg för gott"
+            },
+            {
+              "value": "11-20",
+              "label": "Förlora 11-20kg för gott"
+            },
+            {
+              "value": "21-40",
+              "label": "Förlora 21-40kg för gott"
+            },
+            {
+              "value": "40+",
+              "label": "Förlora mer än 40kg för gott"
+            },
+            {
+              "value": "undecided",
+              "label": "Jag har inte bestämt mig"
+            }
+          ]
+        }
+      ],
+      "section": "Mål"
+    },
+    {
+      "id": "anledningar",
+      "fields": [
+        {
+          "id": "reasons",
+          "type": "multi",
+          "label": "Vilka är de främsta anledningarna till att du vill gå ner i vikt?",
+          "options": [
+            {
+              "value": "confidence",
+              "label": "Bli mer självsäker"
+            },
+            {
+              "value": "health",
+              "label": "Förbättra min hälsa och livskvalitet"
+            },
+            {
+              "value": "prevent",
+              "label": "Undvika sjukdomar och medicin"
+            },
+            {
+              "value": "appearance",
+              "label": "Förändra mitt utseende"
+            },
+            {
+              "value": "energy",
+              "label": "Bli mer aktiv och orka mer"
+            },
+            {
+              "value": "other",
+              "label": "Annat"
+            }
+          ]
+        },
+        {
+          "id": "impact",
+          "type": "single",
+          "layout": "row",
+          "label": "Hur påverkar din nuvarande vikt ditt liv?",
+          "options": [
+            {
+              "value": "not-much",
+              "label": "Inte så mycket"
+            },
+            {
+              "value": "quite",
+              "label": "Ganska mycket"
+            },
+            {
+              "value": "very",
+              "label": "Väldigt mycket"
+            }
+          ]
+        }
+      ],
+      "section": "Mål"
+    },
+    {
+      "id": "malvikt",
+      "fields": [
+        {
+          "id": "target-weight",
+          "type": "slider",
+          "label": "Vad är din målvikt?",
+          "description": "Baserat på Veloras användare och studier räknar vi ut när du kan nå din målvikt om du följer vår plan och våra råd. I genomsnitt går Veloras medlemmar ner 20% under det första året.",
+          "min": 40,
+          "max": 250,
+          "help": {
+            "text": "Vet du inte vilken målvikt som passar dig bäst?",
+            "link": "Hjälp mig hitta min målvikt"
+          },
+          "unit": "kg",
+          "start": 80
+        },
+        {
+          "id": "pace",
+          "type": "single",
+          "label": "Hur vill du uppnå din målvikt?",
+          "options": [
+            {
+              "value": "fast",
+              "label": "Så snabbt som möjligt"
+            },
+            {
+              "value": "sustainable",
+              "label": "Göra hållbara förändringar under en längre tid"
+            },
+            {
+              "value": "between",
+              "label": "Någonstans mitt emellan"
+            }
+          ]
+        }
+      ],
+      "section": "Mål"
+    },
+    {
+      "id": "om-dig",
+      "fields": [
+        {
+          "id": "sex",
+          "type": "single",
+          "layout": "chips",
+          "label": "Vilket biologiskt kön är du?",
+          "description": "Kön och hormoner påverkar hur våra kroppar metaboliserar mat.",
+          "options": [
+            {
+              "value": "male",
+              "label": "Man"
+            },
+            {
+              "value": "female",
+              "label": "Kvinna"
+            }
+          ]
+        },
+        {
+          "id": "age",
+          "type": "single",
+          "layout": "chips",
+          "label": "Hur gammal är du?",
+          "options": [
+            {
+              "value": "under-18",
+              "label": "Under 18 år"
+            },
+            {
+              "value": "18-30",
+              "label": "18-30 år"
+            },
+            {
+              "value": "31-50",
+              "label": "31-50 år"
+            },
+            {
+              "value": "51-70",
+              "label": "51-70 år"
+            },
+            {
+              "value": "over-75",
+              "label": "Över 75 år"
+            }
+          ]
+        }
+      ],
+      "section": "Om dig"
+    },
+    {
+      "id": "kropp",
+      "helpText": "Ett ungefärligt värde räcker. Bara vårdpersonal i din vård ser dina svar.",
+      "fields": [
+        {
+          "id": "weight",
+          "type": "slider",
+          "label": "Vad är din nuvarande vikt?",
+          "description": "Vi behöver veta vart du är nu så vi kan bygga en plan som är rätt för dig.",
+          "unit": "kg",
+          "min": 40,
+          "max": 250,
+          "start": 90
+        },
+        {
+          "id": "height",
+          "type": "slider",
+          "label": "Hur lång är du?",
+          "unit": "cm",
+          "min": 130,
+          "max": 220,
+          "start": 170
+        }
+      ],
+      "section": "Om dig"
+    },
+    {
+      "id": "bmi",
+      "fields": [
+        {
+          "id": "bmi-criteria",
+          "type": "single",
+          "layout": "row",
+          "label": "Ditt BMI är {{bmi}}. Uppfyller du något av följande 3 kriterier?",
+          "description": [
+            "Du har ett BMI på 30 eller högre",
+            "Du har ett BMI på 27 eller högre och minst en viktrelaterad sjukdom, såsom t.ex. högt blodtryck, diabetes typ 2, förhöjda blodfetter, sömnapnésyndrom eller åderförkalkning",
+            "Du har tidigare uppfyllt något av ovanstående kriterier men nu lyckats gå ned i vikt och önskar hjälp med att behålla din nuvarande vikt"
+          ],
+          "options": [
+            {
+              "value": "yes",
+              "label": "Ja"
+            },
+            {
+              "value": "no",
+              "label": "Nej"
+            }
+          ]
+        }
+      ],
+      "section": "Hälsa"
+    },
+    {
+      "id": "sjukdomar",
+      "section": "Hälsa",
+      "fields": [
+        {
+          "id": "conditions",
+          "type": "single",
+          "layout": "row",
+          "label": "Har du eller har du haft någon av följande sjukdomar?",
+          "description": [
+            "Diabetes typ 1",
+            "Multipel endokrin neoplasi typ II, gäller även om någon i din familj är drabbad",
+            "Medullär tyreoideacancer (MTC), gäller även om någon i din familj är drabbad",
+            "Ätstörningar (anorexia och/eller bulimi)",
+            "Diabetesretinopati (förändringar i ögats näthinna orsakat av diabetes)"
+          ],
+          "options": [
+            {
+              "value": "yes",
+              "label": "Ja"
+            },
+            {
+              "value": "no",
+              "label": "Nej"
+            }
+          ]
+        }
+      ],
+      "helpText": "Vi frågar för att läkaren ska kunna bedöma om en behandling är säker för dig."
+    },
+    {
+      "id": "mediciner",
+      "section": "Hälsa",
+      "fields": [
+        {
+          "id": "medication",
+          "type": "single",
+          "layout": "row",
+          "label": "Tar du mediciner idag för viktnedgång?",
+          "description": "Ex. Wegovy, Mounjaro, Ozempic, Rybelsus eller Zepbound.",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Ja"
+            },
+            {
+              "value": "no",
+              "label": "Nej"
+            }
+          ],
+          "note": {
+            "title": "Vi hjälper dig med en smidig och snabb övergång",
+            "more": [
+              "★★★★★",
+              "De har hjälpt mig på så många plan!",
+              "Varit på Yazen först och gick sedan över till Velora. Hos Velora kan man träffa sina coacher via länk och det blir genuina möten, vilket jag inte upplevde på tidigare företag. De har hjälpt mig på så många plan! Tack!",
+              "– Lasse"
+            ]
+          },
+          "noteWhen": "yes"
+        }
+      ]
+    },
+    {
+      "id": "livsstil",
+      "fields": [
+        {
+          "id": "lifestyle",
+          "type": "single",
+          "label": "Vad beskriver din nuvarande livsstil bäst?",
+          "options": [
+            {
+              "value": "active",
+              "label": "Jag lever ett aktivt liv och äter för det mesta nyttigt"
+            },
+            {
+              "value": "partly-active",
+              "label": "Jag lever ett delvis aktivt liv och äter nyttigt ibland"
+            },
+            {
+              "value": "needs-change",
+              "label": "Jag behöver ändra på mycket för att få en hälsosammare livsstil"
+            }
+          ]
+        },
+        {
+          "id": "tried-for",
+          "type": "single",
+          "layout": "grid",
+          "label": "Hur länge har du försökt gå ner i vikt?",
+          "options": [
+            {
+              "value": "12-months",
+              "label": "Sista 12 månaderna"
+            },
+            {
+              "value": "1-5-years",
+              "label": "Sista 1-5 åren"
+            },
+            {
+              "value": "6-10-years",
+              "label": "Sista 6-10 åren"
+            },
+            {
+              "value": "lifetime",
+              "label": "Hela mitt liv"
+            },
+            {
+              "value": "never",
+              "label": "Jag har aldrig försökt tidigare"
+            }
+          ]
+        }
+      ],
+      "section": "Vanor"
+    },
+    {
+      "id": "metoder",
+      "section": "Vanor",
+      "fields": [
+        {
+          "id": "methods",
+          "type": "multi",
+          "label": "Vilka metoder har du tidigare provat för att gå ner i vikt?",
+          "options": [
+            {
+              "value": "diets",
+              "label": "Dieter (t.ex. Keto eller LCHF)"
+            },
+            {
+              "value": "calorie-counting",
+              "label": "Kaloriräkning"
+            },
+            {
+              "value": "exercise",
+              "label": "Träning och motion"
+            },
+            {
+              "value": "meal-replacement",
+              "label": "Måltidsersättning"
+            },
+            {
+              "value": "supplements",
+              "label": "Kosttillskott för viktnedgång"
+            },
+            {
+              "value": "other",
+              "label": "Annat"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hinder",
+      "section": "Vanor",
+      "fields": [
+        {
+          "id": "barriers",
+          "type": "multi",
+          "label": "Vad har gjort det svårt att gå ner i vikt tidigare?",
+          "options": [
+            {
+              "value": "motivation",
+              "label": "Jag förlorar motivationen"
+            },
+            {
+              "value": "consistency",
+              "label": "Det är svårt att vara konsekvent"
+            },
+            {
+              "value": "time",
+              "label": "Jag har inte tillräckligt tid"
+            },
+            {
+              "value": "regain",
+              "label": "Jag förlorar vikt, men den kommer tillbaka"
+            },
+            {
+              "value": "no-support",
+              "label": "Jag hade inte stöd"
+            },
+            {
+              "value": "other",
+              "label": "Annat"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vid-malet",
+      "section": "Framtid",
+      "fields": [
+        {
+          "id": "wishes",
+          "type": "multi",
+          "label": "När jag har nått mitt mål, vill jag gärna...",
+          "options": [
+            {
+              "value": "think-less-food",
+              "label": "Tänka mindre på mat överlag"
+            },
+            {
+              "value": "worry-less-body",
+              "label": "Oroa mig mindre för min kropp"
+            },
+            {
+              "value": "more-active",
+              "label": "Vara mer aktiv i min vardag"
+            },
+            {
+              "value": "healthier-choices",
+              "label": "Ta mer hälsosamma beslut"
+            },
+            {
+              "value": "enjoy-food",
+              "label": "Njuta av mat utan skuldkänslor"
+            },
+            {
+              "value": "other",
+              "label": "Annat"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sjalvbild",
+      "section": "Framtid",
+      "fields": [
+        {
+          "id": "self-image",
+          "type": "multi",
+          "label": "När jag tänker på mig själv vid mitt mål ser jag mig själv...",
+          "options": [
+            {
+              "value": "energetic",
+              "label": "Känna mig mer energisk"
+            },
+            {
+              "value": "vibrant-life",
+              "label": "Leva ett mer levande liv"
+            },
+            {
+              "value": "self-trust",
+              "label": "Tro & lita på mig själv"
+            },
+            {
+              "value": "comfort-zone",
+              "label": "Våga kliva utanför min komfortzon"
+            },
+            {
+              "value": "own-needs",
+              "label": "Sätta mina behov först"
+            },
+            {
+              "value": "other",
+              "label": "Annat"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "behandling",
+      "section": "Framtid",
+      "fields": [
+        {
+          "id": "priorities",
+          "type": "multi",
+          "label": "När du överväger behandling, vilka av följande är viktigast för dig?",
+          "options": [
+            {
+              "value": "results",
+              "label": "Jag vill maximera mina resultat"
+            },
+            {
+              "value": "side-effects",
+              "label": "Jag vill minska risken för biverkningar"
+            },
+            {
+              "value": "support",
+              "label": "Trygghet & snabb support"
+            },
+            {
+              "value": "doctor",
+              "label": "Tillgång till personlig läkare"
+            },
+            {
+              "value": "other",
+              "label": "Annat"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kalla",
+      "section": "Framtid",
+      "fields": [
+        {
+          "id": "source",
+          "type": "single",
+          "label": "Hur hittade du oss?",
+          "options": [
+            {
+              "value": "friends",
+              "label": "Vänner, familj eller kollega"
+            },
+            {
+              "value": "social",
+              "label": "Sociala medier (Facebook, Instagram, YouTube)"
+            },
+            {
+              "value": "google",
+              "label": "Google"
+            },
+            {
+              "value": "blog",
+              "label": "Blogg eller annan hemsida"
+            },
+            {
+              "value": "clinician",
+              "label": "Tips från läkare eller vårdpersonal"
+            },
+            {
+              "value": "tv-radio",
+              "label": "TV eller radio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "result",
+      "type": "result",
+      "title": "Medicinsk viktnedgång kan passa dig",
+      "description": "Utifrån dina svar kan behandling vara ett alternativ för dig – om och hur avgör du och läkaren tillsammans.",
+      "notes": [
+        {
+          "title": "Ditt mål att förlora {{goalKg}} för gott är närmare än vad du tror",
+          "more": [
+            "Med Velorametoden får du tillgång till de effektivaste behandlingarna på marknaden - skräddarsydda till dina mål."
+          ]
+        }
+      ],
+      "bullets": [
+        "Kostnadsfritt videosamtal, 20 minuter. Avboka när du vill.",
+        "En legitimerad läkare går igenom dina svar och din hälsa.",
+        "Ni bestämmer tillsammans om och hur ni går vidare."
+      ],
+      "cta": "Boka gratis samtal",
+      "summary": [
+        {
+          "label": "Ditt mål",
+          "value": "{{goal}}"
+        },
+        {
+          "label": "Ditt BMI",
+          "value": "{{bmi}}"
+        }
+      ]
+    },
+    {
+      "id": "booking",
+      "type": "booking",
+      "title": "Välj en tid som passar",
+      "description": "Kostnadsfritt · 20 min · video · avboka fritt",
+      "fields": [
+        {
+          "id": "slot",
+          "type": "single",
+          "layout": "grid",
+          "label": "Lediga tider",
+          "options": [
+            {
+              "value": "2026-10-05T09:00",
+              "label": "mån 5 okt kl 09:00"
+            },
+            {
+              "value": "2026-10-05T13:30",
+              "label": "mån 5 okt kl 13:30"
+            },
+            {
+              "value": "2026-10-06T10:30",
+              "label": "tis 6 okt kl 10:30"
+            },
+            {
+              "value": "2026-10-06T16:00",
+              "label": "tis 6 okt kl 16:00"
+            },
+            {
+              "value": "2026-10-07T08:30",
+              "label": "ons 7 okt kl 08:30"
+            },
+            {
+              "value": "2026-10-08T11:00",
+              "label": "tor 8 okt kl 11:00"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "title": "9 av 10 medlemmar tycker Velora är det mest effektiva programmet de har testat",
+          "more": [
+            "Senaste GLP-1 medicinen",
+            "Expert 1:1 support från läkare (24/7)",
+            "Livsstilteam med personlig coaching och råd",
+            "20 % genomsnittlig viktnedgång på ett år",
+            "Pengar tillbaka garanti"
+          ]
+        }
+      ],
+      "person": {
+        "name": "Sara Lindqvist",
+        "role": "Leg. läkare"
+      }
+    },
+    {
+      "id": "contact",
+      "type": "booking",
+      "title": "Vart skickar vi bekräftelsen?",
+      "helpText": "Vi använder dina uppgifter bara för att bekräfta och påminna om samtalet.",
+      "cta": "Boka tiden",
+      "fields": [
+        {
+          "id": "name",
+          "type": "text",
+          "placeholder": "Förnamn"
+        },
+        {
+          "id": "phone",
+          "type": "text",
+          "inputType": "tel",
+          "placeholder": "Telefonnummer"
+        },
+        {
+          "id": "email",
+          "type": "text",
+          "inputType": "email",
+          "placeholder": "Email"
+        }
+      ]
+    },
+    {
+      "id": "confirmation",
+      "type": "confirmation",
+      "title": "Vi ses {{slot}}!",
+      "description": "Tack {{name}}. En bekräftelse och länk till videosamtalet skickas till {{email}}. Du får också en påminnelse via sms dagen innan.",
+      "bullets": [
+        "Du får en länk till videosamtalet via sms och e-post.",
+        "Läkaren går igenom dina svar och svarar på dina frågor.",
+        "Passar behandling er båda går ni vidare med nästa steg tillsammans."
+      ],
+      "notes": [
+        {
+          "title": "Hälsokontroll och blodprover",
+          "more": [
+            "Hos Velora är din säkerhet högsta prioritet. Därför analyserar vi din hälsa innan start.",
+            "1. Utesluta sjukdomar som hindrar en behandling.",
+            "2. Hitta ovanliga medicinska orsaker till din övervikt.",
+            "3. Screena för följdsjukdomar av din övervikt.",
+            "Se var du kan ta prover",
+            "Har du redan tagit prover?",
+            "Om du nyligen tagit blodprover kan vi oftast använda dem."
+          ]
+        }
+      ]
+    }
+  ]
+}

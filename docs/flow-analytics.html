@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Velora Flow Analytics</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Ubuntu:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, status strip first, then how → data → value → open items */
+:root {
+  --bg: #fbf6f8; --surface: #ffffff; --fg: #2a1420; --muted: #6e5563; --line: #ead9e1;
+  --accent: #a71e67; --plum: #751a4b;
+  --ok: #1f7a4d; --ok-bg: #e4f3ea; --warn: #9a5b00; --warn-bg: #fbefd9; --bad: #b0233a; --bad-bg: #fbe3e7;
+  --code-bg: #f5ecf0;
+  --display: "Ubuntu", "Segoe UI", system-ui, sans-serif;
+  --body: "Manrope", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1a0f15; --surface: #241620; --fg: #f3e6ec; --muted: #b89cab; --line: #3d2733;
+  --accent: #f06aaa; --plum: #f2a9cc;
+  --ok: #6fd3a0; --ok-bg: #173226; --warn: #f0c070; --warn-bg: #3a2a10; --bad: #ff8a9b; --bad-bg: #3d1820;
+  --code-bg: #2d1c27; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #1a0f15; --surface: #241620; --fg: #f3e6ec; --muted: #b89cab; --line: #3d2733;
+  --accent: #f06aaa; --plum: #f2a9cc;
+  --ok: #6fd3a0; --ok-bg: #173226; --warn: #f0c070; --warn-bg: #3a2a10; --bad: #ff8a9b; --bad-bg: #3d1820;
+  --code-bg: #2d1c27; color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font: 15px/1.6 var(--body); padding: 0 16px; }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 40px 64px; display: flex; flex-direction: column; gap: 40px; }
+h1, h2, h3 { font-family: var(--display); color: var(--plum); text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 2rem; font-weight: 700; }
+h2 { font-size: 1.35rem; font-weight: 700; }
+h3 { font-size: 1rem; font-weight: 500; }
+p { margin: 0; max-width: 65ch; }
+section { display: flex; flex-direction: column; gap: 14px; }
+.eyebrow { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.lead { font-size: 1.05rem; color: var(--muted); }
+code, pre { font-family: var(--mono); font-size: .82rem; }
+:not(pre) > code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+pre.json { background: var(--code-bg); padding: 16px; border-radius: 8px; overflow-x: auto; margin: 0; line-height: 1.5; }
+.scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+td:first-child { white-space: nowrap; }
+.diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; overflow-x: auto; }
+.diagram pre.mermaid { margin: 0; display: flex; justify-content: center; }
+ul, ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+@media (max-width: 520px) { h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:10px">
+    <span class="eyebrow">Velora wizard · frame · 2 Oct 2026</span>
+    <h1>Velora Flow Analytics</h1>
+    <p class="lead">How the wizard records each patient's path through the quiz: when each step starts and stops, where people leave, who comes back, and what gets submitted. Everything is driven by the step ids in <code>wizard.json</code>; nothing is hard-coded per step.</p>
+  </header>
+
+  <section>
+    <h2>How it works</h2>
+    <p>One Firestore document per person, created the first time the wizard loads. The session id lives in the browser next to the saved answers, so a reload or a later visit on the same device continues the same document.</p>
+    <div class="diagram"><pre class="mermaid">
+flowchart TD
+  L([Page load]) --> Q{Saved session and step above 0?}
+  Q -- no --> N[New doc: status in_progress]
+  Q -- yes --> R[Same doc: resumes +1]
+  N --> S[start: visits +1, lastStart]
+  R --> S
+  S --> X{Person leaves the step}
+  X -- Next, auto-advance or Back --> T[stop: lastStop, totalMs += time]
+  X -- closes the tab --> E([No stop = exit on this step])
+  T -- next step is not confirmation --> S
+  T -- next step is confirmation --> U[submit: answers, status submitted]
+</pre></div>
+    <div class="scroll"><table>
+      <thead><tr><th>Event</th><th>When</th><th>Written to the doc</th></tr></thead>
+      <tbody>
+        <tr><td><code>begin</code></td><td>First render of the wizard</td><td>New: <code>status</code>, <code>createdAt</code>, <code>resumes: 0</code>, <code>userAgent</code>. Resume: <code>resumes</code> +1.</td></tr>
+        <tr><td><code>start</code></td><td>A step is shown</td><td><code>currentStep</code>, <code>steps.&lt;id&gt;.visits</code> +1, <code>steps.&lt;id&gt;.lastStart</code></td></tr>
+        <tr><td><code>stop</code></td><td>The person moves off a step (any direction)</td><td><code>steps.&lt;id&gt;.lastStop</code>, <code>steps.&lt;id&gt;.totalMs</code> += time on step</td></tr>
+        <tr><td><code>submit</code></td><td>Moving into the confirmation step</td><td><code>status: "submitted"</code>, <code>submittedAt</code>, <code>answers</code></td></tr>
+        <tr><td><code>restart</code></td><td>"Börja om" on confirmation</td><td>Stops the current step, opens a fresh doc</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>The document</h2>
+    <p>Example of a person who left on the health step after coming back once. Values are illustrative.</p>
+<pre class="json">// sessions/3f6c…e21a
+{
+  "status": "in_progress",
+  "createdAt": "2026-10-02T10:14:03Z",
+  "updatedAt": "2026-10-02T18:40:51Z",
+  "resumes": 1,
+  "currentStep": "health",
+  "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 …)",
+  "steps": {
+    "intro":  { "visits": 1, "totalMs": 4200,  "lastStart": 1790936043000, "lastStop": 1790936047200 },
+    "goal":   { "visits": 1, "totalMs": 6100,  "lastStart": 1790936047200, "lastStop": 1790936053300 },
+    "about":  { "visits": 2, "totalMs": 38400, "lastStart": 1790965230000, "lastStop": 1790965244100 },
+    "weight": { "visits": 1, "totalMs": 21900, "lastStart": 1790965244100, "lastStop": 1790965266000 },
+    "health": { "visits": 1,                    "lastStart": 1790965266000 }
+  }
+}</pre>
+    <p><code>health</code> has a start and no stop: that is the exit. <code>about</code> was visited twice: once before the person left, once after resuming.</p>
+  </section>
+
+  <section>
+    <h2>What it answers</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Question</th><th>How to read it</th></tr></thead>
+      <tbody>
+        <tr><td>Conversion</td><td>Docs with <code>status: "submitted"</code> ÷ all docs.</td></tr>
+        <tr><td>Where people leave</td><td>For <code>in_progress</code> docs, the step where <code>lastStart</code> has no later <code>lastStop</code>. Count per step id.</td></tr>
+        <tr><td>Which steps cause friction</td><td>Median <code>totalMs</code> per step id. A long time on a one-tap step means unclear copy or a hard question.</td></tr>
+        <tr><td>Where people hesitate</td><td><code>visits</code> &gt; 1 means they came back to that step with Back or after a resume.</td></tr>
+        <tr><td>Does resume matter</td><td>Share of submitted docs with <code>resumes</code> &gt; 0.</td></tr>
+        <tr><td>Before / after a change</td><td>Same reads, split by <code>createdAt</code> around a release.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Because the keys are the step ids from <code>wizard.json</code>, adding, merging or removing steps needs no code change. New ids simply appear in new docs.</p>
+  </section>
+
+  <section>
+    <h2>Before real patients</h2>
+    <ul>
+      <li><strong>Health data.</strong> <code>answers</code> holds health and contact details, special-category data under GDPR. Add consent copy and send answers through a server function rather than straight from the browser.</li>
+      <li><strong>Open write rule.</strong> Anyone can write a <code>sessions</code> doc today. Add App Check or anonymous auth so only the real app can write.</li>
+      <li><strong>Abandon window.</strong> Decide when an open session counts as abandoned (for example 30 minutes without <code>updatedAt</code>), so in-progress and lost can be told apart.</li>
+      <li><strong>Clock.</strong> <code>lastStart</code> and <code>lastStop</code> are device time, which is fine for durations but not for ordering across devices.</li>
+    </ul>
+  </section>
+
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+mermaid.initialize({ startOnLoad: true, theme: "base", flowchart: { useMaxWidth: false, nodeSpacing: 30, rankSpacing: 40 },
+  themeVariables: { fontFamily: "Manrope, system-ui, sans-serif", fontSize: "15px",
+    primaryColor: dark ? "#2d1c27" : "#fbeef4", primaryBorderColor: dark ? "#f06aaa" : "#a71e67",
+    primaryTextColor: dark ? "#f3e6ec" : "#2a1420", lineColor: dark ? "#b89cab" : "#751a4b",
+    edgeLabelBackground: dark ? "#241620" : "#ffffff" } })</script>
+</body>
+</html>

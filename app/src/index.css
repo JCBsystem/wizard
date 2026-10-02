@@ -1,13 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    --font-heading: var(--font-display);
+    --font-sans: 'Manrope', system-ui, sans-serif;
+    --font-display: 'Ubuntu', 'Manrope', system-ui, sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,38 +49,38 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --background: #f2e3eb;
+    --foreground: #751a4b;
+    --card: #ffffff;
+    --card-foreground: #751a4b;
+    --popover: #ffffff;
+    --popover-foreground: #751a4b;
+    --primary: #a71e67;
+    --primary-foreground: #ffffff;
+    --secondary: #f2e3eb;
+    --secondary-foreground: #751a4b;
+    --muted: #f2e3eb;
+    --muted-foreground: #751a4b;
+    --accent: #f2e3eb;
+    --accent-foreground: #751a4b;
+    --destructive: #b3261e;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #a71e67;
+    --chart-1: #a71e67;
+    --chart-2: #751a4b;
+    --chart-3: #320014;
+    --chart-4: #d9a6c4;
+    --chart-5: #f2e3eb;
+    --radius: 0.5rem;
+    --sidebar: #ffffff;
+    --sidebar-foreground: #751a4b;
+    --sidebar-primary: #a71e67;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #f2e3eb;
+    --sidebar-accent-foreground: #751a4b;
+    --sidebar-border: #e2e8f0;
+    --sidebar-ring: #a71e67;
 }
 
 .dark {
@@ -117,6 +117,31 @@
     --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Step change (Wizard.tsx wraps it in document.startViewTransition). The content box is named
+   `step` and slides along the travel direction (--dir: 1 forward, -1 back, set on <html>);
+   everything else stays in `root` and gets the UA crossfade (static where pixels are equal,
+   a fade for the CTA/back button). Reduced motion keeps only that crossfade. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(step) {
+    animation: 140ms cubic-bezier(0.4, 0, 1, 1) both step-out;
+  }
+  ::view-transition-new(step) {
+    animation: 240ms 60ms cubic-bezier(0, 0, 0.2, 1) both step-in;
+  }
+}
+@keyframes step-out {
+  to {
+    opacity: 0;
+    translate: calc(var(--dir, 1) * -16px) 0;
+  }
+}
+@keyframes step-in {
+  from {
+    opacity: 0;
+    translate: calc(var(--dir, 1) * 24px) 0;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -126,5 +151,14 @@
     }
   html {
     @apply font-sans;
+    }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    }
+  h1, h2 {
+    font-size: 26px;
+    line-height: 32.5px;
+    letter-spacing: -0.56px;
     }
 }

@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Velora Quiz Baseline</title><style>
+:root{--bg:#faf9f7;--surface:#fff;--ink:#1d1b1a;--muted:#5f5a56;--line:#e6e1dc;--accent:#8a1c5a;
+--hi:#b3261e;--hi-bg:#fde8e6;--me:#8a5300;--me-bg:#fdf0d9;--lo:#2e6b34;--lo-bg:#e3f1e4;
+--t-conv:#1d4f91;--t-conv-bg:#e4ecf8;--t-trust:#7a2e8e;--t-trust-bg:#f1e5f5;--t-scr:#b3261e;--t-scr-bg:#fde8e6;
+--t-copy:#5b5b00;--t-copy-bg:#f2f2d6;--t-vis:#00636b;--t-vis-bg:#dff1f2;--t-mob:#4a4a4a;--t-mob-bg:#ececec;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141312;--surface:#1e1c1b;--ink:#eeeae6;--muted:#a9a29c;--line:#34302d;--accent:#e58fbd;
+--hi:#ff8a80;--hi-bg:#3d1c1a;--me:#f2b860;--me-bg:#3a2b12;--lo:#8fd096;--lo-bg:#18301b;
+--t-conv:#9cc0f5;--t-conv-bg:#1b2a40;--t-trust:#d9a6ea;--t-trust-bg:#2f1d36;--t-scr:#ff8a80;--t-scr-bg:#3d1c1a;
+--t-copy:#dada7a;--t-copy-bg:#2c2c14;--t-vis:#7fd3da;--t-vis-bg:#123234;--t-mob:#cfcfcf;--t-mob-bg:#2c2c2c;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#141312;--surface:#1e1c1b;--ink:#eeeae6;--muted:#a9a29c;--line:#34302d;--accent:#e58fbd;
+--hi:#ff8a80;--hi-bg:#3d1c1a;--me:#f2b860;--me-bg:#3a2b12;--lo:#8fd096;--lo-bg:#18301b;
+--t-conv:#9cc0f5;--t-conv-bg:#1b2a40;--t-trust:#d9a6ea;--t-trust-bg:#2f1d36;--t-scr:#ff8a80;--t-scr-bg:#3d1c1a;
+--t-copy:#dada7a;--t-copy-bg:#2c2c14;--t-vis:#7fd3da;--t-vis-bg:#123234;--t-mob:#cfcfcf;--t-mob-bg:#2c2c2c;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:32px 16px 80px}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-size:1.35rem;margin:56px 0 14px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:1.05rem;margin:0}
+p{margin:0 0 10px}
+.lede{color:var(--muted);max-width:70ch}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px 16px;margin:14px 0 0;font-size:.9rem}
+a{color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font-size:1.7rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:.85rem}
+ol.top{padding-left:1.4em;margin:0}
+ol.top li{margin:0 0 8px;padding-left:4px}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:1px 7px;border-radius:999px;vertical-align:1px;margin-right:4px}
+.tag.conversion{color:var(--t-conv);background:var(--t-conv-bg)}
+.tag.trust{color:var(--t-trust);background:var(--t-trust-bg)}
+.tag.screening{color:var(--t-scr);background:var(--t-scr-bg)}
+.tag.copy{color:var(--t-copy);background:var(--t-copy-bg)}
+.tag.visual{color:var(--t-vis);background:var(--t-vis-bg)}
+.tag.mobile{color:var(--t-mob);background:var(--t-mob-bg)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);margin:0 0 14px;align-items:center}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line)}
+.dot.H{background:var(--hi)}.dot.M{background:var(--me)}.dot.L{background:var(--lo)}
+.dot.M{border-radius:2px}.dot.L{border-radius:0;transform:rotate(45deg) scale(.85)}
+ul.map{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:12px}
+.thumb{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px;height:100%}
+.thumb:hover,.thumb:focus-visible{border-color:var(--accent)}
+.crop{display:block;overflow:hidden;border-radius:6px;aspect-ratio:4/5;background:#f1e3ea}
+.crop img{display:block;width:200%;margin-left:-50%;height:auto}
+.tl{display:flex;gap:6px;align-items:center;font-size:.82rem;line-height:1.25}
+.tt,.ta{font-size:.7rem;color:var(--muted);line-height:1.2}
+.ta.cut{color:var(--hi)}.ta.merge{color:var(--t-conv)}.ta.keep{color:var(--lo)}.ta.move{color:var(--me)}
+.card{display:grid;grid-template-columns:240px 1fr;gap:20px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 16px;scroll-margin-top:12px}
+.crop.big{aspect-ratio:5/6;align-self:start}
+.card header{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:8px}
+.num{font-weight:700;font-variant-numeric:tabular-nums;color:var(--muted)}
+.ctr{font-size:.8rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:0 6px}
+.sev{font-size:.72rem;font-weight:700;padding:1px 8px;border-radius:999px}
+.sev.H{color:var(--hi);background:var(--hi-bg)}.sev.M{color:var(--me);background:var(--me-bg)}.sev.L{color:var(--lo);background:var(--lo-bg)}
+.card .tt,.card .ta{font-size:.78rem}
+.card .ta{font-weight:600}
+.sv{font-weight:600;margin-bottom:2px}
+.en{color:var(--muted);font-size:.92rem}
+.inp{font-size:.9rem}
+ul.probs{margin:6px 0 10px;padding-left:0;list-style:none}
+ul.probs li{margin:0 0 6px;font-size:.94rem}
+.fix{font-size:.94rem;background:var(--bg);border-left:3px solid var(--accent);padding:6px 10px;border-radius:0 6px 6px 0;margin:0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.box h3{margin-bottom:6px}
+.box ul{margin:0;padding-left:1.1em}.box li{margin-bottom:4px;font-size:.94rem}
+.guess{color:var(--muted);font-style:italic}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.93rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+tr.cutrow td{color:var(--muted)}
+tfoot td{font-weight:700;border-bottom:0}
+.lb{display:none;position:fixed;inset:0;z-index:50;background:rgba(10,8,8,.92);overflow:auto;padding:52px 16px 24px}
+.lb:target{display:block}
+.lb img{display:block;max-width:min(100%,640px);height:auto;margin:0 auto;border-radius:8px}
+.lbbar{position:fixed;top:0;left:0;right:0;display:flex;gap:16px;align-items:center;padding:12px 16px;background:rgba(10,8,8,.95);color:#eee;font-size:.9rem}
+.lbbar span{flex:1}
+.lbbar a{color:#fff;font-weight:600}
+footer{margin-top:48px;font-size:.85rem;color:var(--muted)}
+@media (max-width:640px){ul.map{grid-template-columns:repeat(3,1fr);gap:8px}.tl{font-size:.75rem}.card{grid-template-columns:1fr}.crop.big{max-width:260px}}
+</style></head><body><main>
+<h1>Velora intake quiz: current state</h1>
+<p class="lede">Baseline of quiz.velora.se/2-3, captured 2026-10-02 at desktop viewport. Path: a qualifying man, BMI 30. The walkthrough stops at the contact form (25/26); the result and booking screens were not reached. Anything marked <span class="guess">guess</span> is not shown on screen.</p>
+<nav class="toc"><a href="#summary">Summary</a><a href="#map">Flow map</a><a href="#steps">Step by step</a></nav>
+
+<h2 id="summary">Summary</h2>
+<div class="stats">
+<div class="stat"><b>26</b><span>screens captured (counter “/26”)</span></div>
+<div class="stat"><b>20</b><span>questions: 11 single · 6 multi · 3 numeric</span></div>
+<div class="stat"><b>5 + 1</b><span>info screens + contact form</span></div>
+<div class="stat"><b>~38</b><span>taps minimum, plus typing 3 numbers and name, phone, email</span></div>
+<div class="stat"><b>~3–4 min</b><span>to reach the contact form (estimate: ~7 s per screen + typing)</span></div>
+
+</div>
+
+
+<h2 id="map">Flow map</h2>
+<p><a href="#z01">▶ Step through all screens</a> (← → keys, Esc to close)</p>
+
+<ul class="map"><li><a class="thumb" href="#z01" aria-label="Enlarge 01 Goal">
+<span class="crop"><img src="wizard/step-01.png" alt="" loading="lazy"></span>
+<span class="tl"><b>01</b> Goal</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z02" aria-label="Enlarge 02 Goal chart">
+<span class="crop"><img src="wizard/step-02.png" alt="" loading="lazy"></span>
+<span class="tl"><b>02</b> Goal chart</span>
+<span class="tt info">info</span></a></li><li><a class="thumb" href="#z03" aria-label="Enlarge 03 Reasons">
+<span class="crop"><img src="wizard/step-03.png" alt="" loading="lazy"></span>
+<span class="tl"><b>03</b> Reasons</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z04" aria-label="Enlarge 04 Weight impact">
+<span class="crop"><img src="wizard/step-04.png" alt="" loading="lazy"></span>
+<span class="tl"><b>04</b> Weight impact</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z05" aria-label="Enlarge 05 Pace">
+<span class="crop"><img src="wizard/step-05.png" alt="" loading="lazy"></span>
+<span class="tl"><b>05</b> Pace</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z06" aria-label="Enlarge 06 Sex">
+<span class="crop"><img src="wizard/step-06.png" alt="" loading="lazy"></span>
+<span class="tl"><b>06</b> Sex</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z07" aria-label="Enlarge 07 Age">
+<span class="crop"><img src="wizard/step-07.png" alt="" loading="lazy"></span>
+<span class="tl"><b>07</b> Age</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z08" aria-label="Enlarge 08 Weight">
+<span class="crop"><img src="wizard/step-08.png" alt="" loading="lazy"></span>
+<span class="tl"><b>08</b> Weight</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z09" aria-label="Enlarge 09 Height">
+<span class="crop"><img src="wizard/step-09.png" alt="" loading="lazy"></span>
+<span class="tl"><b>09</b> Height</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z10" aria-label="Enlarge 10 BMI criteria">
+<span class="crop"><img src="wizard/step-10.png" alt="" loading="lazy"></span>
+<span class="tl"><b>10</b> BMI criteria</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z11" aria-label="Enlarge 11 Contraindications">
+<span class="crop"><img src="wizard/step-11.png" alt="" loading="lazy"></span>
+<span class="tl"><b>11</b> Contraindications</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z12" aria-label="Enlarge 12 Target weight">
+<span class="crop"><img src="wizard/step-12.png" alt="" loading="lazy"></span>
+<span class="tl"><b>12</b> Target weight</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z13" aria-label="Enlarge 13 Social proof">
+<span class="crop"><img src="wizard/step-13.png" alt="" loading="lazy"></span>
+<span class="tl"><b>13</b> Social proof</span>
+<span class="tt info">info</span></a></li><li><a class="thumb" href="#z14" aria-label="Enlarge 14 Current meds">
+<span class="crop"><img src="wizard/step-14.png" alt="" loading="lazy"></span>
+<span class="tl"><b>14</b> Current meds</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z15" aria-label="Enlarge 15 Switch testimonial">
+<span class="crop"><img src="wizard/step-15.png" alt="" loading="lazy"></span>
+<span class="tl"><b>15</b> Switch testimonial</span>
+<span class="tt info">info</span></a></li><li><a class="thumb" href="#z16" aria-label="Enlarge 16 Lifestyle">
+<span class="crop"><img src="wizard/step-16.png" alt="" loading="lazy"></span>
+<span class="tl"><b>16</b> Lifestyle</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z17" aria-label="Enlarge 17 Time trying">
+<span class="crop"><img src="wizard/step-17.png" alt="" loading="lazy"></span>
+<span class="tl"><b>17</b> Time trying</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z18" aria-label="Enlarge 18 Methods tried">
+<span class="crop"><img src="wizard/step-18.png" alt="" loading="lazy"></span>
+<span class="tl"><b>18</b> Methods tried</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z19" aria-label="Enlarge 19 Comparison table">
+<span class="crop"><img src="wizard/step-19.png" alt="" loading="lazy"></span>
+<span class="tl"><b>19</b> Comparison table</span>
+<span class="tt info">info</span></a></li><li><a class="thumb" href="#z20" aria-label="Enlarge 20 Barriers">
+<span class="crop"><img src="wizard/step-20.png" alt="" loading="lazy"></span>
+<span class="tl"><b>20</b> Barriers</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z21" aria-label="Enlarge 21 Blood tests">
+<span class="crop"><img src="wizard/step-21.png" alt="" loading="lazy"></span>
+<span class="tl"><b>21</b> Blood tests</span>
+<span class="tt info">info</span></a></li><li><a class="thumb" href="#z22" aria-label="Enlarge 22 Life at goal">
+<span class="crop"><img src="wizard/step-22.png" alt="" loading="lazy"></span>
+<span class="tl"><b>22</b> Life at goal</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z23" aria-label="Enlarge 23 Self-image">
+<span class="crop"><img src="wizard/step-23.png" alt="" loading="lazy"></span>
+<span class="tl"><b>23</b> Self-image</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z24" aria-label="Enlarge 24 Treatment priorities">
+<span class="crop"><img src="wizard/step-24.png" alt="" loading="lazy"></span>
+<span class="tl"><b>24</b> Treatment priorities</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z25" aria-label="Enlarge 25 Attribution">
+<span class="crop"><img src="wizard/step-25.png" alt="" loading="lazy"></span>
+<span class="tl"><b>25</b> Attribution</span>
+<span class="tt question">question</span></a></li><li><a class="thumb" href="#z26" aria-label="Enlarge 26 Contact form">
+<span class="crop"><img src="wizard/step-26.png" alt="" loading="lazy"></span>
+<span class="tl"><b>26</b> Contact form</span>
+<span class="tt lead-form">lead form</span></a></li><li><a class="thumb" href="#zDQ" aria-label="Enlarge Side Disqualified (age)">
+<span class="crop"><img src="wizard/side-disqualified.png" alt="" loading="lazy"></span>
+<span class="tl"><b>Side</b> Disqualified (age)</span>
+<span class="tt result">result</span></a></li></ul>
+
+<h2 id="steps">Step by step</h2>
+
+<article class="card" id="s01">
+<a class="crop big" href="#z01" aria-label="Enlarge screenshot"><img src="wizard/step-01.png" alt="Screenshot 01: Vad är ditt viktminskningsmål?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">01</span><h3>Goal</h3><span class="ctr">1/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Vad är ditt viktminskningsmål?”</p>
+<p class="en">What is your weight-loss goal? (options: lose 1–10 / 11–20 / 21–40 / 40+ kg “för gott”, undecided)</p>
+<p class="inp"><b>Input:</b> Single-select, 5 cards, auto-advance</p>
+
+</div></article><article class="card" id="s02">
+<a class="crop big" href="#z02" aria-label="Enlarge screenshot"><img src="wizard/step-02.png" alt="Screenshot 02: Ditt mål att förlora 1-10kg för gott är närmare än vad du tror" loading="lazy"></a>
+<div class="body">
+<header><span class="num">02</span><h3>Goal chart</h3><span class="ctr">2/26</span>
+<span class="tt info">info</span></header>
+<p class="sv" lang="sv">“Ditt mål att förlora 1-10kg för gott är närmare än vad du tror”</p>
+<p class="en">Your goal of losing 1–10 kg for good is closer than you think</p>
+<p class="inp"><b>Input:</b> None (Fortsätt)</p>
+
+</div></article><article class="card" id="s03">
+<a class="crop big" href="#z03" aria-label="Enlarge screenshot"><img src="wizard/step-03.png" alt="Screenshot 03: Vilka är de främsta anledningarna till att du vill gå ner i vikt?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">03</span><h3>Reasons</h3><span class="ctr">3/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Vilka är de främsta anledningarna till att du vill gå ner i vikt?”</p>
+<p class="en">What are the main reasons you want to lose weight?</p>
+<p class="inp"><b>Input:</b> Multi-select, 6 cards + Nästa</p>
+
+</div></article><article class="card" id="s04">
+<a class="crop big" href="#z04" aria-label="Enlarge screenshot"><img src="wizard/step-04.png" alt="Screenshot 04: Hur påverkar din nuvarande vikt ditt liv?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">04</span><h3>Weight impact</h3><span class="ctr">4/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Hur påverkar din nuvarande vikt ditt liv?”</p>
+<p class="en">How does your current weight affect your life?</p>
+<p class="inp"><b>Input:</b> Single-select, 3 cards, auto-advance</p>
+
+</div></article><article class="card" id="s05">
+<a class="crop big" href="#z05" aria-label="Enlarge screenshot"><img src="wizard/step-05.png" alt="Screenshot 05: Hur vill du uppnå din målvikt?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">05</span><h3>Pace</h3><span class="ctr">5/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Hur vill du uppnå din målvikt?”</p>
+<p class="en">How do you want to reach your target weight?</p>
+<p class="inp"><b>Input:</b> Single-select, 3 cards, auto-advance</p>
+
+</div></article><article class="card" id="s06">
+<a class="crop big" href="#z06" aria-label="Enlarge screenshot"><img src="wizard/step-06.png" alt="Screenshot 06: Vilket biologiskt kön är du?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">06</span><h3>Sex</h3><span class="ctr">6/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Vilket biologiskt kön är du?”</p>
+<p class="en">What is your biological sex? Helper: “Sex and hormones affect how our bodies metabolise food.”</p>
+<p class="inp"><b>Input:</b> Single-select, 2 cards, auto-advance</p>
+
+</div></article><article class="card" id="s07">
+<a class="crop big" href="#z07" aria-label="Enlarge screenshot"><img src="wizard/step-07.png" alt="Screenshot 07: Hur gammal är du?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">07</span><h3>Age</h3><span class="ctr">7/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Hur gammal är du?”</p>
+<p class="en">How old are you? (Under 18 / 18–30 / 31–50 / 51–70 / Över 75)</p>
+<p class="inp"><b>Input:</b> Single-select, 5 cards, auto-advance</p>
+
+</div></article><article class="card" id="s08">
+<a class="crop big" href="#z08" aria-label="Enlarge screenshot"><img src="wizard/step-08.png" alt="Screenshot 08: Vad är din nuvarande vikt?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">08</span><h3>Weight</h3><span class="ctr">8/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Vad är din nuvarande vikt?”</p>
+<p class="en">What is your current weight? Helper: “We need to know where you are now so we can build a plan that&#x27;s right for you.”</p>
+<p class="inp"><b>Input:</b> Number input (placeholder “Vikt i kg”, spinner arrows) + Nästa</p>
+
+</div></article><article class="card" id="s09">
+<a class="crop big" href="#z09" aria-label="Enlarge screenshot"><img src="wizard/step-09.png" alt="Screenshot 09: Hur lång är du?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">09</span><h3>Height</h3><span class="ctr">9/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Hur lång är du?”</p>
+<p class="en">How tall are you?</p>
+<p class="inp"><b>Input:</b> Number input (placeholder “Längd i cm”) + Nästa</p>
+
+</div></article><article class="card" id="s10">
+<a class="crop big" href="#z10" aria-label="Enlarge screenshot"><img src="wizard/step-10.png" alt="Screenshot 10: Ditt BMI är 30. Uppfyller du något av följande 3 kriterier?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">10</span><h3>BMI criteria</h3><span class="ctr">9/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Ditt BMI är 30. Uppfyller du något av följande 3 kriterier?”</p>
+<p class="en">Your BMI is 30. Do you meet any of these 3 criteria? (BMI ≥ 30 · BMI ≥ 27 + a weight-related disease · met these before and now want to maintain)</p>
+<p class="inp"><b>Input:</b> Single-select Ja / Nej, auto-advance</p>
+
+</div></article><article class="card" id="s11">
+<a class="crop big" href="#z11" aria-label="Enlarge screenshot"><img src="wizard/step-11.png" alt="Screenshot 11: Har du eller har du haft någon av följande sjukdomar?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">11</span><h3>Contraindications</h3><span class="ctr">10/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Har du eller har du haft någon av följande sjukdomar?”</p>
+<p class="en">Do you have, or have you had, any of these? (type 1 diabetes · MEN 2 incl. family · medullary thyroid cancer incl. family · eating disorders · diabetic retinopathy)</p>
+<p class="inp"><b>Input:</b> Single-select Ja / Nej, auto-advance</p>
+
+</div></article><article class="card" id="s12">
+<a class="crop big" href="#z12" aria-label="Enlarge screenshot"><img src="wizard/step-12.png" alt="Screenshot 12: Vad är din målvikt?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">12</span><h3>Target weight</h3><span class="ctr">11/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Vad är din målvikt?”</p>
+<p class="en">What is your target weight? Helper: we&#x27;ll work out when you can reach it; members lose 20% on average in year one.</p>
+<p class="inp"><b>Input:</b> Text input (numeric) + “Hjälp mig hitta min målvikt” + Nästa</p>
+
+</div></article><article class="card" id="s13">
+<a class="crop big" href="#z13" aria-label="Enlarge screenshot"><img src="wizard/step-13.png" alt="Screenshot 13: 5 000+ har startat där du är nu" loading="lazy"></a>
+<div class="body">
+<header><span class="num">13</span><h3>Social proof</h3><span class="ctr">12/26</span>
+<span class="tt info">info</span></header>
+<p class="sv" lang="sv">“5 000+ har startat där du är nu”</p>
+<p class="en">5,000+ have started where you are now. Body: “we help thousands every week…” + Trustpilot testimonial</p>
+<p class="inp"><b>Input:</b> None (Fortsätt)</p>
+
+</div></article><article class="card" id="s14">
+<a class="crop big" href="#z14" aria-label="Enlarge screenshot"><img src="wizard/step-14.png" alt="Screenshot 14: Tar du mediciner idag för viktnedgång?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">14</span><h3>Current meds</h3><span class="ctr">13/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Tar du mediciner idag för viktnedgång?”</p>
+<p class="en">Are you currently taking weight-loss medication? (e.g. Wegovy, Mounjaro, Ozempic, Rybelsus, Zepbound)</p>
+<p class="inp"><b>Input:</b> Single-select Ja / Nej, auto-advance</p>
+
+</div></article><article class="card" id="s15">
+<a class="crop big" href="#z15" aria-label="Enlarge screenshot"><img src="wizard/step-15.png" alt="Screenshot 15: Vi hjälper dig med en smidig och snabb övergång" loading="lazy"></a>
+<div class="body">
+<header><span class="num">15</span><h3>Switch testimonial</h3><span class="ctr">14/26</span>
+<span class="tt info">info</span></header>
+<p class="sv" lang="sv">“Vi hjälper dig med en smidig och snabb övergång”</p>
+<p class="en">We&#x27;ll help you make a smooth, quick switch (testimonial from someone who switched from a competitor)</p>
+<p class="inp"><b>Input:</b> None (Fortsätt). Probably shown only after “Ja” on 14.</p>
+
+</div></article><article class="card" id="s16">
+<a class="crop big" href="#z16" aria-label="Enlarge screenshot"><img src="wizard/step-16.png" alt="Screenshot 16: Vad beskriver din nuvarande livsstil bäst?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">16</span><h3>Lifestyle</h3><span class="ctr">15/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Vad beskriver din nuvarande livsstil bäst?”</p>
+<p class="en">What best describes your current lifestyle?</p>
+<p class="inp"><b>Input:</b> Single-select, 3 long cards, auto-advance</p>
+
+</div></article><article class="card" id="s17">
+<a class="crop big" href="#z17" aria-label="Enlarge screenshot"><img src="wizard/step-17.png" alt="Screenshot 17: Hur länge har du försökt gå ner i vikt?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">17</span><h3>Time trying</h3><span class="ctr">16/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Hur länge har du försökt gå ner i vikt?”</p>
+<p class="en">How long have you been trying to lose weight?</p>
+<p class="inp"><b>Input:</b> Single-select, 5 cards, auto-advance</p>
+
+</div></article><article class="card" id="s18">
+<a class="crop big" href="#z18" aria-label="Enlarge screenshot"><img src="wizard/step-18.png" alt="Screenshot 18: Vilka metoder har du tidigare provat för att gå ner i vikt?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">18</span><h3>Methods tried</h3><span class="ctr">17/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Vilka metoder har du tidigare provat för att gå ner i vikt?”</p>
+<p class="en">Which methods have you tried before to lose weight?</p>
+<p class="inp"><b>Input:</b> Multi-select, 6 cards + Nästa</p>
+
+</div></article><article class="card" id="s19">
+<a class="crop big" href="#z19" aria-label="Enlarge screenshot"><img src="wizard/step-19.png" alt="Screenshot 19: 9 av 10 medlemmar tycker Velora är det mest effektiva programmet de har testat" loading="lazy"></a>
+<div class="body">
+<header><span class="num">19</span><h3>Comparison table</h3><span class="ctr">18/26</span>
+<span class="tt info">info</span></header>
+<p class="sv" lang="sv">“9 av 10 medlemmar tycker Velora är det mest effektiva programmet de har testat”</p>
+<p class="en">9 out of 10 members think Velora is the most effective programme they&#x27;ve tried (table: Velora ✓ vs “Andra” —)</p>
+<p class="inp"><b>Input:</b> None (Nästa)</p>
+
+</div></article><article class="card" id="s20">
+<a class="crop big" href="#z20" aria-label="Enlarge screenshot"><img src="wizard/step-20.png" alt="Screenshot 20: Vad har gjort det svårt att gå ner i vikt tidigare?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">20</span><h3>Barriers</h3><span class="ctr">19/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Vad har gjort det svårt att gå ner i vikt tidigare?”</p>
+<p class="en">What has made it hard to lose weight before?</p>
+<p class="inp"><b>Input:</b> Multi-select, 6 cards + Nästa</p>
+
+</div></article><article class="card" id="s21">
+<a class="crop big" href="#z21" aria-label="Enlarge screenshot"><img src="wizard/step-21.png" alt="Screenshot 21: Hälsokontroll och blodprover" loading="lazy"></a>
+<div class="body">
+<header><span class="num">21</span><h3>Blood tests</h3><span class="ctr">20/26</span>
+<span class="tt info">info</span></header>
+<p class="sv" lang="sv">“Hälsokontroll och blodprover”</p>
+<p class="en">Health check and blood tests: safety comes first, so we check your health before you start (rule out diseases, find unusual causes, screen for complications)</p>
+<p class="inp"><b>Input:</b> None (“Se var du kan ta prover”, “Jag förstår”)</p>
+
+</div></article><article class="card" id="s22">
+<a class="crop big" href="#z22" aria-label="Enlarge screenshot"><img src="wizard/step-22.png" alt="Screenshot 22: När jag har nått mitt mål, vill jag gärna..." loading="lazy"></a>
+<div class="body">
+<header><span class="num">22</span><h3>Life at goal</h3><span class="ctr">21/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“När jag har nått mitt mål, vill jag gärna...”</p>
+<p class="en">When I&#x27;ve reached my goal, I&#x27;d like to…</p>
+<p class="inp"><b>Input:</b> Multi-select, 6 cards + Nästa</p>
+
+</div></article><article class="card" id="s23">
+<a class="crop big" href="#z23" aria-label="Enlarge screenshot"><img src="wizard/step-23.png" alt="Screenshot 23: När jag tänker på mig själv vid mitt mål ser jag mig själv..." loading="lazy"></a>
+<div class="body">
+<header><span class="num">23</span><h3>Self-image</h3><span class="ctr">22/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“När jag tänker på mig själv vid mitt mål ser jag mig själv...”</p>
+<p class="en">When I picture myself at my goal, I see myself…</p>
+<p class="inp"><b>Input:</b> Multi-select, 6 cards + Nästa</p>
+
+</div></article><article class="card" id="s24">
+<a class="crop big" href="#z24" aria-label="Enlarge screenshot"><img src="wizard/step-24.png" alt="Screenshot 24: När du överväger behandling, vilka av följande är viktigast för dig?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">24</span><h3>Treatment priorities</h3><span class="ctr">23/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“När du överväger behandling, vilka av följande är viktigast för dig?”</p>
+<p class="en">When considering treatment, which of these matter most to you?</p>
+<p class="inp"><b>Input:</b> Multi-select, 5 cards + Nästa</p>
+
+</div></article><article class="card" id="s25">
+<a class="crop big" href="#z25" aria-label="Enlarge screenshot"><img src="wizard/step-25.png" alt="Screenshot 25: Hur hittade du oss?" loading="lazy"></a>
+<div class="body">
+<header><span class="num">25</span><h3>Attribution</h3><span class="ctr">24/26</span>
+<span class="tt question">question</span></header>
+<p class="sv" lang="sv">“Hur hittade du oss?”</p>
+<p class="en">How did you find us?</p>
+<p class="inp"><b>Input:</b> Single-select, 6 cards, auto-advance</p>
+
+</div></article><article class="card" id="s26">
+<a class="crop big" href="#z26" aria-label="Enlarge screenshot"><img src="wizard/step-26.png" alt="Screenshot 26: Ange dina uppgifter för att se resultatet" loading="lazy"></a>
+<div class="body">
+<header><span class="num">26</span><h3>Contact form</h3><span class="ctr">25/26</span>
+<span class="tt lead-form">lead form</span></header>
+<p class="sv" lang="sv">“Ange dina uppgifter för att se resultatet”</p>
+<p class="en">Enter your details to see the result</p>
+<p class="inp"><b>Input:</b> Förnamn, Telefonnummer, Email + OK</p>
+
+</div></article><article class="card" id="sDQ">
+<a class="crop big" href="#zDQ" aria-label="Enlarge screenshot"><img src="wizard/side-disqualified.png" alt="Screenshot Side: För närvarande kan vi endast hjälpa personer mellan 18-75 år." loading="lazy"></a>
+<div class="body">
+<header><span class="num">Side</span><h3>Disqualified (age)</h3><span class="ctr">7/26</span>
+<span class="tt result">result</span></header>
+<p class="sv" lang="sv">“För närvarande kan vi endast hjälpa personer mellan 18-75 år.”</p>
+<p class="en">Currently we can only help people aged 18–75. “We hope to help more people soon.”</p>
+<p class="inp"><b>Input:</b> Button “Skrev du in fel?” (Did you type it wrong?)</p>
+
+</div></article>
+
+</main>
+<div class="lb" id="z01" role="dialog" aria-label="Screenshot 01">
+<div class="lbbar"><span>1 / 27</span><a href="#z02">Next →</a><span>01 · Goal · 1/26</span><a href="#s01">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-01.png" alt="Screenshot 01 full size" loading="lazy"></div><div class="lb" id="z02" role="dialog" aria-label="Screenshot 02">
+<div class="lbbar"><a href="#z01">← Prev</a><span>2 / 27</span><a href="#z03">Next →</a><span>02 · Goal chart · 2/26</span><a href="#s02">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-02.png" alt="Screenshot 02 full size" loading="lazy"></div><div class="lb" id="z03" role="dialog" aria-label="Screenshot 03">
+<div class="lbbar"><a href="#z02">← Prev</a><span>3 / 27</span><a href="#z04">Next →</a><span>03 · Reasons · 3/26</span><a href="#s03">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-03.png" alt="Screenshot 03 full size" loading="lazy"></div><div class="lb" id="z04" role="dialog" aria-label="Screenshot 04">
+<div class="lbbar"><a href="#z03">← Prev</a><span>4 / 27</span><a href="#z05">Next →</a><span>04 · Weight impact · 4/26</span><a href="#s04">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-04.png" alt="Screenshot 04 full size" loading="lazy"></div><div class="lb" id="z05" role="dialog" aria-label="Screenshot 05">
+<div class="lbbar"><a href="#z04">← Prev</a><span>5 / 27</span><a href="#z06">Next →</a><span>05 · Pace · 5/26</span><a href="#s05">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-05.png" alt="Screenshot 05 full size" loading="lazy"></div><div class="lb" id="z06" role="dialog" aria-label="Screenshot 06">
+<div class="lbbar"><a href="#z05">← Prev</a><span>6 / 27</span><a href="#z07">Next →</a><span>06 · Sex · 6/26</span><a href="#s06">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-06.png" alt="Screenshot 06 full size" loading="lazy"></div><div class="lb" id="z07" role="dialog" aria-label="Screenshot 07">
+<div class="lbbar"><a href="#z06">← Prev</a><span>7 / 27</span><a href="#z08">Next →</a><span>07 · Age · 7/26</span><a href="#s07">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-07.png" alt="Screenshot 07 full size" loading="lazy"></div><div class="lb" id="z08" role="dialog" aria-label="Screenshot 08">
+<div class="lbbar"><a href="#z07">← Prev</a><span>8 / 27</span><a href="#z09">Next →</a><span>08 · Weight · 8/26</span><a href="#s08">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-08.png" alt="Screenshot 08 full size" loading="lazy"></div><div class="lb" id="z09" role="dialog" aria-label="Screenshot 09">
+<div class="lbbar"><a href="#z08">← Prev</a><span>9 / 27</span><a href="#z10">Next →</a><span>09 · Height · 9/26</span><a href="#s09">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-09.png" alt="Screenshot 09 full size" loading="lazy"></div><div class="lb" id="z10" role="dialog" aria-label="Screenshot 10">
+<div class="lbbar"><a href="#z09">← Prev</a><span>10 / 27</span><a href="#z11">Next →</a><span>10 · BMI criteria · 9/26</span><a href="#s10">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-10.png" alt="Screenshot 10 full size" loading="lazy"></div><div class="lb" id="z11" role="dialog" aria-label="Screenshot 11">
+<div class="lbbar"><a href="#z10">← Prev</a><span>11 / 27</span><a href="#z12">Next →</a><span>11 · Contraindications · 10/26</span><a href="#s11">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-11.png" alt="Screenshot 11 full size" loading="lazy"></div><div class="lb" id="z12" role="dialog" aria-label="Screenshot 12">
+<div class="lbbar"><a href="#z11">← Prev</a><span>12 / 27</span><a href="#z13">Next →</a><span>12 · Target weight · 11/26</span><a href="#s12">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-12.png" alt="Screenshot 12 full size" loading="lazy"></div><div class="lb" id="z13" role="dialog" aria-label="Screenshot 13">
+<div class="lbbar"><a href="#z12">← Prev</a><span>13 / 27</span><a href="#z14">Next →</a><span>13 · Social proof · 12/26</span><a href="#s13">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-13.png" alt="Screenshot 13 full size" loading="lazy"></div><div class="lb" id="z14" role="dialog" aria-label="Screenshot 14">
+<div class="lbbar"><a href="#z13">← Prev</a><span>14 / 27</span><a href="#z15">Next →</a><span>14 · Current meds · 13/26</span><a href="#s14">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-14.png" alt="Screenshot 14 full size" loading="lazy"></div><div class="lb" id="z15" role="dialog" aria-label="Screenshot 15">
+<div class="lbbar"><a href="#z14">← Prev</a><span>15 / 27</span><a href="#z16">Next →</a><span>15 · Switch testimonial · 14/26</span><a href="#s15">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-15.png" alt="Screenshot 15 full size" loading="lazy"></div><div class="lb" id="z16" role="dialog" aria-label="Screenshot 16">
+<div class="lbbar"><a href="#z15">← Prev</a><span>16 / 27</span><a href="#z17">Next →</a><span>16 · Lifestyle · 15/26</span><a href="#s16">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-16.png" alt="Screenshot 16 full size" loading="lazy"></div><div class="lb" id="z17" role="dialog" aria-label="Screenshot 17">
+<div class="lbbar"><a href="#z16">← Prev</a><span>17 / 27</span><a href="#z18">Next →</a><span>17 · Time trying · 16/26</span><a href="#s17">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-17.png" alt="Screenshot 17 full size" loading="lazy"></div><div class="lb" id="z18" role="dialog" aria-label="Screenshot 18">
+<div class="lbbar"><a href="#z17">← Prev</a><span>18 / 27</span><a href="#z19">Next →</a><span>18 · Methods tried · 17/26</span><a href="#s18">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-18.png" alt="Screenshot 18 full size" loading="lazy"></div><div class="lb" id="z19" role="dialog" aria-label="Screenshot 19">
+<div class="lbbar"><a href="#z18">← Prev</a><span>19 / 27</span><a href="#z20">Next →</a><span>19 · Comparison table · 18/26</span><a href="#s19">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-19.png" alt="Screenshot 19 full size" loading="lazy"></div><div class="lb" id="z20" role="dialog" aria-label="Screenshot 20">
+<div class="lbbar"><a href="#z19">← Prev</a><span>20 / 27</span><a href="#z21">Next →</a><span>20 · Barriers · 19/26</span><a href="#s20">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-20.png" alt="Screenshot 20 full size" loading="lazy"></div><div class="lb" id="z21" role="dialog" aria-label="Screenshot 21">
+<div class="lbbar"><a href="#z20">← Prev</a><span>21 / 27</span><a href="#z22">Next →</a><span>21 · Blood tests · 20/26</span><a href="#s21">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-21.png" alt="Screenshot 21 full size" loading="lazy"></div><div class="lb" id="z22" role="dialog" aria-label="Screenshot 22">
+<div class="lbbar"><a href="#z21">← Prev</a><span>22 / 27</span><a href="#z23">Next →</a><span>22 · Life at goal · 21/26</span><a href="#s22">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-22.png" alt="Screenshot 22 full size" loading="lazy"></div><div class="lb" id="z23" role="dialog" aria-label="Screenshot 23">
+<div class="lbbar"><a href="#z22">← Prev</a><span>23 / 27</span><a href="#z24">Next →</a><span>23 · Self-image · 22/26</span><a href="#s23">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-23.png" alt="Screenshot 23 full size" loading="lazy"></div><div class="lb" id="z24" role="dialog" aria-label="Screenshot 24">
+<div class="lbbar"><a href="#z23">← Prev</a><span>24 / 27</span><a href="#z25">Next →</a><span>24 · Treatment priorities · 23/26</span><a href="#s24">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-24.png" alt="Screenshot 24 full size" loading="lazy"></div><div class="lb" id="z25" role="dialog" aria-label="Screenshot 25">
+<div class="lbbar"><a href="#z24">← Prev</a><span>25 / 27</span><a href="#z26">Next →</a><span>25 · Attribution · 24/26</span><a href="#s25">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-25.png" alt="Screenshot 25 full size" loading="lazy"></div><div class="lb" id="z26" role="dialog" aria-label="Screenshot 26">
+<div class="lbbar"><a href="#z25">← Prev</a><span>26 / 27</span><a href="#zDQ">Next →</a><span>26 · Contact form · 25/26</span><a href="#s26">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/step-26.png" alt="Screenshot 26 full size" loading="lazy"></div><div class="lb" id="zDQ" role="dialog" aria-label="Screenshot Side">
+<div class="lbbar"><a href="#z26">← Prev</a><span>27 / 27</span><span>Side · Disqualified (age) · 7/26</span><a href="#sDQ">Details</a><a href="#map">Close ✕</a></div>
+<img src="wizard/side-disqualified.png" alt="Screenshot Side full size" loading="lazy"></div>
+<script>
+const ids=['z01', 'z02', 'z03', 'z04', 'z05', 'z06', 'z07', 'z08', 'z09', 'z10', 'z11', 'z12', 'z13', 'z14', 'z15', 'z16', 'z17', 'z18', 'z19', 'z20', 'z21', 'z22', 'z23', 'z24', 'z25', 'z26', 'zDQ'];
+addEventListener('keydown',e=>{const c=location.hash.slice(1);let i=ids.indexOf(c);
+if(e.key==='ArrowRight'||e.key==='ArrowLeft'){i=i<0?0:i+(e.key==='ArrowRight'?1:-1);if(ids[i])location.hash=ids[i];}
+if(e.key==='Escape'&&i>=0)location.hash='map';});
+</script>
+</body></html>
