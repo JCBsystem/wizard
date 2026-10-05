@@ -1,6 +1,6 @@
 # Steg 26 – Ange dina uppgifter för att se resultatet
 
-- **URL:** https://quiz.velora.se/2-3?step=29
+- **URL:** https://quiz.companyx.example/2-3?step=29
 - **Progress:** 25/26
 - **Kind:** Lead-capture form (contact details gate before results)
 
@@ -31,7 +31,7 @@ No visible labels other than placeholders.
 
 ## Links
 
-- **Användarvillkor** → https://www.velora.se/anvandarvillkor
+- **Användarvillkor** → https://www.companyx.example/anvandarvillkor
 
 ## Buttons
 
@@ -42,7 +42,7 @@ No visible labels other than placeholders.
 
 Entered **Förnamn:** Test Testsson · **Telefonnummer:** 0701234567 · **Email:** test@example.com. "OK" then became enabled.
 
-**Documentation stops here. OK was NOT clicked.** Clicking OK submits the contact details as a real lead to Velora. The agent's permission system blocked it as a real-world transaction. The remaining step (26/26, which presumably shows the result and the "Boka bedömningssamtal" button) was not reached.
+**Documentation stops here. OK was NOT clicked.** Clicking OK submits the contact details as a real lead to CompanyX. The agent's permission system blocked it as a real-world transaction. The remaining step (26/26, which presumably shows the result and the "Boka bedömningssamtal" button) was not reached.
 
 (The screenshot shows the form before the dummy data was entered.)
 

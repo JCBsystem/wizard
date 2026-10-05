@@ -1,6 +1,6 @@
 # Steg 1 – Vad är ditt viktminskningsmål?
 
-- **URL:** https://quiz.velora.se/2-3?step=1
+- **URL:** https://quiz.companyx.example/2-3?step=1
 - **Progress:** 1/26 (progress bar at top)
 
 ## Visible text (verbatim)
@@ -26,7 +26,7 @@ Jag har inte bestämt mig
 
 ## Buttons
 
-None (selection advances). Header logo links to https://www.velora.se/. Footer link "Cookie Settings".
+None (selection advances). Header logo links to https://www.companyx.example/. Footer link "Cookie Settings".
 
 ## Chosen
 

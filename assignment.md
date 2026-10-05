@@ -1,9 +1,9 @@
-# Velora Health — Work Assignment: Full-stack Patient Experience
+# CompanyX — Work Assignment: Full-stack Patient Experience
 
 Source: https://claude.ai/artifact/BDqN57JJwA7mo2GoCmEjpc (original in Swedish)
-Start here: https://quiz.velora.se/2-3
+Start here: https://quiz.companyx.example/2-3
 
-**Task: build a better way into Velora.** There's no answer key. Velora cares more about how you think, prioritize and build than about polish.
+**Task: build a better way into CompanyX.** There's no answer key. CompanyX cares more about how you think, prioritize and build than about polish.
 
 | Constraint | Value |
 | --- | --- |
@@ -14,14 +14,14 @@ Start here: https://quiz.velora.se/2-3
 
 ## The happy path (what to improve)
 
-1. **Questions**: the person answers the quiz at quiz.velora.se/2-3.
+1. **Questions**: the person answers the quiz at quiz.companyx.example/2-3.
 2. **Result**: they're told medical weight loss may suit them.
 3. **Pick a time**: they book a free online meeting with clinical staff.
 4. **Confirmation**: done, and they know what happens next.
 
 ## Background
 
-The quiz is Velora's most important surface and the first time a prospective patient meets the product. It decides whether medical weight loss may be right, then leads to booking a free online meeting. The flow must do three things at once:
+The quiz is CompanyX's most important surface and the first time a prospective patient meets the product. It decides whether medical weight loss may be right, then leads to booking a free online meeting. The flow must do three things at once:
 
 - **Convert**: every extra percentage point from first question to booked meeting matters.
 - **Screen correctly**: the right people reach the meeting, and everyone is treated with respect.
@@ -31,7 +31,7 @@ The quiz is Velora's most important surface and the first time a prospective pat
 
 Review the current quiz and booking flow. Build a better version of the happy path: a person who qualifies and books an online meeting, from the first question to confirmation.
 
-- **Explore**: walk the flow from quiz.velora.se/2-3, ideally on mobile. Filling in and submitting the quiz with made-up data is fine. Go as far as the booking step and look at it.
+- **Explore**: walk the flow from quiz.companyx.example/2-3, ideally on mobile. Filling in and submitting the quiz with made-up data is fine. Go as far as the booking step and look at it.
   - ⚠️ **Do NOT create a real booking.** Bookings go to real clinical staff.
 - **Build with AI**: an improved, clickable happy path from start to booking confirmation. Booking can be mocked with made-up times.
 - **Make deciding easy**: assume leadership sees the deliverable and must pick a direction within a few minutes.
@@ -63,7 +63,7 @@ Review the current quiz and booking flow. Build a better version of the happy pa
 
 ## After submission
 
-Velora reviews the submission and decides whether to move to a presentation. Written feedback either way.
+CompanyX reviews the submission and decides whether to move to a presentation. Written feedback either way.
 
 **Presentation: 30 min with the tech lead**
 
@@ -77,7 +77,7 @@ Velora reviews the submission and decides whether to move to a presentation. Wri
 ## Evaluation criteria
 
 - **Design & feel**: would you trust it with your own health?
-- **Product understanding**: what the flow must achieve for the patient and for Velora.
+- **Product understanding**: what the flow must achieve for the patient and for CompanyX.
 - **AI & approach**: used with judgment, and can you follow how the solution grew?
 - **Prioritization**: were hours spent on what matters most?
 - **Decidability**: can leadership understand and choose within minutes?

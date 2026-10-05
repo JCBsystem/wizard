@@ -1,6 +1,6 @@
 # Steg 14 – Tar du mediciner idag för viktnedgång?
 
-- **URL:** https://quiz.velora.se/2-3?step=14
+- **URL:** https://quiz.companyx.example/2-3?step=14
 - **Progress:** 13/26 (progress bar at top)
 
 ## Visible text (verbatim)

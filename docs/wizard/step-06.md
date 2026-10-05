@@ -1,6 +1,6 @@
 # Steg 6 – Vilket biologiskt kön är du?
 
-- **URL:** https://quiz.velora.se/2-3?step=6
+- **URL:** https://quiz.companyx.example/2-3?step=6
 - **Progress:** 6/26 (progress bar at top)
 
 ## Visible text (verbatim)

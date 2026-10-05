@@ -1,6 +1,6 @@
 # Steg 17 – Hur länge har du försökt gå ner i vikt?
 
-- **URL:** https://quiz.velora.se/2-3?step=19
+- **URL:** https://quiz.companyx.example/2-3?step=19
 - **Progress:** 16/26 (progress bar at top)
 
 ## Visible text (verbatim)

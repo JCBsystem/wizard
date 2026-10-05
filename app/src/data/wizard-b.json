@@ -25,7 +25,7 @@
             "Du är precis där du ska vara. Vi hjälper tusentals varje vecka att nå sina mål – med behandlingar, coachning och verktyg som funkar på riktigt.",
             "★★★★★",
             "Jag är så tacksam!",
-            "Jag har haft problem med övervikt i väldigt många år och har testat allt för att gå ner i vikt. Velora är dom första som har tagit mig på allvar och hjälpt mig när träning och diet inte räcker hela vägen. Jag är så tacksam för detta! För första gången på väldigt många år har jag faktiskt börjat gå ner i vikt sakta men säkert. :)",
+            "Jag har haft problem med övervikt i väldigt många år och har testat allt för att gå ner i vikt. CompanyX är dom första som har tagit mig på allvar och hjälpt mig när träning och diet inte räcker hela vägen. Jag är så tacksam för detta! För första gången på väldigt många år har jag faktiskt börjat gå ner i vikt sakta men säkert. :)",
             "– Nathalie"
           ]
         }
@@ -129,7 +129,7 @@
           "id": "target-weight",
           "type": "slider",
           "label": "Vad är din målvikt?",
-          "description": "Baserat på Veloras användare och studier räknar vi ut när du kan nå din målvikt om du följer vår plan och våra råd. I genomsnitt går Veloras medlemmar ner 20% under det första året.",
+          "description": "Baserat på CompanyXs användare och studier räknar vi ut när du kan nå din målvikt om du följer vår plan och våra råd. I genomsnitt går CompanyXs medlemmar ner 20% under det första året.",
           "min": 40,
           "max": 250,
           "help": {
@@ -320,7 +320,7 @@
             "more": [
               "★★★★★",
               "De har hjälpt mig på så många plan!",
-              "Varit på Yazen först och gick sedan över till Velora. Hos Velora kan man träffa sina coacher via länk och det blir genuina möten, vilket jag inte upplevde på tidigare företag. De har hjälpt mig på så många plan! Tack!",
+              "Varit på Yazen först och gick sedan över till CompanyX. Hos CompanyX kan man träffa sina coacher via länk och det blir genuina möten, vilket jag inte upplevde på tidigare företag. De har hjälpt mig på så många plan! Tack!",
               "– Lasse"
             ]
           },
@@ -608,7 +608,7 @@
         {
           "title": "Ditt mål att förlora {{goalKg}} för gott är närmare än vad du tror",
           "more": [
-            "Med Velorametoden får du tillgång till de effektivaste behandlingarna på marknaden - skräddarsydda till dina mål."
+            "Med CompanyXmetoden får du tillgång till de effektivaste behandlingarna på marknaden - skräddarsydda till dina mål."
           ]
         }
       ],
@@ -670,7 +670,7 @@
       ],
       "notes": [
         {
-          "title": "9 av 10 medlemmar tycker Velora är det mest effektiva programmet de har testat",
+          "title": "9 av 10 medlemmar tycker CompanyX är det mest effektiva programmet de har testat",
           "more": [
             "Senaste GLP-1 medicinen",
             "Expert 1:1 support från läkare (24/7)",
@@ -725,7 +725,7 @@
         {
           "title": "Hälsokontroll och blodprover",
           "more": [
-            "Hos Velora är din säkerhet högsta prioritet. Därför analyserar vi din hälsa innan start.",
+            "Hos CompanyX är din säkerhet högsta prioritet. Därför analyserar vi din hälsa innan start.",
             "1. Utesluta sjukdomar som hindrar en behandling.",
             "2. Hitta ovanliga medicinska orsaker till din övervikt.",
             "3. Screena för följdsjukdomar av din övervikt.",

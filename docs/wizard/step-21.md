@@ -1,6 +1,6 @@
 # Steg 21 – Hälsokontroll och blodprover
 
-- **URL:** https://quiz.velora.se/2-3?step=23
+- **URL:** https://quiz.companyx.example/2-3?step=23
 - **Progress:** 20/26
 - **Kind:** Informational screen (no input)
 
@@ -10,7 +10,7 @@
 20/26
 Hälsokontroll och blodprover
 
-Hos Velora är din säkerhet högsta prioritet. Därför analyserar vi din hälsa innan start.
+Hos CompanyX är din säkerhet högsta prioritet. Därför analyserar vi din hälsa innan start.
 
 1. Utesluta sjukdomar som hindrar en behandling.
 2. Hitta ovanliga medicinska orsaker till din övervikt.

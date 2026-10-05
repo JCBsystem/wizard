@@ -1,6 +1,6 @@
 # Steg 18 – Vilka metoder har du tidigare provat för att gå ner i vikt?
 
-- **URL:** https://quiz.velora.se/2-3?step=20
+- **URL:** https://quiz.companyx.example/2-3?step=20
 - **Progress:** 17/26
 
 ## Visible text (verbatim)

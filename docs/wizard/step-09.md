@@ -1,6 +1,6 @@
 # Steg 9 – Hur lång är du?
 
-- **URL:** https://quiz.velora.se/2-3?step=10
+- **URL:** https://quiz.companyx.example/2-3?step=10
 - **Progress:** 9/26
 
 ## Visible text (verbatim)

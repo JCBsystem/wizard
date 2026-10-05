@@ -1,6 +1,6 @@
 # Steg 23 – När jag tänker på mig själv vid mitt mål ser jag mig själv...
 
-- **URL:** https://quiz.velora.se/2-3?step=26
+- **URL:** https://quiz.companyx.example/2-3?step=26
 - **Progress:** 22/26 (progress bar at top)
 
 ## Visible text (verbatim)

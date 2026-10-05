@@ -1,6 +1,6 @@
-# Velora quiz (2-3) – wizard walkthrough
+# CompanyX quiz (2-3) – wizard walkthrough
 
-Start: https://quiz.velora.se/2-3?step=1 · Captured 2026-10-02 · Desktop viewport, full-page screenshots.
+Start: https://quiz.companyx.example/2-3?step=1 · Captured 2026-10-02 · Desktop viewport, full-page screenshots.
 
 Navigation was done only through UI clicks. The `step` URL param does not map 1:1 to screens: some numbers are skipped (7, 16–18, 24), `step=15` is used for two screens, and branch screens use names (`bmi-criteria`, `disqualified`). The on-page counter (`N/26`) is a separate sequence.
 
@@ -28,7 +28,7 @@ Navigation was done only through UI clicks. The `step` URL param does not map 1:
 | [16](step-16.md) | 15/26 | 15 | Vad beskriver din nuvarande livsstil bäst? | single-select | Jag lever ett aktivt liv och äter för det mesta nyttigt |
 | [17](step-17.md) | 16/26 | 19 | Hur länge har du försökt gå ner i vikt? | single-select | Sista 12 månaderna |
 | [18](step-18.md) | 17/26 | 20 | Vilka metoder har du tidigare provat för att gå ner i vikt? | multi-select | Dieter (t.ex. Keto eller LCHF) |
-| [19](step-19.md) | 18/26 | 21 | 9 av 10 medlemmar tycker Velora är det mest effektiva programmet de har testat | info (comparison) | Nästa |
+| [19](step-19.md) | 18/26 | 21 | 9 av 10 medlemmar tycker CompanyX är det mest effektiva programmet de har testat | info (comparison) | Nästa |
 | [20](step-20.md) | 19/26 | 22 | Vad har gjort det svårt att gå ner i vikt tidigare? | multi-select | Jag förlorar motivationen |
 | [21](step-21.md) | 20/26 | 23 | Hälsokontroll och blodprover | info | Jag förstår |
 | [22](step-22.md) | 21/26 | 25 | När jag har nått mitt mål, vill jag gärna... | multi-select | Tänka mindre på mat överlag |

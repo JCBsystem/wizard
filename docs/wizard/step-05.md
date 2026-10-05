@@ -1,6 +1,6 @@
 # Steg 5 – Hur vill du uppnå din målvikt?
 
-- **URL:** https://quiz.velora.se/2-3?step=5
+- **URL:** https://quiz.companyx.example/2-3?step=5
 - **Progress:** 5/26 (progress bar at top)
 
 ## Visible text (verbatim)

@@ -1,6 +1,6 @@
 # Steg 3 – Vilka är de främsta anledningarna till att du vill gå ner i vikt?
 
-- **URL:** https://quiz.velora.se/2-3?step=3
+- **URL:** https://quiz.companyx.example/2-3?step=3
 - **Progress:** 3/26
 
 ## Visible text (verbatim)

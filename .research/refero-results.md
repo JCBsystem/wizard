@@ -1,7 +1,7 @@
 # Refero research: quiz result, plan reveal, path to booking
 
 Slice: what happens between the last quiz answer and the "book" CTA. Source: Refero MCP (iOS), 10 calls, 2026-10-02.
-All references are consumer wellness apps selling a subscription. Velora sells a free clinical meeting under Swedish
+All references are consumer wellness apps selling a subscription. CompanyX sells a free clinical meeting under Swedish
 healthcare rules, so we borrow the **structure** of these screens and leave out the **hype**: no guaranteed-outcome
 charts, no fake "analyzing" theatre, no "llamas".
 
@@ -18,7 +18,7 @@ Images: `.research/img/refero-results/`
   progress bars that fill one after another ("Analyzing your data" ✓, "Personalizing goals" 71%, a joke third bar).
 - **Why it converts:** it marks the end of the questions and makes the answers feel like they were used. That raises
   the perceived value of the result (labour illusion). It also gives the next screen a small reveal.
-- **Velora:** keep it to about 2 s with three *true* steps: "Checking your BMI against treatment guidelines",
+- **CompanyX:** keep it to about 2 s with three *true* steps: "Checking your BMI against treatment guidelines",
   "Reviewing your health answers", "Finding available clinicians". No mascot or jokes, since this is about weight and health.
   The third step leads into booking.
 
@@ -31,7 +31,7 @@ Images: `.research/img/refero-results/`
   indicator of..."), one big "Let's Go" button, and the footnote "*Based on a peer reviewed 4 week study*".
 - **Why it converts:** it shows a future the person can picture. The explainer teaches one concept, and the
   footnote supports the claim without cluttering the screen.
-- **Velora:** show a typical-range band for weight over 12 months (for example, the average loss in published
+- **CompanyX:** show a typical-range band for weight over 12 months (for example, the average loss in published
   GLP-1 trials), labelled "Typical in studies, individual results vary", with a footnote citing the trial. Use one
   explainer card ("What GLP-1 does"). The CTA is "Book free meeting". **Never** show a personal prediction line. That is a
   medical/marketing compliance risk.
@@ -45,8 +45,8 @@ Images: `.research/img/refero-results/`
   labelled "Using Foodllama" and a dashed line "Using other methods". Below it: "81% of users maintain their weight after 6 months".
 - **Why it converts:** it anchors the result in the user's *own* start point and shows a contrast with the
   alternative, plus one number for social proof.
-- **Velora:** use the "now" anchor (their entered weight/BMI) and contrast "diet alone" with "medical treatment with
-  support". The second curve can be a range band rather than a single line. The retention stat should be Velora's real
+- **CompanyX:** use the "now" anchor (their entered weight/BMI) and contrast "diet alone" with "medical treatment with
+  support". The second curve can be a range band rather than a single line. The retention stat should be CompanyX's real
   number or be dropped. The card-on-soft-background layout is a good premium template for our result screen.
 
 ## 4. "Your custom plan is ready": mirror the user's goals back
@@ -58,7 +58,7 @@ Images: `.research/img/refero-results/`
   line ("In just 5 minutes a day"), an "App of the Day" laurel badge, and the CTA "Let's Go".
 - **Why it converts:** repeating the user's own words back to them shows they were heard. The effort line answers "is
   this hard?", and the badge adds borrowed trust right above the button.
-- **Velora:** the result headline is something like "Medical weight loss may suit you, {name}". Below it, 2-4 pills built
+- **CompanyX:** the result headline is something like "Medical weight loss may suit you, {name}". Below it, 2-4 pills built
   from their answers ("BMI 32", "Tried diets before", "Wants support with appetite"). The effort line is
   "A free 20-min video call. No commitment." The trust badge sits just above the CTA (licensed clinicians, Swedish
   healthcare regulator registration, patient count).
@@ -72,8 +72,8 @@ Images: `.research/img/refero-results/`
   horizontal carousel of milestone cards ("End of week 1: You'll feel better and start creating healthier habits")
   and a sticky "Continue" button.
 - **Why it converts:** it turns an abstract result into concrete next steps. The serif heading and soft palette feel
-  calm and clinical rather than salesy, which is close to the tone Velora wants.
-- **Velora:** this is the best fit for "what the journey could look like" (see notes.md). Use 3-4 steps: *Free meeting
+  calm and clinical rather than salesy, which is close to the tone CompanyX wants.
+- **CompanyX:** this is the best fit for "what the journey could look like" (see notes.md). Use 3-4 steps: *Free meeting
   (this week) → Prescription decision by doctor → Treatment start + check-ins → Ongoing follow-up*. Make it vertical
   instead of a carousel, since carousels hide content. Step 1 is highlighted and links to the booking CTA.
 
@@ -86,7 +86,7 @@ Images: `.research/img/refero-results/`
   clients": a quote card with a photo, first name and outcome ("Gained 6lbs in 1 month"), shown as a carousel with dots.
 - **Why it converts:** proof from people like the user, placed at the moment of decision. Aggregate numbers come first,
   then a human story.
-- **Velora:** use the Trustpilot score plus 1-2 quotes about the *experience* ("I felt listened to, not judged")
+- **CompanyX:** use the Trustpilot score plus 1-2 quotes about the *experience* ("I felt listened to, not judged")
   rather than kilos. Kilo claims next to prescription drugs are a compliance risk and can trigger feelings of shame.
   Use a first name and age range, with no before/after photos.
 
@@ -96,7 +96,7 @@ Images: `.research/img/refero-results/`
 
 - **What:** an avatar stack in a pill, "20,128 started Premium this month!", above the benefit rows and the CTA.
 - **Why it converts:** it signals momentum and that many others have done this, which lowers perceived risk.
-- **Velora:** put a small pill above the booking CTA, for example "1,200+ booked a meeting this month" (only with a real figure).
+- **CompanyX:** put a small pill above the booking CTA, for example "1,200+ booked a meeting this month" (only with a real figure).
   An alternative is to show availability rather than popularity, for example "Next available time: tomorrow 09:30". That works as a
   nudge and is more honest.
 
@@ -105,7 +105,7 @@ Images: `.research/img/refero-results/`
 ## Structural observation from the flows
 In both Breathwrk (7724) and Foodllama (11775), the outcome graph comes **mid-quiz**, right after goals are chosen
 and before the remaining questions. It is used as a reward to stop drop-off. The "plan ready" screen then sits
-directly before the offer. For Velora this suggests one short evidence or outcome card in the middle of the quiz (after
+directly before the offer. For CompanyX this suggests one short evidence or outcome card in the middle of the quiz (after
 the weight screen, where drop-off risk is high) and a result screen that leads straight into time slots.
 
 ## Top 3 takeaways

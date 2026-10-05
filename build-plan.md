@@ -1,6 +1,6 @@
 # What we're building
 
-A new version of Velora's quiz → result → booking flow. Mobile first. Clickable from the start screen to the booking confirmation, with mocked times.
+A new version of CompanyX's quiz → result → booking flow. Mobile first. Clickable from the start screen to the booking confirmation, with mocked times.
 
 **In one sentence:** 26 screens become 20, every question is kept, the result comes *before* we ask for contact details, and the flow ends with a booked meeting with a named doctor.
 
@@ -8,7 +8,7 @@ A new version of Velora's quiz → result → booking flow. Mobile first. Clicka
 
 ## Today vs. new
 
-| | Today (quiz.velora.se/2-3) | New |
+| | Today (quiz.companyx.example/2-3) | New |
 |---|---|---|
 | Length | 26 steps, counter says "1/26" | 20 screens: start, 15 question screens, result, booking, contact, confirmation |
 | Progress | "N/26" counter | % bar that moves fast at the start, with section marks |
@@ -55,7 +55,7 @@ Source: our capture in `docs/wizard/`. Screen-by-screen mapping: `optimal-flow.m
 **Why:** Most people in this audience have been treated badly in healthcare before (~75% in Sweden). Words matter: "vikt", "BMI" — never "fet" or "fetma".
 
 ### 8. Calm, premium look
-**What:** Velora's own palette and fonts (plum on soft pink, Ubuntu + Manrope), lots of air, one button per screen. Soft transition between steps, so the flow feels like one conversation.
+**What:** CompanyX's own palette and fonts (plum on soft pink, Ubuntu + Manrope), lots of air, one button per screen. Soft transition between steps, so the flow feels like one conversation.
 **Why:** The brief: "premium, safe and personal — something a person with overweight wants to keep tapping through".
 
 ### 9. Design rules (every screen)
@@ -68,7 +68,7 @@ Source: our capture in `docs/wizard/`. Screen-by-screen mapping: `optimal-flow.m
 
 ### 10. Small fixes found in today's flow
 - The contact form title "Ange dina uppgifter för att se resultatet" is no longer true, so it now asks "Vart skickar vi bekräftelsen?".
-- Age options skip 71–75, but the rules say 18–75. Kept as in Velora's flow; flagged.
+- Age options skip 71–75, but the rules say 18–75. Kept as in CompanyX's flow; flagged.
 
 ---
 
@@ -84,9 +84,9 @@ Out of scope per the brief — one line each in the decision doc:
 ## Decisions we made (say so if you disagree)
 
 - **Weight + height on one screen** (Ro and Hers do this; 3 research agents recommended it).
-- **Keep every question** rather than cutting motivation questions: the screens are fewer, the content is Velora's.
+- **Keep every question** rather than cutting motivation questions: the screens are fewer, the content is CompanyX's.
 - Meeting length (20 min), the named doctor and the time slots are placeholders.
-- **Screening rule:** BMI ≥30, or 27–29.9 with a weight-related condition (FASS, Wegovy §4.1). Age 18–75 (Velora's own rule, from today's flow).
+- **Screening rule:** BMI ≥30, or 27–29.9 with a weight-related condition (FASS, Wegovy §4.1). Age 18–75 (CompanyX's own rule, from today's flow).
 
 ## Deliverables (from the brief)
 

@@ -1,6 +1,6 @@
 # Steg 10 – Ditt BMI är 30. Uppfyller du något av följande 3 kriterier?
 
-- **URL:** https://quiz.velora.se/2-3?step=bmi-criteria
+- **URL:** https://quiz.companyx.example/2-3?step=bmi-criteria
 - **Progress:** 9/26 (progress bar at top)
 
 ## Visible text (verbatim)

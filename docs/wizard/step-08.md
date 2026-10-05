@@ -1,6 +1,6 @@
 # Steg 8 – Vad är din nuvarande vikt?
 
-- **URL:** https://quiz.velora.se/2-3?step=9
+- **URL:** https://quiz.companyx.example/2-3?step=9
 - **Progress:** 8/26
 
 ## Visible text (verbatim)

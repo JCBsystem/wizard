@@ -2,7 +2,7 @@
 
 Not part of the happy path. Reached from step 07 ("Hur gammal är du?") by picking **Under 18 år** (the first option). Documented once, then "Skrev du in fel?" was used to return.
 
-- **URL:** https://quiz.velora.se/2-3?step=disqualified
+- **URL:** https://quiz.companyx.example/2-3?step=disqualified
 - **Progress:** 7/26 (no back arrow shown)
 
 ## Visible text (verbatim)

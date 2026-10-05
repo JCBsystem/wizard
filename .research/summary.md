@@ -4,7 +4,7 @@
 
 ## What every source agrees on
 
-1. **Short, human-first funnel.** Nordic players (Yazen, Kry, Doktor24) = short quiz → booked time with a person. Velora fits that model: ~10–12 screens, end in a booked meeting, not an account or card. → `web-competitors.md`
+1. **Short, human-first funnel.** Nordic players (Yazen, Kry, Doktor24) = short quiz → booked time with a person. CompanyX fits that model: ~10–12 screens, end in a booked meeting, not an account or card. → `web-competitors.md`
 2. **Front-loaded progress bar, no "x/N".** Fast-early bar: 11.3% quit vs 21.8% slow-early (Conrad); odds ×0.80 across 32 experiments (Villar 2013). Call it *effort-weighted*, put heavy screens early. → `web-cro-evidence.md`
 3. **Group what belongs together.** Fewer, simpler pages lower quit rates on mobile. Height + weight on one screen (Ro, Hers). → `web-cro-evidence.md`, `mobbin-intake.md`, `refero-intake.md`
 4. **One-line "why we ask" under every sensitive field** + optional "Varför frågar vi?" sheet (Hers, Oura, Ada). Maps to `helpText`. → `mobbin-intake.md`, `refero-intake.md`, `web-trust-tone.md`

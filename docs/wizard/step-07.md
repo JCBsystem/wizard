@@ -1,6 +1,6 @@
 # Steg 7 – Hur gammal är du?
 
-- **URL:** https://quiz.velora.se/2-3?step=8
+- **URL:** https://quiz.companyx.example/2-3?step=8
 - **Progress:** 7/26 (progress bar at top)
 
 ## Visible text (verbatim)

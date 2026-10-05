@@ -2,14 +2,16 @@ import a from '@/data/wizard-a.json'
 import b from '@/data/wizard-b.json'
 import type { Wizard } from './types'
 
-const KEY = 'velora-wizard-variant'
+const KEY = 'companyx-wizard-variant'
 
 type Variant = 'a' | 'b'
 const isVariant = (v: string | null): v is Variant => v === 'a' || v === 'b'
 
+const forced = new URLSearchParams(location.search).get('variant')
+/** ?variant=a|b: a preview. Shows that variant but saves nothing (variant, progress, analytics session). */
+export const preview = isVariant(forced)
+
 function resolve(): Variant {
-  // Manual testing: ?variant=a|b shows that variant but never saves it, so a customer's variant is untouched.
-  const forced = new URLSearchParams(location.search).get('variant')
   if (isVariant(forced)) return forced
   // Once assigned, a customer keeps their variant.
   try {

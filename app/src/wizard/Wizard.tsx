@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { config, variant } from './variant'
+import { config, preview, variant } from './variant'
 import { Field, Note } from './Field'
 import { isValid } from './validate'
 import * as analytics from './analytics'
@@ -12,7 +12,7 @@ const { steps, ui } = config
 const fields = steps.flatMap((s) => s.fields ?? [])
 // Where each section ends, as a position on the front-loaded progress bar.
 const marks = steps.flatMap((s, i) => (i > 1 && s.section !== steps[i - 1].section ? [Math.sqrt(i / (steps.length - 1)) * 100] : []))
-const STORAGE_KEY = 'velora-wizard'
+const STORAGE_KEY = 'companyx-wizard'
 
 // Shared surfaces. `shell` + `core` = a card sitting in a tinted tray (concentric radii), used for the
 // few hero blocks only: start steps, answer summary, clinician.
@@ -25,6 +25,7 @@ const lift = 'shadow-[0_12px_24px_-12px_rgba(167,30,103,0.7)] transition-transfo
 type State = { index: number; answers: Answers }
 
 function load(): State {
+  if (preview) return { index: 0, answers: {} } // previews start fresh, in memory only
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '')
     // Clamp: steps may have been removed from the JSON since this was saved.
@@ -73,12 +74,18 @@ export function Wizard() {
     answersRef.current = answers
   }, [answers])
 
+  // One pending auto-advance at most; `busy` = a step change is in flight, ignore further input.
+  const timer = useRef<number>(undefined)
+  const busy = useRef(false)
+  useEffect(() => () => window.clearTimeout(timer.current), [])
+
   useEffect(() => {
     analytics.begin(step.id, index > 0) // once: resumed = came back mid-flow
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
+    if (preview) return
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
     } catch {
@@ -102,20 +109,26 @@ export function Wizard() {
     else update()
   }
   const go = (to: number) => {
+    if (busy.current) return
+    busy.current = true
+    window.clearTimeout(timer.current)
     analytics.stop()
     if (steps[to].type === 'confirmation') analytics.submit(answersRef.current)
     analytics.start(steps[to].id)
     swap(to, () => {
+      busy.current = false
       setAdvancing(false)
       setState((s) => ({ ...s, index: to }))
     })
   }
   const answer = (f: FieldDef, v: string | string[]) => {
+    if (busy.current) return
     const next = { ...answers, [f.id]: v }
     setState((s) => ({ ...s, answers: { ...s.answers, [f.id]: v } }))
     if (auto && validWith(next)) {
       setAdvancing(true)
-      window.setTimeout(() => go(index + 1), 250) // let the selected state show first
+      window.clearTimeout(timer.current)
+      timer.current = window.setTimeout(() => go(index + 1), 250) // let the selected state show first
     }
   }
   // Auto steps only get a CTA when revisited with an answer already in place (after Back).
@@ -134,7 +147,7 @@ export function Wizard() {
     >
       <header className="flex h-12 shrink-0 items-center gap-3 px-4">
         {intro ? (
-          <span className="font-serif text-[26px] leading-none tracking-[-0.03em]">velora</span>
+          <span className="font-serif text-[26px] leading-none tracking-[-0.03em]">companyx</span>
         ) : (
           <>
             {index > 0 && !done && (

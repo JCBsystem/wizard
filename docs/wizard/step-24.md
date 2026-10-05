@@ -1,6 +1,6 @@
 # Steg 24 – När du överväger behandling, vilka av följande är viktigast för dig?
 
-- **URL:** https://quiz.velora.se/2-3?step=27
+- **URL:** https://quiz.companyx.example/2-3?step=27
 - **Progress:** 23/26 (progress bar at top)
 
 ## Visible text (verbatim)

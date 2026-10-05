@@ -13,7 +13,7 @@ Brief: see `assignment.md`.
 - **Soft transitions** between steps (View Transitions), so the flow feels like one conversation.
 - **Resume.** Answers and step are saved in localStorage; a reload or later visit continues where the person left.
 - **Result before contact details.** Result plays back goal and BMI, then booking with a named doctor (placeholder), then name, phone, email, then confirmation.
-- **Mobile first.** Velora's own look: Ubuntu headings, Manrope text, plum/pink on soft pink.
+- **Mobile first.** CompanyX's own look: Ubuntu headings, Manrope text, plum/pink on soft pink.
 - **Build: Vite + React + TS + shadcn/ui in `app/`**, Firebase Hosting on project `wizard1-f16de`; CI (lint, build, Playwright e2e) deploys on every push to main. Playwright in `e2e/` runs both variants on mobile devices.
 
 ## From research (`.research/`)
@@ -24,10 +24,10 @@ Brief: see `assignment.md`.
 - Trust above one CTA: named licensed clinician with photo, "Gratis · 20 min · video · avboka fritt", rating, quote about experience.
 - Booking: "Första lediga tid" one-tap, next 3–5 days only, sticky "Boka tor kl 10:30". Scarcity only when true.
 - Confirmation: "Vi ses torsdag kl 10:30!", Add to calendar as main button, 3-step what happens next, no upsell.
-- Visual direction (research): serif headlines, sage on cream. Built instead in Velora's own palette and fonts.
+- Visual direction (research): serif headlines, sage on cream. Built instead in CompanyX's own palette and fonts.
 - Language: "vikt", "BMI", person-first. Avoid "fetma", "fet", "tjock". Say once there's no judgement (~75% report poor treatment in healthcare, Obesitas Sverige 2025).
 - "Vi frågar för att…" line under every sensitive field; optional "Varför frågar vi?" sheet → `helpText` in questions JSON.
-- Contraindications (Velora's own list) on their own screen, Ja/Nej, no "prefer not to answer".
+- Contraindications (CompanyX's own list) on their own screen, Ja/Nej, no "prefer not to answer".
 - Benchmark: 44.4% of healthcare form starters finish, 40.8% on mobile (Zuko 2025).
 
 ## Measurement

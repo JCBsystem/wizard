@@ -1,6 +1,6 @@
 # Steg 12 – Vad är din målvikt?
 
-- **URL:** https://quiz.velora.se/2-3?step=12
+- **URL:** https://quiz.companyx.example/2-3?step=12
 - **Progress:** 11/26
 
 ## Visible text (verbatim)
@@ -9,7 +9,7 @@
 11/26
 Vad är din målvikt?
 
-Baserat på Veloras användare och studier räknar vi ut när du kan nå din målvikt om du följer vår plan och våra råd. I genomsnitt går Veloras medlemmar ner 20% under det första året.
+Baserat på CompanyXs användare och studier räknar vi ut när du kan nå din målvikt om du följer vår plan och våra råd. I genomsnitt går CompanyXs medlemmar ner 20% under det första året.
 
 [Målvikt i kg]
 

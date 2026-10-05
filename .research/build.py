@@ -64,7 +64,7 @@ NEW = [
 
 NEW_TEXT = [
     ("Stigma-free language", "“vikt”, “BMI”, never “fet/fetma”. ~75% of Swedes with obesity report bad treatment in healthcare — tone is a differentiator.", "web-trust-tone"),
-    ("Nordic model, not US", "Yazen/Kry/Doktor24: short quiz → a person. Noom/Ro/Hims: 55-screen intake → payment. Velora = Nordic: short, ends in a booked time.", "web-competitors"),
+    ("Nordic model, not US", "Yazen/Kry/Doktor24: short quiz → a person. Noom/Ro/Hims: 55-screen intake → payment. CompanyX = Nordic: short, ends in a booked time.", "web-competitors"),
     ("Easy, no-wrong-answer first question", "Foot-in-the-door: a small first yes raised agreement to a later big ask 76% vs 17%.", "web-cro-evidence"),
     ("Say who it isn't for", "Top UK/Nordic players list exclusions openly — builds trust and screens correctly.", "web-competitors"),
 ]
@@ -149,28 +149,28 @@ def strip_offtopic(t):
 
 
 def patterns(slug):
-    """Extract numbered pattern sections: title, app, image, velora text."""
+    """Extract numbered pattern sections: title, app, image, companyx text."""
     text = (DIR / f"{slug}.md").read_text()
     out = []
     for m in re.finditer(r"^#{2,3} \d+\. (.+?)\n(.*?)(?=^#{2,3} |\Z)", text, re.S | re.M):
         title, sec = m.group(1).strip(), m.group(2)
         img = re.search(r"(img/[\w./-]+\.(?:jpe?g|png|webp))", sec)
         app = re.search(r"\(([^()]+)\)\s*$", title) or re.search(r"\*\*App:\*\*\s*(.+)", sec)
-        vel = re.search(r"\*\*Velora:\*\*\s*(.+?)(?=\n\s*\n|\n- |\n!\[|\Z)", sec, re.S)
+        vel = re.search(r"\*\*CompanyX:\*\*\s*(.+?)(?=\n\s*\n|\n- |\n!\[|\Z)", sec, re.S)
         if not img or not (DIR / img.group(1)).exists():
             continue
         out.append(dict(
             title=re.sub(r"\s*\([^()]+\)\s*$", "", title),
             app=app.group(1).strip() if app else "",
             img=img.group(1),
-            velora=strip_offtopic(re.sub(r"\s+", " ", re.sub(r"[*`]", "", vel.group(1))).strip()) if vel else "",
+            companyx=strip_offtopic(re.sub(r"\s+", " ", re.sub(r"[*`]", "", vel.group(1))).strip()) if vel else "",
             slug=slug))
     return out
 
 
 # ---------- index.html ----------
 n_imgs = len(list((DIR / "img").rglob("*.*")))
-b = [f"""<h1>Velora quiz research</h1>
+b = [f"""<h1>CompanyX quiz research</h1>
 <p class="lead">10 research agents, {n_imgs} screenshots from Mobbin and Refero, plus web evidence. Start with what's <b>new</b> — ideas that weren't on our list. Tap any screenshot to enlarge.</p>"""]
 
 b.append('<section><div class="sh"><h2>New ideas</h2><span class="tag">not on our list</span></div>'
@@ -197,7 +197,7 @@ for name, sub, slugs in STAGES:
     for p in cards:
         b.append(f'<div class="card"><div class="shot"><img loading="lazy" src="{p["img"]}" alt="{e(p["title"])}"></div>'
                  f'<div class="body"><span class="app">{e(p["app"])}</span><h3>{e(p["title"])}</h3>'
-                 f'<p><b>For Velora:</b> {e(p["velora"])}</p><a class="more" href="{p["slug"]}.html">Details →</a></div></div>')
+                 f'<p><b>For CompanyX:</b> {e(p["companyx"])}</p><a class="more" href="{p["slug"]}.html">Details →</a></div></div>')
     b.append("</div></section>")
 
 styles = [i for i in ["img/refero-intake/style-ease-health.jpg", "img/refero-intake/style-oura.jpg"] if (DIR / i).exists()]
@@ -207,7 +207,7 @@ if styles:
         b.append(f'<div class="card"><div class="shot"><img src="{i}" alt=""></div><div class="body"><h3>{e(cap)}</h3></div></div>')
     b.append("</div></section>")
 
-(DIR / "index.html").write_text(page("Velora quiz research", "index", "".join(b)))
+(DIR / "index.html").write_text(page("CompanyX quiz research", "index", "".join(b)))
 print("wrote index.html")
 
 # ---------- detail pages ----------
@@ -218,5 +218,5 @@ for slug, title in DETAIL:
     md = re.sub(r"^- Image: `(img/[^`]+)`", r"![](\1)", src.read_text(), flags=re.M)
     body = subprocess.run(["npx", "-y", "marked", "--gfm"], input=md, capture_output=True, text=True, check=True).stdout
     body = re.sub(r"<code>([\w-]+)\.md</code>", r'<a href="\1.html"><code>\1</code></a>', body)
-    (DIR / f"{slug}.html").write_text(page(f"{title} · Velora research", slug, body, narrow=True))
+    (DIR / f"{slug}.html").write_text(page(f"{title} · CompanyX research", slug, body, narrow=True))
     print("wrote", f"{slug}.html")

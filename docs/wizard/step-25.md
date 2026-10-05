@@ -1,6 +1,6 @@
 # Steg 25 – Hur hittade du oss?
 
-- **URL:** https://quiz.velora.se/2-3?step=28
+- **URL:** https://quiz.companyx.example/2-3?step=28
 - **Progress:** 24/26 (progress bar at top)
 
 ## Visible text (verbatim)

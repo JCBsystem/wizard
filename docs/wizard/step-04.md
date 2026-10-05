@@ -1,6 +1,6 @@
 # Steg 4 – Hur påverkar din nuvarande vikt ditt liv?
 
-- **URL:** https://quiz.velora.se/2-3?step=4
+- **URL:** https://quiz.companyx.example/2-3?step=4
 - **Progress:** 4/26 (progress bar at top)
 
 ## Visible text (verbatim)

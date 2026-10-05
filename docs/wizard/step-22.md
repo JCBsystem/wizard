@@ -1,6 +1,6 @@
 # Steg 22 – När jag har nått mitt mål, vill jag gärna...
 
-- **URL:** https://quiz.velora.se/2-3?step=25
+- **URL:** https://quiz.companyx.example/2-3?step=25
 - **Progress:** 21/26 (progress bar at top)
 
 ## Visible text (verbatim)

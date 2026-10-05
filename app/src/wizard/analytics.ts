@@ -1,7 +1,7 @@
 import { doc, getFirestore, increment, serverTimestamp, setDoc } from 'firebase/firestore'
 import { app } from '@/lib/firebase'
 import type { Answers } from './types'
-import { variant } from './variant'
+import { preview, variant } from './variant'
 
 // One Firestore doc per user: sessions/{sessionId}
 // {
@@ -11,9 +11,10 @@ import { variant } from './variant'
 //   answers?  // written on submit
 // }
 const db = getFirestore(app)
-const ID_KEY = 'velora-wizard-session'
+const ID_KEY = 'companyx-wizard-session'
 
 let id: string | null = null
+let submitted = false // submit at most once per session
 let current: { stepId: string; at: number } | null = null
 
 function write(data: Record<string, unknown>) {
@@ -24,6 +25,8 @@ function write(data: Record<string, unknown>) {
 }
 
 function newSession() {
+  if (preview) return // previews never touch the customer's session or write analytics
+  submitted = false
   id = crypto.randomUUID()
   try {
     localStorage.setItem(ID_KEY, id)
@@ -35,7 +38,7 @@ function newSession() {
 
 /** Call once on load. Reuses the stored session when the user resumes mid-flow. */
 export function begin(stepId: string, resumed: boolean) {
-  if (id) return // already begun (StrictMode re-mount)
+  if (id || preview) return // already begun (StrictMode re-mount)
   try {
     id = localStorage.getItem(ID_KEY)
   } catch {
@@ -60,6 +63,8 @@ export function stop() {
 }
 
 export function submit(answers: Answers) {
+  if (submitted) return
+  submitted = true
   write({ status: 'submitted', submittedAt: serverTimestamp(), answers })
 }
 

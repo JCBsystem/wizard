@@ -1,6 +1,6 @@
 # Steg 16 – Vad beskriver din nuvarande livsstil bäst?
 
-- **URL:** https://quiz.velora.se/2-3?step=15
+- **URL:** https://quiz.companyx.example/2-3?step=15
 - **Progress:** 15/26 (progress bar at top)
 
 ## Visible text (verbatim)

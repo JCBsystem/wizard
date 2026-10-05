@@ -1,6 +1,6 @@
 # Steg 11 – Har du eller har du haft någon av följande sjukdomar?
 
-- **URL:** https://quiz.velora.se/2-3?step=11
+- **URL:** https://quiz.companyx.example/2-3?step=11
 - **Progress:** 10/26 (progress bar at top)
 
 ## Visible text (verbatim)
@@ -32,6 +32,6 @@ Nej
 
 ## Chosen
 
-**Nej** (second option – "Ja" leads to `step=disqualified` with the text "Vid dessa sjukdomar passar tyvärr inte de läkemedel Velora förskriver." and a "Skrev du in fel?" button)
+**Nej** (second option – "Ja" leads to `step=disqualified` with the text "Vid dessa sjukdomar passar tyvärr inte de läkemedel CompanyX förskriver." and a "Skrev du in fel?" button)
 
 ![step 11](step-11.png)

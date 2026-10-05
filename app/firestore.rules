@@ -4,7 +4,8 @@ service cloud.firestore {
     // Wizard analytics: one doc per user. Browser may write its own doc, never read or list.
     // ponytail: open write, no auth — add App Check / anonymous auth before real patients.
     match /sessions/{sessionId} {
-      allow create, update: if true;
+      // Writes close automatically 20 days after launch (2026-10-05 + 20 days).
+      allow create, update: if request.time < timestamp.date(2026, 10, 25);
       allow read, delete: if false;
     }
   }

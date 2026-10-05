@@ -1,6 +1,6 @@
 # Steg 20 – Vad har gjort det svårt att gå ner i vikt tidigare?
 
-- **URL:** https://quiz.velora.se/2-3?step=22
+- **URL:** https://quiz.companyx.example/2-3?step=22
 - **Progress:** 19/26 (progress bar at top)
 
 ## Visible text (verbatim)
