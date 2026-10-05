@@ -60,6 +60,16 @@ One Firestore doc per session (`sessions/{id}`, project `wizard1-f16de`): varian
 - Actions use Node 24 majors (checkout/setup-node/upload-artifact v7, download-artifact v8).
 - Playwright report is uploaded on failure.
 
+## Reports
+
+Served with the app on Firebase Hosting (copied into `dist/` by `npm run build`):
+
+- [Final report](https://wizard1-f16de.web.app/docs/final-report.html) · [source](docs/final-report.html)
+- [Flow analytics](https://wizard1-f16de.web.app/docs/flow-analytics.html) · [source](docs/flow-analytics.html)
+- [Research](https://wizard1-f16de.web.app/.research/index.html) · [source](.research/index.html)
+- [Mockups](https://wizard1-f16de.web.app/mockups/index.html) · [source](mockups/index.html)
+- [Current quiz baseline](https://wizard1-f16de.web.app/docs/companyx-quiz-baseline.html) · [source](docs/companyx-quiz-baseline.html)
+
 ## Changes
 
 - 2026-10-05: client anonymized as CompanyX (localStorage keys `companyx-wizard*`); `?variant=` is preview-only (no saved progress, no analytics); auto-advance timer/double-tap guards and submit-once; new `flow-guards.spec.ts` (24 tests total)
