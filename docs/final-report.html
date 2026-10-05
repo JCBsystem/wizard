@@ -225,6 +225,34 @@ footer{margin-top:80px;padding:34px 0 50px;border-top:1px solid var(--line);font
   .side nav a.on{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#fff}
   .side .btn{margin:28px 12px 0;justify-content:center}
 }
+
+/* terminals */
+.terms{display:grid;gap:18px;margin-top:28px}
+.term{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 20px 36px -30px rgba(50,0,20,.5)}
+.term-head{display:flex;align-items:center;gap:12px;background:var(--deep);color:var(--pink);padding:11px 16px;font-size:14px}
+.term-head .dots{display:flex;gap:6px}
+.term-head .dots span{width:10px;height:10px;border-radius:50%;background:var(--plum)}
+.term-head b{color:#fff;font-family:var(--display);font-weight:500}
+.term-head time{margin-left:auto;color:var(--soft);font-size:13px}
+.term-body{padding:16px 18px 18px}
+.term-body p.role{font-size:15px;color:var(--muted);margin:0 0 12px}
+.prompt{display:grid;grid-template-columns:18px 1fr;gap:8px;font:14.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);padding:10px 0;border-top:1px dashed var(--line)}
+.prompt:before{content:'›';color:var(--primary);font-weight:700}
+.prompt ul{margin:6px 0 0;padding-left:18px}
+.prompt li{margin:2px 0}
+.prompt em{font-style:normal;color:var(--muted)}
+
+/* agents */
+.orch{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.big{font:700 64px/1 var(--display);color:var(--primary);letter-spacing:-.02em}
+.big small{display:block;font:600 15px/1.4 var(--body);color:var(--plum);letter-spacing:0;margin-top:8px}
+.counts{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.counts li{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:baseline;font-size:15.5px}
+.counts li b{font:700 18px/1 var(--display);color:var(--primary);text-align:right}
+.counts li span{color:var(--muted)}
+.models{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.models span{background:var(--pink);color:var(--plum);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:600}
+@media (max-width:820px){.orch{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -587,7 +615,29 @@ footer{margin-top:80px;padding:34px 0 50px;border-top:1px solid var(--line);font
   <div class="wrap">
     <div class="eyebrow">03 · Angreppssätt</div>
     <h2>Förstå först, bygga sist</h2>
-    <p class="intro">Prototypen byggdes på ungefär tre timmar en förmiddag, med upp till fyra AI-sessioner igång samtidigt. En kortare andra omgång, ungefär en timme, gick till A/B-stödet, testerna och den här rapporten. Jag lät AI göra det tunga och snabba, och höll själv i besluten.</p>
+    <p class="intro">Prototypen byggdes på ungefär tre timmar en förmiddag. En kortare andra omgång, ungefär en timme, gick till A/B-stödet, testerna och den här rapporten. Det gick bara att hinna eftersom arbetet inte gjordes av en AI i en tråd, utan av många agenter samtidigt.</p>
+
+    <div class="orch">
+      <div class="box">
+        <h3>Huvudagenten leder, underagenterna jobbar</h3>
+        <p style="margin:0 0 12px">I varje terminal arbetade huvudagenten som projektledare. Den bröt ner uppgiften, gav varje underagent ett avgränsat uppdrag och granskade resultatet, men gjorde inte själva jobbet.</p>
+        <p style="margin:0">Det håller huvudagentens minne fritt från kod och filinnehåll, så att den kan fokusera på besluten hela vägen. Underagenterna delades upp efter vilka filer de ägde, så att de kunde arbeta parallellt utan att skriva över varandra.</p>
+      </div>
+      <div class="box">
+        <div class="big">58<small>underagenter i fyra terminaler</small></div>
+        <ul class="counts">
+          <li><b>13</b><div>Tester, CI/CD och kontroll av publiceringen</div></li>
+          <li><b>11</b><div>Bygget av appen: ramverk, fält, övergångar, A/B</div></li>
+          <li><b>11</b><div>Granskning, dokumentation och README</div></li>
+          <li><b>10</b><div>Research <span>(Mobbin, Refero, webben)</span></div></li>
+          <li><b>8</b><div>Design och skisser av alla skärmar</div></li>
+          <li><b>5</b><div>Kartläggning av dagens quiz</div></li>
+        </ul>
+        <div class="models"><span>Opus 5.5 · 25</span><span>Sonnet 5.5 · 23</span><span>Fable 5.1 · 10</span></div>
+        <p style="margin:14px 0 0;font-size:14.5px;color:var(--muted)">Utöver dessa skrevs den här rapporten i en femte session med 2 egna agenter: en läste igenom hela sessionshistoriken för styrningsavsnittet, en tog nya mobilskärmbilder av dagens quiz.</p>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:16px">Modellen valdes efter uppgiften. <b>Fable</b> byggde kärnan och designen: wizard-motorn, mobilramen, fälten, övergångarna och skisserna av alla skärmar. <b>Opus</b> gjorde research, kartläggning och granskning, bland annat jämförelsen mot dagens quiz. <b>Sonnet</b> tog de snabba jobben: kontroller av CI och publicering, namnbyten och dokumentation.</p>
 
     <div class="steps">
       <div class="step"><span class="num">1</span><div><h3>Kartlade dagens flöde</h3><p>En AI-agent gick igenom hela quizet i en webbläsare med påhittade svar och tog en skärmbild av varje skärm, fram till kontaktformuläret. Där stoppade jag den, eftersom ett tryck på OK skickar en riktig förfrågan. Resultatet blev en beskrivning av dagens quiz som det är, utan förslag.</p></div></div>
@@ -600,7 +650,7 @@ footer{margin-top:80px;padding:34px 0 50px;border-top:1px solid var(--line);font
     <div class="box" style="margin-top:12px">
       <h3>Verktyg</h3>
       <ul>
-        <li><b>Claude Code</b> i flera terminaler samtidigt, med agenter som delade upp arbetet efter vilka filer de ägde.</li>
+        <li><b>Claude Code</b> i fyra terminaler, med Fable, Opus och Sonnet som underagenter.</li>
         <li><b>Mobbin och Refero</b> för designmönster, <b>Playwright</b> för att gå igenom quizet och ta skärmbilder.</li>
         <li><b>Skills</b> för typografi och layout, och för att skriva tester på samma sätt varje gång.</li>
       </ul>
@@ -611,13 +661,56 @@ footer{margin-top:80px;padding:34px 0 50px;border-top:1px solid var(--line);font
 <section id="promptlogg">
   <div class="wrap">
     <div class="eyebrow">03 · Promptlogg</div>
-    <h2>Prompterna som tog fram lösningen</h2>
-    <p class="intro">De tre prompter som gjorde störst skillnad, i den ordning jag använde dem. Citaten är mina prompter, med rättad stavning.</p>
-    <ul class="list">
-      <li><b>Mina anteckningar, första timmen</b>Satte formen på allt: färre skärmar genom att slå ihop, procent i stället för ”1/26”, mätning per steg och ett flöde som styrs av en konfigurationsfil.<blockquote style="margin-top:10px">”Fewer steps by merging common questions: sex, age and height in one step instead of three.”<br>”Show % instead of step numbers, show almost there, only a few steps left.”<br>”Track time on each step. If a user doesn’t finish, find out why.”</blockquote></li>
-      <li><b>Behåll era frågor ordagrant</b>Vände på AI:s strykningar och blev den viktigaste ramen för lösningen: allt ert innehåll kvar, bara packningen bättre.<blockquote style="margin-top:10px">”We cannot remove their content. We can improve the packing.”</blockquote></li>
-      <li><b>Låt en annan AI granska</b>Jämförelsen mot dagens version visade att vår första version var sämre på flera punkter. Det ledde till designomgången som gav det som syns i prototypen i dag.<blockquote style="margin-top:10px">”Set up an Opus agent and compare the two.”</blockquote></li>
-    </ul>
+    <h2>Fyra terminaler, inte en prompt</h2>
+    <p class="intro">Lösningen kom inte från en enda prompt. Jag körde Claude Code i fyra terminaler, var och en med sitt eget uppdrag, och varje terminal startade egna underagenter, 58 totalt. Prompterna gick till huvudagenten, som delade ut arbetet till underagenter. Här är hur varje terminal startades, i tidsordning. Stavningen är rättad.</p>
+
+    <div class="terms">
+      <div class="term">
+        <div class="term-head"><span class="dots"><span></span><span></span><span></span></span><b>Terminal 1 · Planering, research och bygge</b><time>Dag 1, 11:26</time></div>
+        <div class="term-body">
+          <p class="role">Huvudsessionen. Bröt ner uppdraget, startade research-agenterna och byggde appen. <b>46 underagenter.</b></p>
+          <div class="prompt"><div>We got a work assignment. Read the brief and create an assignment.md in the root.</div></div>
+          <div class="prompt"><div>These are my thoughts. Read them and let's talk about them.
+            <ul>
+              <li>Redesign the customer's wizard. Analyse the current screens and identify the problems.</li>
+              <li>Fewer steps by merging common questions: sex, age and height in one step instead of three.</li>
+              <li>Show % instead of step numbers, so we don't scare the user off. An optimistic progress bar that shows "almost there".</li>
+              <li>Track the time on each step, and if a user doesn't finish, find out why. Keep progress in the session.</li>
+              <li>Research competitors. Mobile first.</li>
+              <li>Plan: break the task down, time-box research agents on Mobbin, set up the app with the questions in a JSON settings file, Playwright tests, final reports.</li>
+            </ul></div></div>
+          <div class="prompt"><div>Set up an agent to build a thin app in an app folder: Vite, React (not Next) and shadcn. Here is the Firebase config. Use agents to move fast. Also set up Playwright in a separate folder.</div></div>
+          <div class="prompt"><div>The agents can commit and deploy in this project, but they need to ask me first.</div></div>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-head"><span class="dots"><span></span><span></span><span></span></span><b>Terminal 2 · Kartläggning av dagens quiz</b><time>Dag 1, 11:29</time></div>
+        <div class="term-body">
+          <p class="role">Gick igenom dagens quiz i en webbläsare och dokumenterade varje skärm. <b>1 underagent.</b></p>
+          <div class="prompt"><div>Use agents to do this quickly. For this wizard, I want a screenshot and a .md file of each step. Do not click "Boka bedömningssamtal" at the end. You can't trust the URL parameter, some steps aren't there, so click through by selecting an option. Our goal is to document the wizard. Any questions?</div></div>
+          <div class="prompt"><div>The contact form should be on the last step. Do not submit it. Otherwise, use dummy data.</div></div>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-head"><span class="dots"><span></span><span></span><span></span></span><b>Terminal 3 · Granskning och det nya flödet</b><time>Dag 1, 12:21</time></div>
+        <div class="term-body">
+          <p class="role">Granskade vad de andra agenterna byggt och tog fram det nya flödet med alla frågor kvar. <b>8 underagenter.</b></p>
+          <div class="prompt"><div>Read assignment.md. We should improve their existing wizard for new customers; the baseline of today's quiz is in docs/. Review what we have so far. Do this fast, we are time-boxed. Use agents if it's faster.</div></div>
+          <div class="prompt"><div>Several agents are working in this repo. Set up an agent to take what they have and compact it into fewer steps, like we talked about. We can't put so much on one screen that it scrolls. I will show this to the customer, so don't skip or rewrite any questions.</div></div>
+          <div class="prompt"><div>Create a new optimal-flow.md.</div></div>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-head"><span class="dots"><span></span><span></span><span></span></span><b>Terminal 4 · Stabila tester</b><time>Dag 2, 09:26</time></div>
+        <div class="term-body">
+          <p class="role">Gjorde de automatiska testerna tåliga mot ändringar i text och design. <b>3 underagenter.</b></p>
+          <div class="prompt"><div>We're doing an assignment and I need a quick fix in the test project. Make it use stable selectors: test IDs, not selectors that break easily, like text or CSS queries. If that's not possible, let me know. Update both the code and the tests. Use agents to speed things up. Any questions?</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
