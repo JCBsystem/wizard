@@ -8,8 +8,8 @@ test('mobile frame holds on every step', async ({ page }, testInfo) => {
   const project = testInfo.project.name.replace(/ /g, '-');
   const viewport = page.viewportSize()!;
   await blockFirestore(page);
-  await page.goto('/');
-  const main = page.locator('main');
+  await page.goto('/?variant=a');
+  const main = page.getByTestId('wizard');
 
   for (const [i, step] of wizard.steps.entries()) {
     await expect(main).toHaveAttribute('data-step', step.id);
@@ -24,7 +24,7 @@ test('mobile frame holds on every step', async ({ page }, testInfo) => {
     // One question per screen: nothing may scroll vertically, neither the page nor the content area.
     const v = await page.evaluate(() => {
       const d = document.documentElement;
-      const m = document.querySelector('main');
+      const m = document.querySelector('[data-testid=wizard]');
       return {
         doc: { scrollHeight: d.scrollHeight, innerHeight: window.innerHeight },
         main: m ? { scrollHeight: m.scrollHeight, clientHeight: m.clientHeight } : null,
@@ -39,8 +39,8 @@ test('mobile frame holds on every step', async ({ page }, testInfo) => {
 
     // Steps with only single-choice fields auto-advance on pick and may render no CTA.
     const autoAdvance = isAuto(step);
-    const ctaName = step.type === 'confirmation' ? wizard.ui.restart : (step.cta ?? wizard.ui.next);
-    const cta = page.getByRole('button', { name: ctaName });
+    const ctaName = step.type === 'confirmation' ? 'restart' : 'next';
+    const cta = page.getByTestId(ctaName);
     const hasCta = (await cta.count()) > 0;
     expect.soft(hasCta || autoAdvance, `[${step.id}] CTA "${ctaName}" missing`).toBe(true);
     if (hasCta) {
@@ -81,7 +81,7 @@ test('mobile frame holds on every step', async ({ page }, testInfo) => {
     const nn = String(i + 1).padStart(2, '0');
     await page.screenshot({ path: path.resolve(__dirname, '../screenshots/frame', `${project}-${nn}-${step.id}.png`) });
 
-    for (const f of step.fields ?? []) await answer(main, f);
+    for (const f of step.fields ?? []) await answer(page, f);
     if (step.type === 'confirmation') break;
     // Auto-advance steps move on by themselves; the next iteration's data-step wait covers it.
     if (hasCta) await cta.click();

@@ -1,9 +1,11 @@
 import { doc, getFirestore, increment, serverTimestamp, setDoc } from 'firebase/firestore'
 import { app } from '@/lib/firebase'
 import type { Answers } from './types'
+import { variant } from './variant'
 
 // One Firestore doc per user: sessions/{sessionId}
 // {
+//   variant: 'a' | 'b',
 //   status: 'in_progress' | 'submitted', createdAt, updatedAt, submittedAt?, resumes, currentStep,
 //   steps: { [stepId]: { visits, totalMs, lastStart, lastStop } },  // lastStart > lastStop (or no lastStop) = exited there
 //   answers?  // written on submit
@@ -28,7 +30,7 @@ function newSession() {
   } catch {
     /* no storage: session lives for this page load only */
   }
-  write({ status: 'in_progress', createdAt: serverTimestamp(), resumes: 0, userAgent: navigator.userAgent })
+  write({ status: 'in_progress', variant, createdAt: serverTimestamp(), resumes: 0, userAgent: navigator.userAgent })
 }
 
 /** Call once on load. Reuses the stored session when the user resumes mid-flow. */

@@ -1,32 +1,45 @@
 import { test, expect } from '@playwright/test';
-import { wizard, blockFirestore, answer, isAuto } from './walk';
+import { wizardA, wizardB, blockFirestore, answer, isAuto } from './walk';
 
-test('happy path reaches confirmation', async ({ page }, testInfo) => {
-  await blockFirestore(page);
-  await page.goto('/');
-  const main = page.locator('main');
+for (const [v, wizard] of [['a', wizardA], ['b', wizardB]] as const) {
+  test(`happy path reaches confirmation (variant ${v})`, async ({ page }, testInfo) => {
+    await blockFirestore(page);
+    await page.goto(`/?variant=${v}`);
+    const main = page.getByTestId('wizard');
+    await expect(main).toHaveAttribute('data-variant', v);
+    await expect(page.getByTestId('step-title')).toContainText(wizard.steps[0].title!);
 
-  for (const step of wizard.steps) {
-    await expect(main).toHaveAttribute('data-step', step.id);
-    for (const f of step.fields ?? []) await answer(main, f);
-    if (step.type === 'confirmation') break;
-    // Auto-advance steps move on by themselves; the next data-step check waits for it.
-    if (!isAuto(step)) await page.getByRole('button', { name: step.cta ?? wizard.ui.next }).click();
-  }
+    for (const step of wizard.steps) {
+      await expect(main).toHaveAttribute('data-step', step.id);
+      for (const f of step.fields ?? []) await answer(page, f);
+      if (step.type === 'confirmation') break;
+      // Auto-advance steps move on by themselves; the next data-step check waits for it.
+      if (!isAuto(step)) await page.getByTestId('next').click();
+    }
 
-  await expect(main).toHaveAttribute('data-step', wizard.steps.at(-1)!.id);
-  await expect(page.getByRole('button', { name: wizard.ui.restart })).toBeVisible();
-  await page.screenshot({ path: `screenshots/${testInfo.project.name}-confirmation.png`, fullPage: true });
-});
+    await expect(main).toHaveAttribute('data-step', wizard.steps.at(-1)!.id);
+    await expect(page.getByTestId('restart')).toBeVisible();
+    await page.screenshot({ path: `screenshots/${testInfo.project.name}-${v}-confirmation.png`, fullPage: true });
+  });
+}
 
 test('back returns to the previous step', async ({ page }) => {
   await blockFirestore(page);
-  await page.goto('/');
-  const main = page.locator('main');
-  const [first, second] = wizard.steps;
-  for (const f of first.fields ?? []) await answer(main, f);
-  if (!isAuto(first)) await page.getByRole('button', { name: first.cta ?? wizard.ui.next }).click();
+  await page.goto('/?variant=a');
+  const main = page.getByTestId('wizard');
+  const [first, second] = wizardA.steps;
+  for (const f of first.fields ?? []) await answer(page, f);
+  if (!isAuto(first)) await page.getByTestId('next').click();
   await expect(main).toHaveAttribute('data-step', second.id);
-  await page.getByRole('button', { name: wizard.ui.back }).click();
+  await page.getByTestId('back').click();
   await expect(main).toHaveAttribute('data-step', first.id);
+});
+
+test('variant is sticky across reload', async ({ page }) => {
+  await blockFirestore(page);
+  await page.goto('/');
+  const v = await page.getByTestId('wizard').getAttribute('data-variant');
+  expect(['a', 'b']).toContain(v);
+  await page.reload();
+  await expect(page.getByTestId('wizard')).toHaveAttribute('data-variant', v!);
 });

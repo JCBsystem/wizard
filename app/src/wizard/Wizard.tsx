@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import data from '@/data/wizard.json'
+import { config, variant } from './variant'
 import { Field, Note } from './Field'
 import { isValid } from './validate'
 import * as analytics from './analytics'
-import type { Answers, Field as FieldDef, Wizard as WizardDef } from './types'
+import type { Answers, Field as FieldDef } from './types'
 
-const { steps, ui } = data as unknown as WizardDef
+const { steps, ui } = config
 const fields = steps.flatMap((s) => s.fields ?? [])
 // Where each section ends, as a position on the front-loaded progress bar.
 const marks = steps.flatMap((s, i) => (i > 1 && s.section !== steps[i - 1].section ? [Math.sqrt(i / (steps.length - 1)) * 100] : []))
@@ -126,7 +126,9 @@ export function Wizard() {
   // the footer only exists with a CTA (auto steps need the height) — the transition hides that reflow.
   return (
     <main
+      data-testid="wizard"
       data-step={step.id}
+      data-variant={variant}
       // Soft light from the top, so the page has depth instead of one flat pink.
       className="mx-auto flex h-dvh w-full max-w-md flex-col bg-[radial-gradient(120%_46%_at_50%_0%,rgba(255,255,255,0.8),transparent_72%)] pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] sm:border-x"
     >
@@ -136,7 +138,7 @@ export function Wizard() {
         ) : (
           <>
             {index > 0 && !done && (
-              <Button variant="ghost" className="-ml-3 size-11 shrink-0 text-foreground [&_svg]:size-[18px] [&_svg]:stroke-2" aria-label={ui.back} onClick={() => go(index - 1)}>
+              <Button data-testid="back" variant="ghost" className="-ml-3 size-11 shrink-0 text-foreground [&_svg]:size-[18px] [&_svg]:stroke-2" aria-label={ui.back} onClick={() => go(index - 1)}>
                 <ArrowLeft />
               </Button>
             )}
@@ -163,7 +165,7 @@ export function Wizard() {
 
         {step.title && (
           <header className="space-y-1.5">
-            <h1 className={`font-bold text-balance ${intro ? 'text-[32px] leading-[1.1] tracking-[-0.9px]' : ''}`}>{fill(step.title)}</h1>
+            <h1 data-testid="step-title" className={`font-bold text-balance ${intro ? 'text-[32px] leading-[1.1] tracking-[-0.9px]' : ''}`}>{fill(step.title)}</h1>
             {step.description && <p className="text-[15px] leading-relaxed text-foreground/75 text-pretty">{fill(step.description)}</p>}
           </header>
         )}
@@ -240,7 +242,7 @@ export function Wizard() {
       {showCta && (
         <footer className="shrink-0 space-y-2 px-4 py-3">
           {done ? (
-            <Button variant="link" className="h-11 w-full text-sm font-semibold" onClick={() => {
+            <Button data-testid="restart" variant="link" className="h-11 w-full text-sm font-semibold" onClick={() => {
               analytics.restart(steps[0].id)
               swap(0, () => setState({ index: 0, answers: {} }))
             }}>
@@ -248,7 +250,7 @@ export function Wizard() {
             </Button>
           ) : (
             // Arrow in its own circle, flush right; the label stays optically centred.
-            <Button className={`group w-full justify-between pr-2 pl-12 ${lift}`} disabled={!valid} onClick={() => go(index + 1)}>
+            <Button data-testid="next" className={`group w-full justify-between pr-2 pl-12 ${lift}`} disabled={!valid} onClick={() => go(index + 1)}>
               <span className="flex-1 text-center">{step.cta ?? ui.next}</span>
               <span className="flex size-10 items-center justify-center rounded-full bg-white/15 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5" aria-hidden>
                 <ArrowRight className="size-[18px]" strokeWidth={2} />

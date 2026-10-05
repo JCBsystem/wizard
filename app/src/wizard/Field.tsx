@@ -50,7 +50,7 @@ export function Field({ field, name, value, onChange }: Props) {
   }, [def, value, onChange])
 
   return (
-    <fieldset data-field={field.id} aria-describedby={descId} className={cn('min-w-0 space-y-2', !('half' in field && field.half) && 'col-span-2')}>
+    <fieldset data-testid={`field-${field.id}`} aria-describedby={descId} className={cn('min-w-0 space-y-2', !('half' in field && field.half) && 'col-span-2')}>
       {/* The label is the question: a real heading, not a form label. */}
       <legend className={cn('mb-1.5 font-heading text-[20px] leading-[1.2] font-bold tracking-[-0.3px] text-pretty', !field.label && 'sr-only')}>{name}</legend>
       {/* A list to read before answering sits on its own white card, like the customer's form. */}
@@ -87,7 +87,7 @@ export function Field({ field, name, value, onChange }: Props) {
                   (segmented || layout === 'chips') && sel && filled,
                 )}
               >
-                <RadioGroupItem value={o.value} className={control} />
+                <RadioGroupItem data-testid={`option-${field.id}-${o.value}`} value={o.value} className={control} />
                 {/* Cards always carry the radio mark, stacked or in a grid, so one screen never mixes two card styles. */}
                 {(!layout || layout === 'grid') && (
                   <span className={cn(mark, 'rounded-full', sel && 'border-primary')} aria-hidden>
@@ -108,7 +108,7 @@ export function Field({ field, name, value, onChange }: Props) {
             ['no', field.noLabel ?? 'Nej'],
           ].map(([v, label]) => (
             <label key={v} className={cn(card, segment, text === v && filled)}>
-              <RadioGroupItem value={v} className={control} />
+              <RadioGroupItem data-testid={`option-${field.id}-${v}`} value={v} className={control} />
               {label}
             </label>
           ))}
@@ -127,6 +127,7 @@ export function Field({ field, name, value, onChange }: Props) {
               −
             </button>
             <Slider
+              data-testid={`slider-${field.id}`}
               aria-label={name}
               min={field.min}
               max={field.max}
@@ -149,6 +150,7 @@ export function Field({ field, name, value, onChange }: Props) {
             return (
               <label key={o.value} className={cn(card, lifted, sel && selected, layout === 'grid' && 'gap-2 px-2.5 text-[15px] leading-snug last:odd:col-span-2')}>
                 <Checkbox
+                  data-testid={`option-${field.id}-${o.value}`}
                   className={control}
                   checked={sel}
                   onCheckedChange={(checked) => onChange(checked ? [...list, o.value] : list.filter((v) => v !== o.value))}
@@ -166,6 +168,7 @@ export function Field({ field, name, value, onChange }: Props) {
       {field.type === 'number' && (
         <div className="relative">
           <Input
+            data-testid={`input-${field.id}`}
             aria-label={name}
             aria-describedby={cn(descId, field.unit && `${field.id}-unit`) || undefined}
             type="number"
@@ -196,6 +199,7 @@ export function Field({ field, name, value, onChange }: Props) {
 
       {field.type === 'text' && (
         <Input
+          data-testid={`input-${field.id}`}
           aria-label={name}
           aria-describedby={descId}
           type={field.inputType ?? 'text'}
