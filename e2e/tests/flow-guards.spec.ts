@@ -54,14 +54,20 @@ async function reachAuto(page: Page, wiz: Wizard) {
   return idx;
 }
 
+// Clicks in one page task: Playwright's per-click actionability waits can exceed the 250ms
+// auto-advance on a slow runner, which would make "immediately" and "quick" untrue.
+const tap = (page: Page, ...ids: string[]) =>
+  page.evaluate((ids) => ids.forEach((id) => document.querySelector<HTMLElement>(`[data-testid="${id}"]`)!.click()), ids);
+
 for (const [v, wiz] of [['a', wizardA], ['b', wizardB]] as const) {
   test(`pick on an auto step then Back immediately stays on the previous step (variant ${v})`, async ({ page }) => {
     await spyFirestore(page);
     await page.goto(`/?variant=${v}`);
     const main = page.getByTestId('wizard');
     const idx = await reachAuto(page, wiz);
-    await answer(page, wiz.steps[idx].fields![0]);
-    await page.getByTestId('back').click();
+    const f = wiz.steps[idx].fields![0];
+    if (f.type !== 'single') throw new Error('auto step starts with a single field');
+    await tap(page, `option-${f.id}-${f.options[0].value}`, 'back');
     await expect(main).toHaveAttribute('data-step', wiz.steps[idx - 1].id);
     await page.waitForTimeout(600); // longer than the 250ms auto-advance: it must stay cancelled
     await expect(main).toHaveAttribute('data-step', wiz.steps[idx - 1].id);
@@ -91,8 +97,7 @@ for (const [v, wiz] of [['a', wizardA], ['b', wizardB]] as const) {
     const f = wiz.steps[idx].fields![0];
     if (f.type !== 'single') throw new Error('auto step starts with a single field');
     // Re-tapping the same radio does nothing, so the second quick tap is a different option.
-    await page.getByTestId(`option-${f.id}-${f.options[0].value}`).click();
-    await page.getByTestId(`option-${f.id}-${f.options[1].value}`).click();
+    await tap(page, `option-${f.id}-${f.options[0].value}`, `option-${f.id}-${f.options[1].value}`);
     await expect(main).toHaveAttribute('data-step', wiz.steps[idx + 1].id);
     await page.waitForTimeout(600);
     await expect(main).toHaveAttribute('data-step', wiz.steps[idx + 1].id);

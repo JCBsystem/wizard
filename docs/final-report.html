@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>En bättre väg in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Same palette and fonts as the prototype (app/src/index.css). */
+:root{
+  --page:#fbf6f8; --pink:#f2e3eb; --tray:#ecd6e1; --card:#fff;
+  --plum:#751a4b; --ink:#3a1027; --deep:#320014; --primary:#a71e67; --soft:#d9a6c4;
+  --muted:#7a5a6b; --line:#ead9e1;
+  --display:'Ubuntu','Manrope',system-ui,sans-serif; --body:'Manrope',system-ui,-apple-system,sans-serif;
+  --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--primary);text-underline-offset:3px}
+h1,h2,h3{font-family:var(--display);color:var(--plum);font-weight:700;line-height:1.15;margin:0}
+h2{font-size:clamp(28px,4.4vw,38px);letter-spacing:-.01em}
+h3{font-size:21px}
+p{margin:0 0 14px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+.wide{max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:5;background:rgba(251,246,248,.88);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.bar .wide{display:flex;align-items:center;justify-content:space-between;gap:12px;height:58px}
+.mark{font:500 26px/1 var(--serif);letter-spacing:-.03em;color:var(--plum);text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--primary);color:#fff;text-decoration:none;font:700 16px/1 var(--display);padding:14px 22px;border-radius:999px;box-shadow:0 12px 24px -12px rgba(167,30,103,.7);transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.small{font-size:14px;padding:10px 16px}
+.btn.ghost{background:transparent;color:var(--plum);box-shadow:none;border:1.5px solid var(--soft)}
+
+/* hero */
+.hero{background:linear-gradient(180deg,#fff 0%,var(--pink) 100%);padding:56px 0 64px}
+.hero .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+.kicker{display:inline-block;background:#fff;color:var(--primary);font:700 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;border-radius:999px;margin-bottom:22px}
+.hero h1{font-size:clamp(36px,6vw,58px);letter-spacing:-.015em;margin-bottom:22px}
+.lead{font-size:19px;color:var(--ink);max-width:36em}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .phone{max-width:280px;justify-self:center}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* recommendation */
+.rec{margin-top:-36px;position:relative}
+.tray{background:var(--tray);border-radius:30px;padding:8px}
+.core{background:var(--card);border-radius:24px;padding:28px}
+.rec .core{padding:30px 30px 26px}
+.label{font:700 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:12px}
+.rec p{font-size:18px}
+.recl{font-size:17px}
+.rec ul,.recl{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.rec li,.recl li{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start}
+.num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--pink);color:var(--primary);font:700 14px/1 var(--display)}
+
+/* toc */
+.deliv{margin-top:-36px;position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.deliv .core{height:100%;display:flex;flex-direction:column;padding:24px}
+.deliv .n{font:700 34px/1 var(--display);color:var(--soft);margin-bottom:12px}
+.deliv h3{font-size:21px;margin-bottom:8px}
+.deliv p{font-size:15.5px;color:var(--ink);margin:0 0 14px}
+.deliv .go{display:grid;gap:8px;margin-top:auto}
+.deliv .go a{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--pink);color:var(--plum);text-decoration:none;font-weight:600;font-size:15px;padding:10px 14px;border-radius:12px}
+.deliv .go a:after{content:'→';color:var(--primary)}
+.deliv .go a:hover{background:var(--tray)}
+.deliv .go a.main{background:var(--primary);color:#fff}
+.deliv .go a.main:after{color:#fff}
+.deliv-head{margin:0 0 18px}
+.toc{margin:44px auto 0;display:flex;flex-wrap:wrap;gap:8px}
+.toc a{background:#fff;border:1px solid var(--line);color:var(--plum);text-decoration:none;font-weight:600;font-size:15px;padding:9px 14px;border-radius:999px}
+.toc a:hover{border-color:var(--soft)}
+
+/* sections */
+section{padding:72px 0 8px}
+[id]{scroll-margin-top:70px}
+.part{margin:84px 0 0;padding:44px 0;background:var(--pink)}
+.part p{max-width:38em;margin:12px 0 0}
+.eyebrow{font:700 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:14px}
+.intro{font-size:19px;margin-top:16px;max-width:38em}
+
+/* problem list */
+.problems{display:grid;gap:22px;margin-top:34px}
+.problem{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:26px;padding:22px}
+.problem h3{margin-bottom:10px}
+.problem p:last-child{margin-bottom:0}
+.problem .shots{display:flex;gap:10px}
+
+/* phones */
+.phone{border-radius:26px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 40px -28px rgba(50,0,20,.45);background:#fff}
+.tag{display:inline-block;font:700 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:999px;margin-bottom:10px}
+.tag.old{background:#fff;color:var(--muted);border:1px solid var(--line)}
+.tag.new{background:var(--primary);color:#fff}
+
+/* before / after */
+.change{margin-top:46px}
+.change h3{font-size:24px;margin-bottom:10px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,250px));gap:22px;margin:22px 0 18px}
+.pair.three{grid-template-columns:repeat(3,minmax(0,220px))}
+.pair figure{margin:0}
+.pair figcaption{font-size:14px;color:var(--muted);margin-top:10px;line-height:1.45}
+.why{background:#fff;border-left:4px solid var(--soft);border-radius:0 16px 16px 0;padding:14px 18px;font-size:16px}
+.why b{color:var(--plum)}
+
+/* filmstrip */
+.strip-wrap{margin-top:30px}
+.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 16px 18px;margin:0 -16px;-webkit-overflow-scrolling:touch}
+.strip figure{flex:0 0 150px;margin:0;scroll-snap-align:start}
+.strip .phone{border-radius:18px}
+.strip figcaption{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.35}
+.strip figcaption b{display:block;color:var(--plum);font-size:13px}
+.hint{font-size:14px;color:var(--muted)}
+
+/* table */
+.table{margin-top:28px;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr 1.15fr;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row>div{padding:16px 18px;font-size:15.5px;line-height:1.55}
+.row.head>div{background:var(--pink);font:700 12px/1.2 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--plum);padding:14px 18px}
+.row>div:first-child{color:var(--muted)}
+.row>div:nth-child(2){font-weight:600;color:var(--plum)}
+
+/* evidence */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
+.card h3{font-size:18px;margin-bottom:6px}
+.card .src{font-size:13px;color:var(--muted);margin-bottom:16px}
+.bars{display:grid;gap:12px}
+.bars .b{display:grid;gap:5px}
+.bars .t{display:flex;justify-content:space-between;font-size:14px}
+.bars .t b{font-family:var(--display);color:var(--plum)}
+.bars .track{height:10px;border-radius:99px;background:var(--pink);overflow:hidden}
+.bars .fill{height:100%;border-radius:99px;background:var(--soft)}
+.bars .fill.good{background:var(--primary)}
+.card p.take{font-size:14.5px;margin:16px 0 0;color:var(--ink)}
+.callout{margin-top:22px;background:#fff;border:1px dashed var(--soft);border-radius:18px;padding:18px 20px;font-size:16px}
+
+/* lists */
+.list{display:grid;gap:14px;margin:22px 0 0;padding:0;list-style:none}
+.list li{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 20px}
+.list li b{color:var(--plum);display:block;font-family:var(--display);font-size:17px;margin-bottom:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
+.box h3{font-size:19px;margin-bottom:10px}
+.box ul{margin:0;padding-left:20px}
+.box li{margin:6px 0}
+
+/* steps */
+.steps{display:grid;gap:0;margin-top:28px;counter-reset:s}
+.step{display:grid;grid-template-columns:44px 1fr;gap:18px;padding-bottom:26px;position:relative}
+.step:before{content:'';position:absolute;left:21px;top:44px;bottom:0;width:2px;background:var(--line)}
+.step:last-child:before{display:none}
+.step .num{width:44px;height:44px;font-size:17px;background:#fff;border:2px solid var(--soft)}
+.step h3{font-size:19px;margin:9px 0 6px}
+.step p{margin:0}
+
+/* steering */
+.steer{display:grid;gap:18px;margin-top:28px}
+.steer article{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 24px}
+.steer h3{font-size:19px;margin-bottom:12px}
+.steer dl{display:grid;grid-template-columns:150px 1fr;gap:8px 16px;margin:0;font-size:16px}
+.steer dt{font-weight:700;color:var(--plum)}
+.steer dd{margin:0}
+blockquote{margin:0;padding:12px 16px;background:var(--pink);border-radius:12px;font-size:15.5px;color:var(--ink)}
+
+/* tech */
+.tech{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.tech .box p{margin:0;font-size:16px}
+code{font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--pink);padding:2px 6px;border-radius:6px;color:var(--plum)}
+
+.links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.links a{display:block;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;text-decoration:none;color:var(--ink)}
+.links a b{display:block;color:var(--plum);font-family:var(--display);font-size:17px}
+.links a span{font-size:14.5px;color:var(--muted)}
+.links a:hover{border-color:var(--soft)}
+
+footer{margin-top:80px;padding:34px 0 50px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+
+@media (max-width:820px){
+  .deliv{grid-template-columns:1fr}
+  .hero{padding:36px 0 56px}
+  .hero .grid{grid-template-columns:1fr;gap:28px}
+  .hero .phone{max-width:230px;justify-self:start}
+  .problem{grid-template-columns:1fr;gap:16px}
+  .problem .shots{max-width:300px}
+  .cards{grid-template-columns:1fr}
+  .two,.tech,.links{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+  .row.head{display:none}
+  .row>div{padding:4px 18px}
+  .row>div:first-child{padding-top:16px}
+  .row>div:last-child{padding-bottom:16px}
+  .row>div:first-child:before{content:'Idag: ';font-weight:700}
+  .row>div:nth-child(2):before{content:'Nu: ';font-weight:700;color:var(--primary)}
+  .steer dl{grid-template-columns:1fr;gap:2px}
+  .steer dd{margin-bottom:10px}
+}
+@media (max-width:520px){
+  body{font-size:16.5px}
+  .pair,.pair.three{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .pair.three figure:last-child{grid-column:1 / -1;max-width:50%}
+  .core,.rec .core{padding:22px}
+  .bar .btn.small{padding:9px 13px}
+}
+
+/* left menu (desktop) */
+.side{display:none}
+@media (min-width:1000px){
+  body{padding-left:272px}
+  .bar{display:none}
+  .side{display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0;width:272px;overflow-y:auto;background:var(--deep);color:var(--pink);padding:30px 18px 28px;z-index:6}
+  .side .mark{color:#fff;font-size:30px;padding:0 12px}
+  .side .sub{font:600 11.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);opacity:.8;margin:12px 12px 0}
+  .side h4{font:700 11.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);opacity:.75;margin:32px 12px 10px}
+  .side nav{display:grid;gap:2px}
+  .side nav a{display:grid;grid-template-columns:30px 1fr;align-items:center;gap:6px;color:var(--pink);text-decoration:none;font-size:15.5px;line-height:1.3;padding:9px 12px;border-radius:12px;border:1px solid transparent}
+  .side nav a i{font-style:normal;font:600 12.5px/1 var(--display);color:var(--soft);opacity:.75}
+  .side nav a.lvl2{padding-top:6px;padding-bottom:6px;font-size:14.5px;color:var(--soft)}
+  .side nav a:hover{background:rgba(255,255,255,.06)}
+  .side nav a.on{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#fff}
+  .side .btn{margin:28px 12px 0;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<aside class="side" aria-label="Meny">
+  <a class="mark" href="#top">companyx</a>
+  <div class="sub">Arbetsprov · oktober 2026</div>
+  <h4>Rapport</h4>
+  <nav>
+    <a href="#top"><i>00</i>Översikt</a>
+    <a href="#leverans"><i>01</i>Prototypen</a>
+    <a href="#rekommendation"><i>02</i>Beslutsunderlag</a>
+    <a class="lvl2" href="#problemet"><i></i>Problemet i dag</a>
+    <a class="lvl2" href="#versionen"><i></i>Min version och varför</a>
+    <a class="lvl2" href="#effekt"><i></i>Förväntad effekt</a>
+    <a class="lvl2" href="#bortvalt"><i></i>Det jag valde bort</a>
+    <a href="#arbetssatt"><i>03</i>Angreppssätt</a>
+    <a class="lvl2" href="#promptlogg"><i></i>Promptlogg</a>
+    <a class="lvl2" href="#ai"><i></i>Styrning</a>
+    <a href="#antaganden"><i>04</i>Antaganden</a>
+    <a href="#teknik"><i>05</i>Teknik</a>
+  </nav>
+  <h4>Underlag</h4>
+  <nav>
+    <a href="https://wizard1-f16de.web.app" target="_blank" rel="noopener"><i>→</i>Prototyp</a>
+    <a href="https://github.com/JCBsystem/wizard" target="_blank" rel="noopener"><i>→</i>GitHub</a>
+    <a href="companyx-quiz-baseline.html" target="_blank" rel="noopener"><i>→</i>Dagens quiz</a>
+    <a href="../.research/summary.html" target="_blank" rel="noopener"><i>→</i>Research, kort</a>
+    <a href="../.research/index.html" target="_blank" rel="noopener"><i>→</i>Research</a>
+    <a href="flow-analytics.html" target="_blank" rel="noopener"><i>→</i>Mätning</a>
+  </nav>
+  <a class="btn small" href="https://wizard1-f16de.web.app" target="_blank" rel="noopener">Öppna prototypen</a>
+</aside>
+
+<header class="bar">
+  <div class="wide">
+    <a class="mark" href="#top">companyx</a>
+    <a class="btn small" href="https://wizard1-f16de.web.app" target="_blank" rel="noopener">Öppna prototypen</a>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wide grid">
+    <div>
+      <span class="kicker">Arbetsprov · Utvecklare · oktober 2026</span>
+      <h1>En bättre väg in, från första frågan till bokat samtal</h1>
+      <p class="lead">Jag har byggt om quizet och bokningen som en klickbar prototyp för mobilen. Alla era 20 frågor finns kvar, ord för ord. Det som är nytt är ordningen, längden och tonen: personen får sitt resultat innan vi ber om namn och telefonnummer, flödet är 20 skärmar i stället för 26, och det slutar med en bokad tid hos en läkare med namn.</p>
+      <div class="actions">
+        <a class="btn" href="https://wizard1-f16de.web.app" target="_blank" rel="noopener">Öppna prototypen →</a>
+        <a class="btn ghost" href="#leverans">Se leveransen</a>
+      </div>
+      <p class="note">Prototypen är gjord för mobilen. På dator visas den i mobilbredd. Tiderna i bokningen är påhittade.</p>
+    </div>
+    <img class="phone" src="img/new/17-result.jpg" width="585" height="996" alt="Resultatskärmen i den nya versionen: Medicinsk viktnedgång kan passa dig, med personens mål och BMI">
+  </div>
+</div>
+
+<div class="wide" id="leverans">
+  <div class="deliv">
+    <div class="tray"><div class="core">
+      <div class="n">01</div>
+      <h3>Prototypen</h3>
+      <p>Klickbar från första frågan till bokningsbekräftelse. Bokningen är mockad med påhittade tider.</p>
+      <div class="go">
+        <a class="main" href="https://wizard1-f16de.web.app" target="_blank" rel="noopener">Öppna prototypen</a>
+        <a href="#flodet">Se alla 20 skärmar här</a>
+        <a href="https://github.com/JCBsystem/wizard" target="_blank" rel="noopener">Koden på GitHub</a>
+      </div>
+    </div></div>
+    <div class="tray"><div class="core">
+      <div class="n">02</div>
+      <h3>Beslutsunderlag på en sida</h3>
+      <p>För ledningsgruppen: problemet, rekommendationen, effekten och det jag valde bort.</p>
+      <div class="go">
+        <a href="#problemet">Problemet i dagens flöde</a>
+        <a href="#versionen">Rekommenderad version och varför</a>
+        <a href="#effekt">Förväntad effekt</a>
+        <a href="#bortvalt">Det jag valde bort</a>
+      </div>
+    </div></div>
+    <div class="tray"><div class="core">
+      <div class="n">03</div>
+      <h3>Angreppssätt och promptlogg</h3>
+      <p>Hur jag bröt ner problemet, prompterna som tog fram lösningen och var jag styrde om AI.</p>
+      <div class="go">
+        <a href="#arbetssatt">Angreppssätt</a>
+        <a href="#promptlogg">Promptlogg</a>
+        <a href="#ai">Styrning</a>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<div class="part" style="margin-top:72px">
+  <div class="wrap">
+    <div class="eyebrow">02</div>
+    <h2>Beslutsunderlag på en sida</h2>
+    <p>Problemet i dagens flöde, min rekommenderade version och varför, förväntad effekt, och vad jag valde bort.</p>
+  </div>
+</div>
+
+<section id="rekommendation" style="padding-top:48px">
+  <div class="wrap">
+    <div class="tray"><div class="core">
+      <div class="label">Min rekommendation</div>
+      <p style="font-size:18px">Gå vidare med den här versionen. Om ni bara gör en sak, flytta kontaktformuläret så att det kommer <b>efter</b> resultatet. Det är den största förbättringen, den kräver inga nya frågor, och effekten går att mäta från första dagen.</p>
+      <ul class="recl">
+        <li><span class="num">1</span><span><b>Resultatet först.</b> I dag måste man lämna namn, telefon och e-post för att få se sitt resultat. Nu ser man det direkt och lämnar sina uppgifter först när man har valt en tid.</span></li>
+        <li><span class="num">2</span><span><b>Kortare och lugnare.</b> Frågor som hör ihop delar skärm, och de fem reklamskärmarna har blivit korta rader man kan läsa mer om. Knappen syns alltid utan att man behöver scrolla.</span></li>
+        <li><span class="num">3</span><span><b>En människa på andra sidan.</b> Bokningen visar vem man ska prata med, att samtalet är gratis, tar 20 minuter och går att avboka.</span></li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<!-- 1 -->
+<section id="problemet">
+  <div class="wrap">
+    <div class="eyebrow">02 · Problemet i dagens flöde</div>
+    <h2>Man ger mycket innan man får något tillbaka</h2>
+    <p class="intro">Jag gick igenom hela dagens quiz på en vanlig mobilskärm med påhittade svar, fram till kontaktformuläret, utan att skicka in något. Fyra saker stack ut.</p>
+
+    <div class="problems">
+      <div class="problem">
+        <div class="shots"><img class="phone" src="img/today/26.jpg" width="585" height="996" loading="lazy" alt="Dagens skärm 25 av 26: Ange dina uppgifter för att se resultatet"></div>
+        <div>
+          <h3>Resultatet är låst bakom ett formulär</h3>
+          <p>Efter 25 skärmar med frågor om vikt, sjukdomar och mediciner kommer rubriken <i>”Ange dina uppgifter för att se resultatet”</i>. Personen måste lämna namn, telefon och e-post innan hen får veta något.</p>
+          <p>Det känns som ett byte, precis i det ögonblick då förtroendet betyder mest. Den som tvekar här lämnar, och då har vi ingen bokning och ingen kontakt.</p>
+        </div>
+      </div>
+
+      <div class="problem">
+        <div class="shots"><img class="phone" src="img/today/01.jpg" width="585" height="996" loading="lazy" alt="Dagens första fråga med räknaren 1/26"></div>
+        <div>
+          <h3>Det ser långt ut redan från början</h3>
+          <p>Första skärmen visar <i>”1/26”</i>. Man vet direkt att det är 25 skärmar kvar. Fem av dem är inte frågor utan informationsskärmar med påståenden som <i>”9 av 10 medlemmar…”</i> och <i>”5 000+ har startat där du är nu”</i>, mitt i en medicinsk bedömning.</p>
+          <p>Det finns heller ingen rad som säger hur lång tid det tar, att det är gratis eller vem som ser svaren.</p>
+        </div>
+      </div>
+
+      <div class="problem">
+        <div class="shots"><img class="phone" src="img/today/03.jpg" width="585" height="996" loading="lazy" alt="Dagens fråga 3 där Nästa-knappen hamnar under skärmkanten"></div>
+        <div>
+          <h3>Knappen hamnar utanför skärmen</h3>
+          <p>På en vanlig telefon (390 × 664 punkter) hamnar <i>Nästa</i> under kanten på skärm 3 (anledningar) och skärm 20 (vad som gjort det svårt), och svaret <i>Nej</i> på BMI-frågan syns inte utan att scrolla. Man ser inte hur man går vidare.</p>
+        </div>
+      </div>
+
+      <div class="problem">
+        <div class="shots"><img class="phone" src="img/today/08.jpg" width="585" height="996" loading="lazy" alt="Dagens viktfråga med en tom sifferruta"></div>
+        <div>
+          <h3>De känsligaste frågorna är de kalaste</h3>
+          <p>Vikt och längd är två skärmar med varsin tom sifferruta. Det är de frågor som känns mest utsatta för den här målgruppen, och det står inte vem som ser svaret.</p>
+          <p>Bokningen syns aldrig före formuläret, så man vet inte heller vad man säger ja till.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="versionen">
+  <div class="wrap">
+    <div class="eyebrow">02 · Rekommenderad version och varför</div>
+    <h2>Samma frågor, i en ordning som bygger förtroende</h2>
+    <p class="intro">Jag har inte tagit bort eller skrivit om någon av era frågor. Det är er data och ert beslut. I stället har jag ändrat allt runt dem: ordning, gruppering, längd, ton och vad man får tillbaka.</p>
+
+    <div class="change">
+      <h3>Resultatet kommer före kontaktuppgifterna</h3>
+      <p>Direkt efter sista frågan får personen sitt besked, med sitt eget mål och BMI. Sedan väljer hen en tid, och först då frågar vi vart bekräftelsen ska skickas. Formulärets rubrik är ändrad, eftersom den gamla inte längre stämmer.</p>
+      <div class="pair">
+        <figure><span class="tag old">Idag</span><img class="phone" src="img/today/26.jpg" width="585" height="996" loading="lazy" alt="Idag: kontaktformulär före resultatet"><figcaption>Skärm 25 av 26. Uppgifterna krävs för att se resultatet.</figcaption></figure>
+        <figure><span class="tag new">Ny version</span><img class="phone" src="img/new/17-result.jpg" width="585" height="996" loading="lazy" alt="Ny version: resultatet med mål och BMI"><figcaption>Resultatet direkt. Läkaren avgör tillsammans med personen.</figcaption></figure>
+      </div>
+      <p class="why"><b>Varför:</b> Resultatet är det personen har jobbat sig fram till. Att visa det först är ärligt, och det gör att kontaktuppgifterna lämnas för att boka ett samtal, inte för att låsa upp något. Resultatet lovar ingen viktnedgång: det säger att behandling <i>kan</i> passa och att läkaren avgör.</p>
+    </div>
+
+    <div class="change">
+      <h3>En start som säger vad som händer</h3>
+      <p>Startskärmen säger att det tar två minuter, att det är gratis och vad de tre stegen är. Under knappen står vem som ser svaren. Förloppet visas som en stapel som rör sig snabbt i början och har namn på delarna (Mål, Om dig, Hälsa, Vanor, Framtid) i stället för ”1/26”.</p>
+      <div class="pair">
+        <figure><span class="tag old">Idag</span><img class="phone" src="img/today/01.jpg" width="585" height="996" loading="lazy" alt="Idag: första frågan med 1/26"><figcaption>Rakt in i första frågan, med ”1/26”.</figcaption></figure>
+        <figure><span class="tag new">Ny version</span><img class="phone" src="img/new/01-intro.jpg" width="585" height="996" loading="lazy" alt="Ny version: startskärm med tid, kostnad och tre steg"><figcaption>Tid, kostnad, tre steg och vem som ser svaren.</figcaption></figure>
+      </div>
+      <p class="why"><b>Varför:</b> Folk hoppar av när de inte vet vad de ger sig in på. En stapel som rör sig snabbt i början halverade andelen som avbröt i ett experiment (11 % mot 22 %), jämfört med en som rör sig långsamt.</p>
+    </div>
+
+    <div class="change">
+      <h3>Frågor som hör ihop delar skärm</h3>
+      <p>Vikt och längd, kön och ålder, målvikt och takt ligger nu två och två. Vikt och längd väljs med reglage, och under står <i>”Ett ungefärligt värde räcker. Bara vårdpersonal i din vård ser dina svar.”</i> På skärmar med ett enda val går flödet vidare direkt när man trycker, utan Nästa-knapp.</p>
+      <div class="pair">
+        <figure><span class="tag old">Idag</span><img class="phone" src="img/today/08.jpg" width="585" height="996" loading="lazy" alt="Idag: tom sifferruta för vikt"><figcaption>Vikt på en skärm, längd på nästa. Tomma rutor.</figcaption></figure>
+        <figure><span class="tag new">Ny version</span><img class="phone" src="img/new/06-kropp.jpg" width="585" height="996" loading="lazy" alt="Ny version: vikt och längd med reglage på samma skärm"><figcaption>Båda på en skärm, med reglage och en lugnande rad.</figcaption></figure>
+      </div>
+      <p class="why"><b>Varför:</b> Färre och enklare skärmar ger färre avhopp på mobilen. Ro och Hers frågar vikt och längd på samma skärm av samma skäl. Kontrollfrågorna för säkerhet (sjukdomar, mediciner) har fortfarande en egen skärm, med en rad om varför vi frågar.</p>
+    </div>
+
+    <div class="change">
+      <h3>Ett samtal med en människa, och en bekräftelse som får folk att dyka upp</h3>
+      <p>Bokningen visar läkarens namn och titel, och att samtalet är kostnadsfritt, 20 minuter, via video och går att avboka. Kontaktformuläret har bara tre fält. Bekräftelsen säger <i>”Vi ses mån 5 okt kl 09:00!”</i>, att en sms-påminnelse kommer dagen innan, och vad som händer i samtalet.</p>
+      <div class="pair three">
+        <figure><span class="tag new">Välj tid</span><img class="phone" src="img/new/18-booking.jpg" width="585" height="996" loading="lazy" alt="Ny version: välj tid hos en namngiven läkare"></figure>
+        <figure><span class="tag new">Kontakt</span><img class="phone" src="img/new/19-contact.jpg" width="585" height="996" loading="lazy" alt="Ny version: vart skickar vi bekräftelsen"></figure>
+        <figure><span class="tag new">Bekräftelse</span><img class="phone" src="img/new/20-confirmation.jpg" width="585" height="996" loading="lazy" alt="Ny version: Vi ses, med vad som händer härnäst"></figure>
+      </div>
+      <p class="why"><b>Varför:</b> Ett bokat möte som ingen kommer till ger ingenting. Påminnelser minskar uteblivna besök (från 21 % till 15 % i en sammanställning av 21 studier), och tider inom några dagar har färre uteblivna besök än tider långt fram. Namnet på läkaren och tiderna är påhittade i prototypen.</p>
+    </div>
+  </div>
+
+  <div class="wide strip-wrap" id="flodet">
+    <h3>Hela flödet, alla 20 skärmar</h3>
+    <p class="hint">Dra i sidled för att se alla. Skärmarna är tagna från prototypen på en iPhone 13.</p>
+    <div class="strip" tabindex="0" aria-label="Alla 20 skärmar i den nya versionen">
+      <figure><img class="phone" src="img/new/01-intro.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>1 · Start</b>Vad som händer, tid och kostnad</figcaption></figure>
+      <figure><img class="phone" src="img/new/02-mal.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>2 · Mål</b>Viktmål</figcaption></figure>
+      <figure><img class="phone" src="img/new/03-anledningar.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>3 · Mål</b>Anledningar och hur vikten påverkar livet</figcaption></figure>
+      <figure><img class="phone" src="img/new/04-malvikt.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>4 · Mål</b>Målvikt och takt</figcaption></figure>
+      <figure><img class="phone" src="img/new/05-om-dig.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>5 · Om dig</b>Kön och ålder</figcaption></figure>
+      <figure><img class="phone" src="img/new/06-kropp.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>6 · Om dig</b>Vikt och längd</figcaption></figure>
+      <figure><img class="phone" src="img/new/07-bmi.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>7 · Hälsa</b>BMI-kriterier</figcaption></figure>
+      <figure><img class="phone" src="img/new/08-sjukdomar.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>8 · Hälsa</b>Sjukdomar som utesluter behandling</figcaption></figure>
+      <figure><img class="phone" src="img/new/09-mediciner.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>9 · Hälsa</b>Nuvarande medicin</figcaption></figure>
+      <figure><img class="phone" src="img/new/10-livsstil.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>10 · Vanor</b>Livsstil och hur länge man försökt</figcaption></figure>
+      <figure><img class="phone" src="img/new/11-metoder.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>11 · Vanor</b>Metoder man provat</figcaption></figure>
+      <figure><img class="phone" src="img/new/12-hinder.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>12 · Vanor</b>Vad som gjort det svårt</figcaption></figure>
+      <figure><img class="phone" src="img/new/13-vid-malet.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>13 · Framtid</b>Livet vid målet</figcaption></figure>
+      <figure><img class="phone" src="img/new/14-sjalvbild.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>14 · Framtid</b>Självbild</figcaption></figure>
+      <figure><img class="phone" src="img/new/15-behandling.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>15 · Framtid</b>Vad som är viktigast i en behandling</figcaption></figure>
+      <figure><img class="phone" src="img/new/16-kalla.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>16 · Framtid</b>Hur man hittade hit</figcaption></figure>
+      <figure><img class="phone" src="img/new/17-result.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>17 · Resultat</b>Besked, mål och BMI</figcaption></figure>
+      <figure><img class="phone" src="img/new/18-booking.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>18 · Bokning</b>Välj tid</figcaption></figure>
+      <figure><img class="phone" src="img/new/19-contact.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>19 · Bokning</b>Vart skickar vi bekräftelsen?</figcaption></figure>
+      <figure><img class="phone" src="img/new/20-confirmation.jpg" width="585" height="996" loading="lazy" alt=""><figcaption><b>20 · Klart</b>Vi ses, och vad som händer</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h3 style="margin-top:40px">Alla förändringar i en tabell</h3>
+    <div class="table" role="table">
+      <div class="row head" role="row"><div>Idag</div><div>I prototypen</div><div>Varför</div></div>
+      <div class="row" role="row"><div>Namn, telefon och e-post krävs för att se resultatet.</div><div>Resultatet visas direkt. Uppgifterna lämnas efter att man valt tid.</div><div>Ärligare, och personen lämnar uppgifter för att boka, inte för att låsa upp.</div></div>
+      <div class="row" role="row"><div>26 skärmar, varav 5 informationsskärmar.</div><div>20 skärmar från start till bokad tid. Informationen finns kvar som en rad med ”Läs mer”.</div><div>Kortare väg, samma svar till er.</div></div>
+      <div class="row" role="row"><div>”1/26” på första skärmen.</div><div>En stapel med namngivna delar som rör sig snabbt i början. Mot slutet står det ”Nästan klart”.</div><div>Det ska kännas överkomligt från början.</div></div>
+      <div class="row" role="row"><div>Ingen information om tid, kostnad eller vem som ser svaren.</div><div>”2 minuter · Kostnadsfritt”, tre steg och ”Bara vårdpersonal i din vård ser dem”.</div><div>Lägre tröskel att börja, och trygghet före första känsliga fråga.</div></div>
+      <div class="row" role="row"><div>Knappen eller ett svar hamnar under skärmkanten på tre skärmar.</div><div>Ingen skärm behöver scrollas på en 390 × 664 telefon. Det kontrolleras av ett automatiskt test.</div><div>Man ska alltid se hur man går vidare.</div></div>
+      <div class="row" role="row"><div>Vikt och längd i tomma rutor på två skärmar.</div><div>Reglage på samma skärm, med ”Ett ungefärligt värde räcker”.</div><div>Lättare att svara, mindre utsatt.</div></div>
+      <div class="row" role="row"><div>Bokningen syns först efter formuläret.</div><div>Läkare med namn, ”Kostnadsfritt · 20 min · video · avboka fritt”, sex tider de närmaste dagarna.</div><div>Svarar på de sista frågorna: vem, vad kostar det, kan jag ångra mig.</div></div>
+      <div class="row" role="row"><div>Ingen bekräftelse fanns att se.</div><div>”Vi ses …!”, sms-påminnelse och vad som händer i samtalet.</div><div>Fler kommer till mötet.</div></div>
+      <div class="row" role="row"><div>Avbryter man börjar man om.</div><div>Svaren sparas i webbläsaren. Man fortsätter där man slutade.</div><div>Den som blir avbruten förlorar inget.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="effekt">
+  <div class="wrap">
+    <div class="eyebrow">02 · Förväntad effekt</div>
+    <h2>Vad jag förväntar mig, och hur ni ser om det stämmer</h2>
+    <p class="intro">Jag kan inte lova en siffra för er. Det jag kan visa är vad forskningen har sett för samma typ av förändringar, och att prototypen mäter er egen effekt från första besökaren.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Förloppsstapeln</h3>
+        <div class="src">Andel som avbröt ett formulär · Conrad m.fl.</div>
+        <div class="bars">
+          <div class="b"><div class="t"><span>Långsam i början</span><b>21,8 %</b></div><div class="track"><div class="fill" style="width:87%"></div></div></div>
+          <div class="b"><div class="t"><span>Snabb i början</span><b>11,3 %</b></div><div class="track"><div class="fill good" style="width:45%"></div></div></div>
+        </div>
+        <p class="take">Hälften så många hoppade av när stapeln rörde sig snabbt i början.</p>
+      </div>
+      <div class="card">
+        <h3>Snar tid</h3>
+        <div class="src">Uteblivna besök · 1,26 miljoner bokningar</div>
+        <div class="bars">
+          <div class="b"><div class="t"><span>Mer än 60 dagar bort</span><b>7,7 %</b></div><div class="track"><div class="fill" style="width:77%"></div></div></div>
+          <div class="b"><div class="t"><span>Inom 15 dagar</span><b>4,3 %</b></div><div class="track"><div class="fill good" style="width:43%"></div></div></div>
+        </div>
+        <p class="take">Därför visar bokningen bara tider de närmaste dagarna.</p>
+      </div>
+      <div class="card">
+        <h3>Påminnelser</h3>
+        <div class="src">Uteblivna besök · sammanställning av 21 studier</div>
+        <div class="bars">
+          <div class="b"><div class="t"><span>Utan påminnelse</span><b>21 %</b></div><div class="track"><div class="fill" style="width:84%"></div></div></div>
+          <div class="b"><div class="t"><span>Med påminnelse</span><b>15 %</b></div><div class="track"><div class="fill good" style="width:60%"></div></div></div>
+        </div>
+        <p class="take">Därför lovar bekräftelsen ett sms dagen innan.</p>
+      </div>
+    </div>
+    <p class="callout">Om formuläret före resultatet finns bara siffror från leverantörer av formulärverktyg (30–50 % tapp). Det är svag evidens, så jag bygger inte rekommendationen på den siffran. Det är just därför mätningen nedan finns.</p>
+
+    <div class="two">
+      <div class="box">
+        <h3>Det som mäts i prototypen</h3>
+        <ul>
+          <li>Hur många som går från första frågan till bokad tid.</li>
+          <li>På vilken skärm de som lämnar slutar.</li>
+          <li>Hur lång tid varje skärm tar, och var folk går tillbaka.</li>
+          <li>Hur många som kommer tillbaka och fortsätter.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Så testar ni en ändring</h3>
+        <p style="margin:0">Varje besökare får version A eller B och behåller den. Som exempel skiljer de sig i startskärmens rubrik. Alla siffror ovan går att dela upp på version, så nästa ändring kan bevisas i stället för gissas. Frågor och texter ligger i en fil, så en ny variant kräver ingen ny kod.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="bortvalt">
+  <div class="wrap">
+    <div class="eyebrow">02 · Det jag valde bort</div>
+    <h2>Medvetna val, och vad jag skulle göra härnäst</h2>
+
+    <div class="two">
+      <div class="box">
+        <h3>Inte byggt, enligt uppdraget</h3>
+        <ul>
+          <li><b>Den som inte kvalificerar sig:</b> en egen skärm som förklarar varför, utan skuld, och visar annan hjälp.</li>
+          <li><b>Avbrutna flöden:</b> svaren sparas redan. Nästa steg vore ett sms med en länk tillbaka.</li>
+          <li><b>Riktig bokning:</b> koppla tiderna till vårdens kalender.</li>
+          <li><b>Felhantering, inloggning och integrationer.</b></li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Valt bort med flit</h3>
+        <ul>
+          <li><b>Stryka frågor.</b> AI föreslog det. Jag behöll alla, eftersom det är er data och ert beslut.</li>
+          <li><b>En falsk ”analyserar dina svar”-skärm,</b> nedräkningar och påhittad brådska.</li>
+          <li><b>En personlig viktprognos</b> på resultatet. Det lovar mer än en läkare har bedömt.</li>
+          <li><b>Flera designvarianter.</b> En genomarbetad version i stället för tre halvfärdiga.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:40px">Förslag till nästa steg</h3>
+    <ul class="list">
+      <li><b>Fråga till er: vilka svar används i dag?</b>Bara sju frågor behövs för att bedöma om behandling kan passa: kön, ålder, vikt, längd, BMI-kriterier, sjukdomar som utesluter behandling och nuvarande medicin. Om resten kan ställas efter bokningen blir quizet ungefär 11 skärmar.</li>
+      <li><b>Rätta åldersvalen.</b>Gränsen är 18–75 år, men svarsalternativen hoppar från ”51–70 år” till ”Över 75 år”. Den som är 71–75 har inget rätt svar. Jag har behållit det som i dag och flaggar det här.</li>
+      <li><b>Riktig läkare med namn och foto.</b>Visa en riktig läkare på bokningen, och ”Första lediga tid” som ett enda tryck.</li>
+      <li><b>Visa följdsjukdomarna bara när BMI är 27–29,9.</b>Den som har BMI 30 eller mer behöver inte svara på dem.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Part 2 -->
+<div class="part">
+  <div class="wrap">
+    <div class="eyebrow">03</div>
+    <h2>Angreppssätt och promptlogg</h2>
+    <p>Hur jag bröt ner problemet och i vilken ordning jag arbetade, prompterna som tog fram lösningen, och var jag ändrade eller förkastade AI:s förslag.</p>
+  </div>
+</div>
+
+<!-- 5 -->
+<section id="arbetssatt">
+  <div class="wrap">
+    <div class="eyebrow">03 · Angreppssätt</div>
+    <h2>Förstå först, bygga sist</h2>
+    <p class="intro">Prototypen byggdes på ungefär tre timmar en förmiddag, med upp till fyra AI-sessioner igång samtidigt. En kortare andra omgång, ungefär en timme, gick till A/B-stödet, testerna och den här rapporten. Jag lät AI göra det tunga och snabba, och höll själv i besluten.</p>
+
+    <div class="steps">
+      <div class="step"><span class="num">1</span><div><h3>Kartlade dagens flöde</h3><p>En AI-agent gick igenom hela quizet i en webbläsare med påhittade svar och tog en skärmbild av varje skärm, fram till kontaktformuläret. Där stoppade jag den, eftersom ett tryck på OK skickar en riktig förfrågan. Resultatet blev en beskrivning av dagens quiz som det är, utan förslag.</p></div></div>
+      <div class="step"><span class="num">2</span><div><h3>Researchade parallellt</h3><p>Tio agenter samtidigt: tre i Mobbin och tre i Refero (designmönster från riktiga appar för frågor, resultat och bokning), fyra på webben (konkurrenter, forskning om formulär, ton och förtroende, bokning och uteblivna besök). Jag läste sammanfattningen och markerade vilka siffror som var för svaga för att visa för en ledningsgrupp.</p></div></div>
+      <div class="step"><span class="num">3</span><div><h3>Bestämde riktningen</h3><p>Fyra beslut styrde allt efteråt: behåll alla frågor ordagrant, resultatet före kontaktuppgifterna, ingen skärm får kräva scroll på mobilen, och mät varje steg från dag ett.</p></div></div>
+      <div class="step"><span class="num">4</span><div><h3>Byggde och testade</h3><p>Prototypen byggdes med Claude Code. Alla frågor och texter ligger i en fil, så de går att ändra utan kod. Automatiska tester går igenom hela flödet på iPhone och Android och kontrollerar att ingen skärm behöver scrollas. Varje ändring publiceras automatiskt när testerna går igenom.</p></div></div>
+      <div class="step"><span class="num">5</span><div><h3>Granskade på riktig skärmstorlek</h3><p>Jag tittade på varje skärm i mobilstorlek innan något räknades som klart. Flera fel hittades så, och inte i koden.</p></div></div>
+    </div>
+
+    <div class="box" style="margin-top:12px">
+      <h3>Verktyg</h3>
+      <ul>
+        <li><b>Claude Code</b> i flera terminaler samtidigt, med agenter som delade upp arbetet efter vilka filer de ägde.</li>
+        <li><b>Mobbin och Refero</b> för designmönster, <b>Playwright</b> för att gå igenom quizet och ta skärmbilder.</li>
+        <li><b>Skills</b> för typografi och layout, och för att skriva tester på samma sätt varje gång.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="promptlogg">
+  <div class="wrap">
+    <div class="eyebrow">03 · Promptlogg</div>
+    <h2>Prompterna som tog fram lösningen</h2>
+    <p class="intro">De tre prompter som gjorde störst skillnad, i den ordning jag använde dem. Citaten är mina prompter, med rättad stavning.</p>
+    <ul class="list">
+      <li><b>Mina anteckningar, första timmen</b>Satte formen på allt: färre skärmar genom att slå ihop, procent i stället för ”1/26”, mätning per steg och ett flöde som styrs av en konfigurationsfil.<blockquote style="margin-top:10px">”Fewer steps by merging common questions: sex, age and height in one step instead of three.”<br>”Show % instead of step numbers, show almost there, only a few steps left.”<br>”Track time on each step. If a user doesn’t finish, find out why.”</blockquote></li>
+      <li><b>Behåll era frågor ordagrant</b>Vände på AI:s strykningar och blev den viktigaste ramen för lösningen: allt ert innehåll kvar, bara packningen bättre.<blockquote style="margin-top:10px">”We cannot remove their content. We can improve the packing.”</blockquote></li>
+      <li><b>Låt en annan AI granska</b>Jämförelsen mot dagens version visade att vår första version var sämre på flera punkter. Det ledde till designomgången som gav det som syns i prototypen i dag.<blockquote style="margin-top:10px">”Set up an Opus agent and compare the two.”</blockquote></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6 -->
+<section id="ai">
+  <div class="wrap">
+    <div class="eyebrow">03 · Styrning</div>
+    <h2>Där AI ledde fel, och hur jag märkte det</h2>
+    <p class="intro">AI var snabb men tog ofta egna vägar. Här är de tillfällen som påverkade resultatet mest. Citaten är mina egna prompter, med rättad stavning.</p>
+
+    <div class="steer">
+      <article>
+        <h3>AI strök era frågor på egen hand</h3>
+        <dl>
+          <dt>Vad AI gjorde</dt><dd>För att korta flödet tog AI bort åtta av era frågor i en enda ändring (takt, påverkan, livsstil, hur länge man försökt, metoder, hinder, livet vid målet och prioriteringar). Ett tidigare steg hade redan tappat fyra till. Tolv av tjugo frågor saknades.</dd>
+          <dt>Hur jag märkte det</dt><dd>AI:s egen sammanfattning visade att 20 frågor hade blivit 8. Det var aldrig uppdraget.</dd>
+          <dt>Vad jag gjorde</dt><dd>Jag satte en fast regel: alla frågor och svar ska vara kvar ordagrant, bara packningen får ändras. Agenterna fick sedan kontrollera varje fråga tecken för tecken mot skärmbilderna av dagens quiz.</dd>
+        </dl>
+        <blockquote>”Don’t skip or rewrite any questions.”<br>”We cannot remove their content. We can improve the packing.”</blockquote>
+      </article>
+
+      <article>
+        <h3>”Förloppet börjar på 25 %” lästes som fusk</h3>
+        <dl>
+          <dt>Vad AI gjorde</dt><dd>Jag skrev att stapeln skulle ”starta på 25 %” så att det känns överkomligt. AI argumenterade emot och kallade det att fejka framsteg. Senare bytte en annan AI-session ut den framtunga stapeln mot en vanlig, på inrådan av en granskande agent.</dd>
+          <dt>Hur jag märkte det</dt><dd>Första gången i samtalet. Andra gången i appen, när stapeln började på noll igen.</dd>
+          <dt>Vad jag gjorde</dt><dd>Förklarade att jag menade en stapel som rör sig snabbt i början, vilket forskningen stödjer. AI höll med och räknade fram den som kvadratroten av andelen klara steg. När den försvann lät jag återställa den.</dd>
+        </dl>
+        <blockquote>AI: ”faking progress in a health product hurts trust”<br>Jag: ”My 25 % meant the same thing as a front-loaded bar.”</blockquote>
+      </article>
+
+      <article>
+        <h3>Nulägesbeskrivningen fylldes med förslag</h3>
+        <dl>
+          <dt>Vad AI gjorde</dt><dd>Jag bad om en beskrivning av dagens quiz som det är. AI lade in rangordnade problem, ”Fix:”-rader, en tabell över vilka skärmar som skulle slås ihop och färgade allvarlighetsprickar.</dd>
+          <dt>Hur jag märkte det</dt><dd>När jag läste rapporten i webbläsaren. Det tog tre rundor innan den bara innehöll fakta.</dd>
+          <dt>Vad jag gjorde</dt><dd>Gjorde det till en arbetsregel: AI får föreslå, men inte gå vidare utan att fråga. Utan en ren nulägesbild går det inte att visa vad som faktiskt blev bättre.</dd>
+        </dl>
+        <blockquote>”Wait. First we need their version before we make a better one. Don’t merge their screens.”<br>”This is what exists today. The next step is to improve it.”</blockquote>
+      </article>
+
+      <article>
+        <h3>Den första versionen gick inte att använda på en telefon</h3>
+        <dl>
+          <dt>Vad AI gjorde</dt><dd>Byggde ett flöde som var 880 punkter högt på en 664 punkter hög skärm, så knappen hamnade långt ner.</dd>
+          <dt>Hur jag märkte det</dt><dd>Jag öppnade appen i Chromes iPhone-läge.</dd>
+          <dt>Vad jag gjorde</dt><dd>Krävde en fast knapp och ingen scroll på någon skärm, och lät det bli ett automatiskt test som körs på varje skärm. AI:s första lösning blev 21 skärmar med en fråga var, och det var det som ledde till att den sedan strök frågor för att korta igen.</dd>
+        </dl>
+        <blockquote>”Use a fixed Next button, and no scrolling.”</blockquote>
+      </article>
+
+      <article>
+        <h3>Fel utseende, och en granskning som sa att vi var sämre</h3>
+        <dl>
+          <dt>Vad AI gjorde</dt><dd>Researchen pekade på krämvitt och grönt, och AI behandlade er rosa färg som en avvikelse att rätta. Den första ombyggda versionen packade dessutom alla frågor två och två, en regel AI hittat på själv.</dd>
+          <dt>Hur jag märkte det</dt><dd>Jag lät en separat AI (Opus) jämföra vår version med dagens, skärm för skärm. Dagens version vann i 7 av 12 områden.</dd>
+          <dt>Vad jag gjorde</dt><dd>Lät agenter hämta era riktiga färger, typsnitt och hörnradier från er CSS, och gjorde en ny designomgång med design-skills: reglage, segmenterade Ja/Nej-val, en startskärm och en enda kortstil.</dd>
+        </dl>
+        <blockquote>”Same font, same radius, same colours.”<br>”Set up an Opus agent and compare the two.”</blockquote>
+      </article>
+    </div>
+
+    <h3 style="margin-top:36px">Fler tillfällen, kort</h3>
+    <ul class="list">
+      <li><b>Juridik och BankID i byggplanen.</b>AI flyttade in juridiska regler, GDPR-samtycke och BankID från researchen till det vi skulle bygga. Inget av det fanns i uppdraget, så det togs bort. Researchen får innehålla allt, prototypen bara det uppdraget ber om.</li>
+      <li><b>En kalenderfil ingen bett om.</b>Mitt i designarbetet började AI skriva kod för ”lägg till i kalendern”. Jag stoppade det: det förbättrar inte flödet.</li>
+      <li><b>”Mätningen fungerar” stämde inte.</b>AI rapporterade att mätningen skickade data. I själva verket köades den bara i webbläsaren, eftersom databasen inte var påslagen. Ett ”inga fel” betyder inte att något fungerar.</li>
+      <li><b>En gammal version publicerades över den nya.</b>AI körde om ett gammalt bygge, som skrev över den publicerade prototypen med den allra första versionen. Jag såg det på den publicerade sidan och lät en agent gå igenom hela publiceringsflödet.</li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- assumptions + tech -->
+<section id="antaganden">
+  <div class="wrap">
+    <div class="eyebrow">Antaganden</div>
+    <h2>Det jag har antagit</h2>
+    <ul class="list">
+      <li><b>Medicinska regler.</b>Behandling kan passa vid BMI 30 eller mer, eller BMI 27–29,9 med minst en viktrelaterad sjukdom (till exempel högt blodtryck, typ 2-diabetes, höga blodfetter, sömnapné). Källa: FASS, Wegovy avsnitt 4.1. Åldersgränsen 18–75 år kommer från dagens quiz.</li>
+      <li><b>Texten efter formuläret är min.</b>Dagens resultat-, boknings- och bekräftelseskärmar gick inte att se utan att skicka in riktiga uppgifter, så de texterna har jag skrivit.</li>
+      <li><b>Platshållare.</b>Samtalets längd (20 minuter), läkarens namn och tiderna är påhittade.</li>
+    </ul>
+
+    <div class="eyebrow" id="teknik" style="margin-top:56px">För tech lead</div>
+    <h2>Hur prototypen är byggd</h2>
+    <p class="intro">All kod, tester och dokument finns i <a href="https://github.com/JCBsystem/wizard" target="_blank" rel="noopener">github.com/JCBsystem/wizard</a>. README beskriver hur man kör appen och testerna lokalt.</p>
+    <div class="tech">
+      <div class="box"><h3>Flödet är en fil</h3><p>Alla skärmar, frågor, svar och texter ligger i <code>wizard-a.json</code>. En generell komponent ritar dem. En ny fråga är ett nytt objekt i filen, inte ny kod. Det gör en liveändring på presentationen enkel.</p></div>
+      <div class="box"><h3>Testat på mobil</h3><p>Playwright-tester går igenom hela flödet för båda versionerna på iPhone 13 och Pixel 7. De kontrollerar också att ingen skärm scrollar, att knappen syns och att tryckytorna är minst 44 punkter.</p></div>
+      <div class="box"><h3>Mätning per skärm</h3><p>Varje besök blir ett dokument i Firestore med version, tid och besök per skärm, var personen slutade och om hen kom tillbaka. Ingen webbläsare kan läsa datan.</p></div>
+      <div class="box"><h3>Publiceras automatiskt</h3><p>React, TypeScript och Vite. GitHub Actions kör lint, typkontroll, bygge och tester, och publicerar sedan till Firebase Hosting. Varje pull request får en egen förhandslänk.</p></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:56px">Underlag</div>
+    <h2>Läs mer</h2>
+    <div class="links">
+      <a href="https://wizard1-f16de.web.app" target="_blank" rel="noopener"><b>Prototypen</b><span>Klickbar från start till bekräftelse</span></a>
+      <a href="https://github.com/JCBsystem/wizard" target="_blank" rel="noopener"><b>Koden på GitHub</b><span>App, tester, CI/CD och alla dokument</span></a>
+      <a href="companyx-quiz-baseline.html" target="_blank" rel="noopener"><b>Dagens quiz, skärm för skärm</b><span>Alla 26 skärmar som de ser ut i dag</span></a>
+      <a href="../.research/summary.html" target="_blank" rel="noopener"><b>Research, sammanfattning</b><span>Det alla källor var överens om</span></a>
+      <a href="../.research/index.html" target="_blank" rel="noopener"><b>Research, alla källor</b><span>Tio rapporter med länkar och bilder</span></a>
+      <a href="flow-analytics.html" target="_blank" rel="noopener"><b>Mätningen</b><span>Vad som sparas och hur man läser det</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Arbetsprov · oktober 2026. Skärmbilderna av dagens quiz är tagna på en 390 × 664 mobilskärm med påhittade svar. Inget skickades in och ingen tid bokades.</div>
+</footer>
+
+<script>
+// Highlight the menu item for the section in view.
+const links = [...document.querySelectorAll('.side nav a[href^="#"]')]
+const targets = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean)
+const mark = () => {
+  let cur = targets[0]
+  for (const t of targets) if (t.getBoundingClientRect().top < innerHeight * 0.3) cur = t
+  links.forEach((a) => a.classList.toggle('on', a.getAttribute('href') === '#' + cur.id))
+}
+addEventListener('scroll', mark, { passive: true })
+mark()
+</script>
+</body>
+</html>
