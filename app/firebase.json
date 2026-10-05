@@ -7,13 +7,6 @@
       "**/.DS_Store",
       "**/*.py"
     ],
-    "redirects": [
-      {
-        "source": "/.research/:path*",
-        "destination": "/research/:path*",
-        "type": 301
-      }
-    ],
     "rewrites": [
       {
         "source": "**",
