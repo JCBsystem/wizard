@@ -68,7 +68,7 @@ Served with the app on Firebase Hosting (copied into `dist/` by `npm run build`)
 
 - [Final report](https://wizard1-f16de.web.app/docs/final-report.html) · [source](docs/final-report.html)
 - [Flow analytics](https://wizard1-f16de.web.app/docs/flow-analytics.html) · [source](docs/flow-analytics.html)
-- [Research](https://wizard1-f16de.web.app/.research/index.html) · [source](.research/index.html)
+- [Research](https://wizard1-f16de.web.app/research/index.html) · [source](.research/index.html)
 - [Mockups](https://wizard1-f16de.web.app/mockups/index.html) · [source](mockups/index.html)
 - [Current quiz baseline](https://wizard1-f16de.web.app/docs/companyx-quiz-baseline.html) · [source](docs/companyx-quiz-baseline.html)
 
