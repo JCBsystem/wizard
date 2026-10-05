@@ -90,7 +90,7 @@ flowchart TD
 
   <section>
     <h2>The document</h2>
-    <p>Example of a person who left on the health step after coming back once. Values are illustrative.</p>
+    <p>Example of a person who left on the sjukdomar step after coming back once. Values are illustrative.</p>
 <pre class="json">// sessions/3f6c…e21a
 {
   "variant": "b",
@@ -98,17 +98,17 @@ flowchart TD
   "createdAt": "2026-10-02T10:14:03Z",
   "updatedAt": "2026-10-02T18:40:51Z",
   "resumes": 1,
-  "currentStep": "health",
+  "currentStep": "sjukdomar",
   "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 …)",
   "steps": {
     "intro":  { "visits": 1, "totalMs": 4200,  "lastStart": 1790936043000, "lastStop": 1790936047200 },
-    "goal":   { "visits": 1, "totalMs": 6100,  "lastStart": 1790936047200, "lastStop": 1790936053300 },
-    "about":  { "visits": 2, "totalMs": 38400, "lastStart": 1790965230000, "lastStop": 1790965244100 },
-    "weight": { "visits": 1, "totalMs": 21900, "lastStart": 1790965244100, "lastStop": 1790965266000 },
-    "health": { "visits": 1,                    "lastStart": 1790965266000 }
+    "mal":    { "visits": 1, "totalMs": 6100,  "lastStart": 1790936047200, "lastStop": 1790936053300 },
+    "om-dig": { "visits": 2, "totalMs": 38400, "lastStart": 1790965230000, "lastStop": 1790965244100 },
+    "kropp":  { "visits": 1, "totalMs": 21900, "lastStart": 1790965244100, "lastStop": 1790965266000 },
+    "sjukdomar": { "visits": 1,                    "lastStart": 1790965266000 }
   }
 }</pre>
-    <p><code>health</code> has a start and no stop: that is the exit. <code>about</code> was visited twice: once before the person left, once after resuming.</p>
+    <p><code>sjukdomar</code> has a start and no stop: that is the exit. <code>om-dig</code> was visited twice: once before the person left, once after resuming.</p>
   </section>
 
   <section>
@@ -132,7 +132,7 @@ flowchart TD
     <h2>Before real patients</h2>
     <ul>
       <li><strong>Health data.</strong> <code>answers</code> holds health and contact details, special-category data under GDPR. Add consent copy and send answers through a server function rather than straight from the browser.</li>
-      <li><strong>Open write rule.</strong> Anyone can write a <code>sessions</code> doc today. Add App Check or anonymous auth so only the real app can write.</li>
+      <li><strong>Open write rule.</strong> Firestore rules let anyone create or update a <code>sessions</code> doc, never read or list one. Add App Check or anonymous auth so only the real app can write.</li>
       <li><strong>Abandon window.</strong> Decide when an open session counts as abandoned (for example 30 minutes without <code>updatedAt</code>), so in-progress and lost can be told apart.</li>
       <li><strong>Clock.</strong> <code>lastStart</code> and <code>lastStop</code> are device time, which is fine for durations but not for ordering across devices.</li>
     </ul>

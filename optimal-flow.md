@@ -1,6 +1,6 @@
 # Velora quiz: 26 screens to 20, every question kept
 
-A working prototype of Velora's intake quiz (`app/`, config in `app/src/data/wizard.json`). It asks the same 20 questions with the same titles, groups related ones, shows the result before asking for contact details, and ends with a booked video call. Screens and comparisons: `mockups/index.html`.
+A working prototype of Velora's intake quiz (`app/`, config in `app/src/data/wizard-a.json` and `wizard-b.json`, two variants that differ only in the start-screen headline: A "Ta reda på om medicinsk viktnedgång kan passa dig", B "Kan medicinsk viktnedgång vara något för dig? Ta reda på det"). It asks the same 20 questions with the same titles, groups related ones, shows the result before asking for contact details, and ends with a booked video call. Screens and comparisons: `mockups/index.html`.
 
 ## Today vs new
 

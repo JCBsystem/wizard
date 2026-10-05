@@ -43,3 +43,15 @@ test('variant is sticky across reload', async ({ page }) => {
   await page.reload();
   await expect(page.getByTestId('wizard')).toHaveAttribute('data-variant', v!);
 });
+
+test('?variant= shows a variant for testing without changing the customer\'s saved one', async ({ page }) => {
+  await blockFirestore(page);
+  const main = page.locator('main');
+  await page.goto('/');
+  const saved = await main.getAttribute('data-variant');
+  const other = saved === 'a' ? 'b' : 'a';
+  await page.goto(`/?variant=${other}`);
+  await expect(main).toHaveAttribute('data-variant', other);
+  await page.goto('/');
+  await expect(main).toHaveAttribute('data-variant', saved!);
+});
