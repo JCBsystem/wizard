@@ -1,5 +1,7 @@
 # CompanyX wizard
 
+**Final report:** https://wizard1-f16de.web.app/docs/final-report.html
+
 > The client's name is anonymized as **CompanyX** throughout this repo (code, copy, docs).
 
 Mobile-first, JSON-driven intake wizard for medical weight-loss (CompanyX), with A/B copy variants and per-session Firestore analytics. Live: https://wizard1-f16de.web.app
